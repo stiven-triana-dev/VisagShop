@@ -1,8 +1,6 @@
-# VisagShop — Sprint 5, edición gratuita para Internet
+# VisagShop —
 
 **Objetivo:** probar VisagShop públicamente con **Render Free + Neon Free**, conservando la estética minimalista, catálogo, carrito, administración y autenticación. Los datos mutables (clientes, sesiones, productos, fotografías nuevas) se almacenan en PostgreSQL y sobreviven a reinicios de Render.
-
-**Empieza aquí:** lee [GUIA_PUBLICACION_GRATUITA.md](GUIA_PUBLICACION_GRATUITA.md). Allí están los pasos para GitHub, Neon y Render, pruebas y seguridad.
 
 ## En tu computador
 
