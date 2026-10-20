@@ -1,29 +1,26 @@
-# VisagShop · Publicación gratuita de prueba (Render + Neon)
+# VisagShop · Publicación de prueba (Render + Neon)
 
-Esta versión conserva la tienda **Sprint 5** y permite probarla en una URL gratuita de Render, **sin comprar `visagshop.com`**. Incluye catálogo, carrito, cuentas, sesiones y administración con datos persistentes en Neon.
+Esta versión permite probarla en una URL gratuita de Render, **sin comprar `visagshop.com`**. Incluye catálogo, carrito, cuentas, sesiones y administración con datos persistentes en Neon.
 
-> **No es una solución comercial garantizada 24/7.** Render Free se duerme después de 15 minutos sin tráfico; un visitante puede esperar aproximadamente un minuto al entrar. Los planes gratuitos tienen límites y pueden cambiar. Usa datos ficticios en las pruebas iniciales.
+No es una solución comercial garantizada 24/7. Render Free se duerme después de 15 minutos sin tráfico; un visitante puede esperar aproximadamente un minuto al entrar. Los planes gratuitos tienen límites y pueden cambiar. Usa datos ficticios en las pruebas iniciales.
 
-## A. Lo que necesitas
+## PASO 1
 
 1. Cuenta gratuita de **GitHub**: https://github.com/
 2. Cuenta gratuita de **Neon**: https://console.neon.tech/
 3. Cuenta gratuita de **Render**: https://dashboard.render.com/
 4. **Git para Windows** instalado si vas a subir el código desde VS Code: https://git-scm.com/downloads/win
 
-No incluyas contraseñas, datos bancarios, tokens o direcciones de clientes en GitHub. No pongas datos de tarjeta en los formularios de VisagShop.
+## PASO 2 Crear la base de datos Neon 
 
-## B. Crear la base de datos Neon gratis
-
-1. Abre Neon → **New Project**. Elige un nombre, por ejemplo `visagshop-demo`, y selecciona **Free**.
+1. Abrimos Neon → **New Project**. Elige un nombre, por ejemplo `visagshop-demo`, y selecciona **Free**.
 2. En el panel del proyecto, copia la **cadena de conexión PostgreSQL** (preferiblemente `pooled connection`). Tiene este formato: `postgresql://...neon.tech/neondb?sslmode=require`.
 3. Guarda esa cadena de manera privada. Contiene la **contraseña real de la base de datos**. No la copies dentro del ZIP, no la pongas en archivos `.js`, ni en GitHub.
 4. **No hace falta crear las tablas a mano:** al iniciar la web por primera vez, el servidor prepara las tablas, copia los 108 productos originales y deja usuarios y sesiones vacíos.
-5. Si el catálogo se elimina después, el servidor **no vuelve a sembrar** los 108 productos automáticamente porque registra un indicador de inicialización.
 
-Neon Free tiene límites de computación y almacenamiento; comprueba en tu panel cuánto llevas consumido. Esta solución guarda fotografías nuevas en la misma base de datos para evitar pérdidas en el disco temporal de Render: no subas imágenes muy pesadas.
+Algo a tener en cuenta: Neon tiene límites de almacenamiento, comprueba en tu panel cuánto llevas consumido. Esta solución guarda fotografías nuevas en la misma base de datos para evitar pérdidas en el disco temporal de Render, dato a tener en cuenta no subir imágenes muy pesadas.
 
-## C. Subir el proyecto a GitHub
+## PASO 3 como Subir el proyecto a GitHub
 
 El archivo `package.json` debe quedar en la **raíz del repositorio**, al mismo nivel que `app.js` y `render.yaml`.
 
@@ -32,7 +29,7 @@ El archivo `package.json` debe quedar en la **raíz del repositorio**, al mismo 
 3. En GitHub, crea un **repositorio privado** llamado, por ejemplo, `visagshop`, **sin README nuevo** (el proyecto ya trae uno).
 4. En la terminal de VS Code, ejecuta, uno por uno:
 
-```powershell
+```powershell o CMD
 git init
 git add .
 git commit -m "VisagShop Sprint 5 - despliegue gratuito"
@@ -47,7 +44,7 @@ Antes de subir, comprueba `git status` y `git diff --cached --name-only`: `.env`
 
 Si no tienes Git, puedes usar la opción **Source Control → Publish to GitHub** de VS Code después de abrir exactamente esta carpeta.
 
-## D. Crear el alojamiento Render (plan Free)
+## PASO 4 Crear el Render
 
 1. Abre Render → **New → Web Service** y conecta tu cuenta de GitHub.
 2. Selecciona el repositorio de VisagShop.
@@ -75,7 +72,7 @@ Si no tienes Git, puedes usar la opción **Source Control → Publish to GitHub*
 
 **Si aparece un error:** ve a Render → tu servicio → **Logs**. `DATABASE_URL` debe estar bien escrita. Sin `DATABASE_URL`, el sistema detiene el arranque en producción para proteger tus datos.
 
-## E. Probar todas las funciones
+## PASO 5 Probar todas las funciones
 
 1. Abre la tienda desde otro teléfono usando la URL `onrender.com`.
 2. Navega por categorías y abre un producto; su foto y precio deben mostrarse.
@@ -86,7 +83,7 @@ Si no tienes Git, puedes usar la opción **Source Control → Publish to GitHub*
 7. Comprueba el carrito, talla, cantidad y método de pago. WhatsApp envía **un mensaje listo para que el cliente pulse Enviar**, no cobra tarjetas ni envía imágenes adjuntas automáticamente.
 8. Cuando termines, elimina cuentas y productos ficticios desde las herramientas disponibles. Las cuentas de clientes no cuentan todavía con un botón de borrado; para pruebas usa direcciones `@example.test` y restaura el proyecto de Neon si es necesario, con conocimiento de lo que se eliminará.
 
-## F. Límites y seguridad
+## PASO 6 Los Límites y seguridad
 
 **Lo que no garantiza el plan gratuito:** disponibilidad continua, respuestas instantáneas, un dominio `.com`, respaldos ilimitados o recursos de producción para clientes reales. Render Free se suspende tras 15 minutos sin visitas, puede reiniciarse y **pierde archivos guardados localmente**; Neon conserva su base de datos pero también está sujeto a cuotas y cambios del servicio.
 
@@ -96,17 +93,6 @@ Si no tienes Git, puedes usar la opción **Source Control → Publish to GitHub*
 
 La autenticación HTTP Basic para administración sigue siendo apropiada para demostraciones sobre HTTPS, pero una tienda comercial requerirá autenticación administrativa reforzada, controles CSRF y 2FA, validación de pedidos en backend, sistema de pagos auditado, políticas legales y gestión de incidentes. La limitación de intentos basada en memoria se reinicia cuando Render reinicia; no es protección total contra bots.
 
-## G. ¿Y `visagshop.com`?
+##  ¿Y  PORQUE NO SALE visagshop.com?
 
 Puedes usar el subdominio `onrender.com` **sin comprar** dominio. `visagshop.com`, si está disponible, requiere registro y renovación de pago. Cuando decidas comprarlo, Render puede asociar el dominio y activar HTTPS administrado en un plan compatible.
-
-## H. Problemas frecuentes
-
-- `ENOENT package.json`: abriste la carpeta equivocada; usa `dir package.json` y **Archivo → Abrir carpeta** en VS Code.
-- `Cannot find module 'pg'`: ejecuta `npm install` **desde la carpeta raíz** o comprueba el build de Render.
-- El catálogo no aparece: revisa `/health` y los logs; Neon debe aceptar conexiones.
-- Render tarda al abrir: es normal después de suspenderse por inactividad.
-- El producto no conserva su foto: crea el producto en el panel actualizado, conectado a Neon, **no** guardes fotos manualmente dentro del disco del servidor.
-- No se envía el texto por WhatsApp: configura `WHATSAPP_NUMBER` real en Render y vuelve a desplegar. No hace falta editar `site.js`.
-
-**Estado de verificación:** los test unitarios/sintácticos se ejecutaron localmente. No se verificó una conexión real a una cuenta Neon ni un despliegue real en Render; esas pruebas requieren tus cuentas, credenciales y aceptación de sus condiciones.
