@@ -1,6 +1,5 @@
-VISAGSHOP – SPRINT 5
+VISAGSHOP
 
 Implementado: registro, login, logout, Recordarme, sesiones persistentes con tokens revocables, middleware de huéspedes y usuarios, perfil editable, cambio de contraseña.
 Archivo package.json está en la raíz del ZIP. Inicia con INICIAR_VISAGSHOP.bat. Para la administración utiliza INICIAR_PANEL_ADMIN.bat.
-Ver README.md, GUIA_DE_PRUEBAS_SPRINT5.md y documentos retro.md / tablero_sprint5.md.
-Páginas ilegibles en el PDF: se implementaron objetivos legibles; confirmar requisitos adicionales con versión legible del documento.
+Ver README.md, GUIA_DE_PRUEBAS_SPRINT5.md y documentos retro.md 
