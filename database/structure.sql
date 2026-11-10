@@ -112,3 +112,13 @@ CREATE TABLE sessions (
 );
 CREATE INDEX sessions_user_idx    ON sessions(user_id);
 CREATE INDEX sessions_expires_idx ON sessions(expires_at);
+
+-- ---------------------------------------------------------------------
+-- Tabla técnica: registra los ajustes de datos que la aplicación ejecuta
+-- una sola vez al arrancar (no tiene relaciones con el resto).
+-- ---------------------------------------------------------------------
+CREATE TABLE app_meta (
+  key        VARCHAR(80) PRIMARY KEY,
+  value      JSONB       NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

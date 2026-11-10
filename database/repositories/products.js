@@ -203,4 +203,4 @@ async function image(id) {
   return row ? {mime: row.mime, image_bytes: row.data} : null;
 }
 
-module.exports = {all, find, search, create, update, remove, image, patch, importProduct, categories, decodeImage, toPlain};
+module.exports = {all, find, search, create, update, remove, image, patch, importProduct, setRelations, categories, decodeImage, toPlain};

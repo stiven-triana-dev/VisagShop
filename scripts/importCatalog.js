@@ -96,6 +96,9 @@ async function updateNeon(applied) {
 // sin ella, contra data/products.json.
 async function currentCatalog(apply) {
   if (!process.env.DATABASE_URL) return JSON.parse(fs.readFileSync(seedFile, 'utf8'));
+  if (!/^postgres(ql)?:\/\/[^\s@]+@[^\s/]+\/\S+$/.test(process.env.DATABASE_URL.trim())) {
+    throw new Error('DATABASE_URL no parece una cadena de conexión válida. Debe ser algo como postgresql://usuario:clave@servidor.neon.tech/neondb?sslmode=require (cópiala completa desde Render > Environment).');
+  }
   const db = require('../database/models');
   if (apply) await require('../database/setup').initialize();
   try {
