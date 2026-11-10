@@ -12,3 +12,15 @@
 
 .mobile-logout{color:#222;background:transparent;border:0;font-size:13px;font-weight:700;text-align:left;cursor:pointer;padding:14px 5px}
 @media(max-width:680px){.account-chip{display:none}}
+
+/* Sprint 6: buscador del listado de productos */
+.product-search{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:8px 0 4px}
+.product-search-field{flex:1 1 260px;display:flex}
+.product-search-field:nth-child(2){flex:0 1 220px}
+.product-search input,.product-search select{width:100%;min-height:52px;padding:0 16px;border:1px solid #c9c8c0;background:#fff;color:var(--ink);font-size:14px;border-radius:0}
+.product-search input:focus-visible,.product-search select:focus-visible{outline:2px solid #4f6249;outline-offset:0;border-color:#4f6249}
+.product-search .btn{justify-content:center}
+.product-search-clear{align-self:center;font-size:12px;text-decoration:underline;text-underline-offset:3px;color:#575f38;padding:0 6px}
+.product-search-empty{padding:28px;border:1px dashed #c9c8c0;background:#fff;font-size:14px}
+.product-search-empty a{text-decoration:underline}
+@media(max-width:680px){.product-search-field,.product-search-field:nth-child(2){flex:1 1 100%}.product-search .btn{flex:1 1 auto}}

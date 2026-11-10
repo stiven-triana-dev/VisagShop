@@ -8,7 +8,7 @@ const productRoutes=require('./routes/products');
 const accounts=require('./routes/accounts');
 const products=require('./models/activeProducts');
 const session=require('./middleware/activeSession');
-const db=require('./cloud/db');
+const database=require('./database/setup');
 const wrap=require('./middleware/asyncHandler');
 const store=require('./storage');
 const {notFound}=require('./controllers/pageController');
@@ -36,7 +36,7 @@ app.use((req,res,next)=>{
 app.use(express.json({limit:'5mb',type:'application/json'}));
 app.use(express.urlencoded({extended:false,limit:'100kb'}));
 app.get('/health',wrap(async(req,res)=>{
- if(cloud)await db.query('SELECT 1');
+ if(cloud)await database.ping();
  else{
   const fs=require('node:fs');fs.accessSync(path.join(store.dataDir,'products.json'),fs.constants.R_OK|fs.constants.W_OK);
   fs.accessSync(path.join(store.dataDir,'users.json'),fs.constants.R_OK|fs.constants.W_OK);
@@ -47,7 +47,7 @@ app.get('/health',wrap(async(req,res)=>{
 // CSS, JS y fotografía, importante para cuotas gratuitas.
 if(cloud){
  app.get('/img/uploads/:filename',wrap(async(req,res)=>{
-  const match=/^([a-f0-9-]{36})\.(?:jpg|png|webp)$/.exec(req.params.filename);
+  const match=/^([a-f0-9-]{36})\.(?:jpg|png|webp|gif)$/.exec(req.params.filename);
   if(!match)return res.sendStatus(404);
   const file=await products.image(match[1]);
   if(!file)return res.sendStatus(404);
@@ -78,8 +78,8 @@ app.use((err,req,res,next)=>{
  res.status(status).type('text/plain').send('La tienda está temporalmente no disponible. Intenta nuevamente.');
 });
 async function start(){
- if(cloud)await db.initialize();
- return app.listen(PORT,'0.0.0.0',()=>console.log(`VisagShop: puerto ${PORT} (${cloud?'Neon PostgreSQL':'JSON local'})`));
+ if(cloud)await database.initialize();
+ return app.listen(PORT,'0.0.0.0',()=>console.log(`VisagShop: puerto ${PORT} (${cloud?'PostgreSQL con Sequelize':'JSON local'})`));
 }
 if(require.main===module)start().catch(err=>{console.error('Error al iniciar la tienda:',err.message);process.exitCode=1;});
 module.exports={app,start};
