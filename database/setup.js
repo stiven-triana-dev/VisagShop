@@ -76,11 +76,52 @@ async function syncSequence(transaction) {
   await q(`SELECT setval('product_number_seq', ${value}, true)`);
 }
 
+// Ajustes de datos que deben ejecutarse una sola vez; quedan registrados en app_meta.
+async function runOnce(key, transaction, task) {
+  const {sequelize} = db.models;
+  const [done] = await sequelize.query('SELECT 1 FROM app_meta WHERE key = :key', {replacements: {key}, type: 'SELECT', transaction});
+  if (done) return;
+  const result = await task();
+  await sequelize.query('INSERT INTO app_meta (key, value) VALUES (:key, :value)', {replacements: {key, value: JSON.stringify(result ?? {})}, transaction});
+}
+
+// Noviembre 2026: el catálogo completó precios, tallas y colores. Se copian a los
+// productos que en la base todavía no los tienen. No pisa datos ya cargados y,
+// al correr una sola vez, tampoco vuelve a llenar un precio que el administrador
+// deje vacío después.
+async function fillCatalogGaps(transaction) {
+  const {Product, Size, Color} = db.models;
+  const seed = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'products.json'), 'utf8'));
+  let prices = 0, sizes = 0, colors = 0;
+  for (const item of seed) {
+    const row = await Product.findByPk(item.id, {
+      transaction,
+      include: [{model: Size, as: 'sizes', through: {attributes: ['position']}}, {model: Color, as: 'colors', through: {attributes: ['position']}}]
+    });
+    if (!row) continue;
+    if (row.price === null && Number.isSafeInteger(item.precio)) {
+      await row.update({price: item.precio}, {transaction});
+      prices++;
+    }
+    const current = products.toPlain(row);
+    const newSizes = !current.tallas.length && item.tallas?.length ? item.tallas : null;
+    const newColors = !current.colores.length && item.colores?.length ? item.colores : null;
+    if (newSizes || newColors) {
+      await products.setRelations(row, {tallas: newSizes || current.tallas, colores: newColors || current.colores}, transaction);
+      if (newSizes) sizes++;
+      if (newColors) colors++;
+    }
+  }
+  console.info(`Catálogo completado: ${prices} precios, ${sizes} tallas y ${colors} colores agregados.`);
+  return {prices, sizes, colors};
+}
+
 async function initialize() {
   const {sequelize, Product, User, Category} = db.connect();
   await sequelize.authenticate();
   await sequelize.sync();
   await sequelize.query('CREATE SEQUENCE IF NOT EXISTS product_number_seq START WITH 1');
+  await sequelize.query('CREATE TABLE IF NOT EXISTS app_meta (key VARCHAR(80) PRIMARY KEY, value JSONB NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())');
   await sequelize.transaction(async transaction => {
     await sequelize.query(`SELECT pg_advisory_xact_lock(${LOCK_ID})`, {transaction});
     for (const name of products.categories) await Category.findOrCreate({where: {name}, defaults: {name}, transaction});
@@ -96,6 +137,7 @@ async function initialize() {
       const moved = await migrateLegacyAccounts(transaction);
       console.info(`Migración: ${moved.users} usuarios y ${moved.sessions} sesiones activas copiados.`);
     }
+    await runOnce('catalog-fill-2026-11', transaction, () => fillCatalogGaps(transaction));
     await syncSequence(transaction);
   });
 }

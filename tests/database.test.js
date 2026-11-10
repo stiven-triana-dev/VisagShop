@@ -119,6 +119,8 @@ test('migra los datos del esquema anterior (tablas visag_*) sin perder nada', {s
     INSERT INTO visag_uploads VALUES ('${uploadId}', 'image/png', '\\x89504e470d0a1a0a0000', NOW());
     INSERT INTO visag_products (id, payload) VALUES
       ('p001', '{"id":"p001","nombre":"Gorra vieja","categoria":"Gorras","precio":45000,"tallas":["Ajustable"],"colores":[],"imagen":"/img/p001.jpg"}'),
+      ('p002', '{"id":"p002","nombre":"Gorra sin precio","categoria":"Gorras","precio":null,"tallas":[],"colores":[],"imagen":"/img/p002.jpg"}'),
+      ('p042', '{"id":"p042","nombre":"Jean con precio propio","categoria":"Pantalones","precio":150000,"tallas":["30-10"],"colores":["Gris"],"imagen":"/img/p042.jpg"}'),
       ('p200', '{"id":"p200","nombre":"Subida desde el panel","descripcion":"con foto","categoria":"Zapatos","precio":null,"tallas":["40","41"],"colores":["Blanco"],"imagen":"/img/uploads/${uploadId}.png"}');
     INSERT INTO visag_users (id, email, payload) VALUES ('${userId}', 'viejo@example.test',
       '{"id":"${userId}","firstName":"Cliente","lastName":"Antiguo","email":"viejo@example.test","phone":"3000000000","password":"${hash}","category":"customer","createdAt":"2026-01-02T03:04:05.000Z"}');
@@ -133,7 +135,18 @@ test('migra los datos del esquema anterior (tablas visag_*) sin perder nada', {s
   const repoUsers = require('../database/repositories/users');
   const db = require('../database/models');
   const all = await products.all();
-  assert.deepEqual(all.map(p => p.id).sort(), ['p001', 'p200']);
+  assert.deepEqual(all.map(p => p.id).sort(), ['p001', 'p002', 'p042', 'p200']);
+
+  // Carga única de precios, tallas y colores del catálogo en lo que faltaba.
+  const seed = id => catalog.find(p => p.id === id);
+  const p002 = await products.find('p002');
+  assert.deepEqual([p002.precio, p002.tallas, p002.colores], [seed('p002').precio, seed('p002').tallas, seed('p002').colores]);
+  assert.deepEqual((await products.find('p001')).colores, seed('p001').colores, 'completa colores aunque ya tenga precio');
+  const p042 = await products.find('p042');
+  assert.deepEqual([p042.precio, p042.tallas, p042.colores], [150000, ['30-10'], ['Gris']], 'no pisa datos ya cargados');
+  await products.patch('p002', {precio: null});
+  await setup.initialize();
+  assert.equal((await products.find('p002')).precio, null, 'no vuelve a llenar un precio vaciado por el administrador');
   assert.deepEqual(await products.find('p200'), {id: 'p200', nombre: 'Subida desde el panel', descripcion: 'con foto', categoria: 'Zapatos', precio: null, tallas: ['40', '41'], colores: ['Blanco'], imagen: `/img/uploads/${uploadId}.png`});
   assert.equal((await products.image(uploadId)).mime, 'image/png');
   const migrated = await repoUsers.authenticate('viejo@example.test', password);
@@ -143,5 +156,5 @@ test('migra los datos del esquema anterior (tablas visag_*) sin perder nada', {s
   const png = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
   assert.equal((await products.create({nombre: 'Después de migrar', categoria: 'Gorras', imageData: png})).id, 'p206', 'continúa el contador anterior');
   const [{count}] = await db.models.sequelize.query('SELECT COUNT(*)::int AS count FROM visag_products', {type: 'SELECT'});
-  assert.equal(count, 2, 'las tablas anteriores quedan intactas como respaldo');
+  assert.equal(count, 4, 'las tablas anteriores quedan intactas como respaldo');
 });
