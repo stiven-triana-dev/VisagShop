@@ -1,0 +1,9 @@
+// Rutas que usa sequelize-cli (npx sequelize-cli ...). Todo vive en database/.
+const path = require('node:path');
+
+module.exports = {
+  config: path.resolve('database', 'config', 'config.js'),
+  'models-path': path.resolve('database', 'models'),
+  'seeders-path': path.resolve('database', 'seeders'),
+  'migrations-path': path.resolve('database', 'migrations')
+};

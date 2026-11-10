@@ -11,15 +11,22 @@
    "30-10",
    "32-12"
   ],
-  "imagen": "/img/p042.jpg"
+  "imagen": "/img/p042.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p098",
   "nombre": "Adidas · Negro y blanco",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 220000,
   "tallas": [],
-  "imagen": "/img/p098.jpg"
+  "imagen": "/img/p098.jpg",
+  "colores": [
+   "Negro",
+   "Blanco"
+  ]
  },
  {
   "id": "p059",
@@ -29,35 +36,50 @@
   "tallas": [
    "L"
   ],
-  "imagen": "/img/p059.jpg"
+  "imagen": "/img/p059.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p089",
   "nombre": "Sudadera 1.1 · Negra con diseño rojo 01",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 120000,
   "tallas": [
    "L"
   ],
-  "imagen": "/img/p089.jpg"
+  "imagen": "/img/p089.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p001",
   "nombre": "Gorra curva · Negra 01",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p001.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p001.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p062",
   "nombre": "Bermuda jean · Azul con tachas",
   "categoria": "Bermudas",
-  "precio": null,
+  "precio": 95000,
   "tallas": [
    "28"
   ],
-  "imagen": "/img/p062.jpg"
+  "imagen": "/img/p062.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p043",
@@ -69,15 +91,22 @@
    "26-6",
    "28-8"
   ],
-  "imagen": "/img/p043.jpg"
+  "imagen": "/img/p043.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p099",
   "nombre": "Jordan · Gris y blanco",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 280000,
   "tallas": [],
-  "imagen": "/img/p099.jpg"
+  "imagen": "/img/p099.jpg",
+  "colores": [
+   "Gris",
+   "Blanco"
+  ]
  },
  {
   "id": "p060",
@@ -87,35 +116,51 @@
   "tallas": [
    "M"
   ],
-  "imagen": "/img/p060.jpg"
+  "imagen": "/img/p060.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p090",
   "nombre": "Sudadera 1.1 · Negra con diseño rojo 02",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 120000,
   "tallas": [
    "M"
   ],
-  "imagen": "/img/p090.jpg"
+  "imagen": "/img/p090.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p002",
   "nombre": "Gorra curva · Negra y roja 01",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p002.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p002.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p063",
   "nombre": "Bermuda jean · Negra con parches",
   "categoria": "Bermudas",
-  "precio": null,
+  "precio": 95000,
   "tallas": [
    "28"
   ],
-  "imagen": "/img/p063.jpg"
+  "imagen": "/img/p063.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p044",
@@ -126,15 +171,21 @@
    "24-4",
    "26-6"
   ],
-  "imagen": "/img/p044.jpg"
+  "imagen": "/img/p044.jpg",
+  "colores": [
+   "Gris"
+  ]
  },
  {
   "id": "p100",
   "nombre": "Jordan · Blanco",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 280000,
   "tallas": [],
-  "imagen": "/img/p100.jpg"
+  "imagen": "/img/p100.jpg",
+  "colores": [
+   "Blanco"
+  ]
  },
  {
   "id": "p061",
@@ -144,37 +195,51 @@
   "tallas": [
    "XL"
   ],
-  "imagen": "/img/p061.jpg"
+  "imagen": "/img/p061.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p091",
   "nombre": "Sudadera algodón · Roja",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "M",
    "L",
    "XL"
   ],
-  "imagen": "/img/p091.jpg"
+  "imagen": "/img/p091.jpg",
+  "colores": [
+   "Rojo"
+  ]
  },
  {
   "id": "p003",
   "nombre": "Gorra curva · Negra 02",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p003.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p003.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p064",
   "nombre": "Bermuda jean · Negra con brillos",
   "categoria": "Bermudas",
-  "precio": null,
+  "precio": 95000,
   "tallas": [
    "30"
   ],
-  "imagen": "/img/p064.jpg"
+  "imagen": "/img/p064.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p045",
@@ -184,15 +249,21 @@
   "tallas": [
    "26-6"
   ],
-  "imagen": "/img/p045.jpg"
+  "imagen": "/img/p045.jpg",
+  "colores": [
+   "Verde"
+  ]
  },
  {
   "id": "p101",
   "nombre": "Jordan · Negro",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 280000,
   "tallas": [],
-  "imagen": "/img/p101.jpg"
+  "imagen": "/img/p101.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p069",
@@ -202,37 +273,51 @@
   "tallas": [
    "L"
   ],
-  "imagen": "/img/p069.jpg"
+  "imagen": "/img/p069.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p092",
   "nombre": "Sudadera algodón · Negra con franjas",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "M",
    "L",
    "XL"
   ],
-  "imagen": "/img/p092.jpg"
+  "imagen": "/img/p092.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p004",
   "nombre": "Gorra curva · Gris oscuro",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p004.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p004.jpg",
+  "colores": [
+   "Gris"
+  ]
  },
  {
   "id": "p065",
   "nombre": "Bermuda jean · Negra con strass",
   "categoria": "Bermudas",
-  "precio": null,
+  "precio": 95000,
   "tallas": [
    "30"
   ],
-  "imagen": "/img/p065.jpg"
+  "imagen": "/img/p065.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p046",
@@ -243,15 +328,22 @@
    "26-6",
    "30-10"
   ],
-  "imagen": "/img/p046.jpg"
+  "imagen": "/img/p046.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p102",
   "nombre": "New Balance · Gris y blanco",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 250000,
   "tallas": [],
-  "imagen": "/img/p102.jpg"
+  "imagen": "/img/p102.jpg",
+  "colores": [
+   "Gris",
+   "Blanco"
+  ]
  },
  {
   "id": "p070",
@@ -261,37 +353,53 @@
   "tallas": [
    "L"
   ],
-  "imagen": "/img/p070.jpg"
+  "imagen": "/img/p070.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p093",
   "nombre": "Sudadera algodón · Negra con ribete 01",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "M",
    "L",
    "XL"
   ],
-  "imagen": "/img/p093.jpg"
+  "imagen": "/img/p093.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p005",
   "nombre": "Gorra curva · Negra y roja 02",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p005.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p005.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p066",
   "nombre": "Bermuda jean · Azul rota",
   "categoria": "Bermudas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "32"
   ],
-  "imagen": "/img/p066.jpg"
+  "imagen": "/img/p066.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p047",
@@ -303,15 +411,21 @@
    "32-12",
    "34-14"
   ],
-  "imagen": "/img/p047.jpg"
+  "imagen": "/img/p047.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p103",
   "nombre": "Nike · Negro",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 230000,
   "tallas": [],
-  "imagen": "/img/p103.jpg"
+  "imagen": "/img/p103.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p071",
@@ -321,37 +435,52 @@
   "tallas": [
    "L"
   ],
-  "imagen": "/img/p071.jpg"
+  "imagen": "/img/p071.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p094",
   "nombre": "Sudadera algodón · Blanca y negra",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "M",
    "L",
    "XL"
   ],
-  "imagen": "/img/p094.jpg"
+  "imagen": "/img/p094.jpg",
+  "colores": [
+   "Blanco",
+   "Negro"
+  ]
  },
  {
   "id": "p006",
   "nombre": "Gorra curva · Negra 03",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p006.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p006.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p067",
   "nombre": "Bermuda jean · Azul con estampado",
   "categoria": "Bermudas",
-  "precio": null,
+  "precio": 95000,
   "tallas": [
    "32"
   ],
-  "imagen": "/img/p067.jpg"
+  "imagen": "/img/p067.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p048",
@@ -363,15 +492,22 @@
    "30-10",
    "32-12"
   ],
-  "imagen": "/img/p048.jpg"
+  "imagen": "/img/p048.jpg",
+  "colores": [
+   "Gris"
+  ]
  },
  {
   "id": "p104",
   "nombre": "Nike · Verde y blanco",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 230000,
   "tallas": [],
-  "imagen": "/img/p104.jpg"
+  "imagen": "/img/p104.jpg",
+  "colores": [
+   "Verde",
+   "Blanco"
+  ]
  },
  {
   "id": "p072",
@@ -382,37 +518,52 @@
    "L",
    "XL"
   ],
-  "imagen": "/img/p072.jpg"
+  "imagen": "/img/p072.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p095",
   "nombre": "Sudadera algodón · Gris",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "M",
    "L",
    "XL"
   ],
-  "imagen": "/img/p095.jpg"
+  "imagen": "/img/p095.jpg",
+  "colores": [
+   "Gris"
+  ]
  },
  {
   "id": "p007",
   "nombre": "Gorra curva · Negra y celeste",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p007.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p007.jpg",
+  "colores": [
+   "Negro",
+   "Celeste"
+  ]
  },
  {
   "id": "p068",
   "nombre": "Bermuda jean · Azul con brillos",
   "categoria": "Bermudas",
-  "precio": null,
+  "precio": 95000,
   "tallas": [
    "34"
   ],
-  "imagen": "/img/p068.jpg"
+  "imagen": "/img/p068.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p049",
@@ -424,15 +575,22 @@
    "30-10",
    "32-12"
   ],
-  "imagen": "/img/p049.jpg"
+  "imagen": "/img/p049.jpg",
+  "colores": [
+   "Azul",
+   "Turquesa"
+  ]
  },
  {
   "id": "p105",
   "nombre": "Nike · Blanco 01",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 230000,
   "tallas": [],
-  "imagen": "/img/p105.jpg"
+  "imagen": "/img/p105.jpg",
+  "colores": [
+   "Blanco"
+  ]
  },
  {
   "id": "p073",
@@ -442,27 +600,41 @@
   "tallas": [
    "L"
   ],
-  "imagen": "/img/p073.jpg"
+  "imagen": "/img/p073.jpg",
+  "colores": [
+   "Negro",
+   "Gris",
+   "Rojo"
+  ]
  },
  {
   "id": "p096",
   "nombre": "Sudadera algodón · Negra",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "M",
    "L",
    "XL"
   ],
-  "imagen": "/img/p096.jpg"
+  "imagen": "/img/p096.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p008",
   "nombre": "Gorra curva · Blanca y negra 01",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p008.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p008.jpg",
+  "colores": [
+   "Blanco",
+   "Negro"
+  ]
  },
  {
   "id": "p050",
@@ -474,15 +646,21 @@
    "30-10",
    "32-12"
   ],
-  "imagen": "/img/p050.jpg"
+  "imagen": "/img/p050.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p106",
   "nombre": "Nike · Blanco 02",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 230000,
   "tallas": [],
-  "imagen": "/img/p106.jpg"
+  "imagen": "/img/p106.jpg",
+  "colores": [
+   "Blanco"
+  ]
  },
  {
   "id": "p074",
@@ -493,27 +671,40 @@
    "L",
    "XL"
   ],
-  "imagen": "/img/p074.jpg"
+  "imagen": "/img/p074.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p097",
   "nombre": "Sudadera algodón · Negra con ribete 02",
   "categoria": "Sudaderas",
-  "precio": null,
+  "precio": 85000,
   "tallas": [
    "M",
    "L",
    "XL"
   ],
-  "imagen": "/img/p097.jpg"
+  "imagen": "/img/p097.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p009",
   "nombre": "Gorra curva · Roja y negra",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p009.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p009.jpg",
+  "colores": [
+   "Rojo",
+   "Negro"
+  ]
  },
  {
   "id": "p051",
@@ -524,15 +715,22 @@
    "30-10",
    "32-12"
   ],
-  "imagen": "/img/p051.jpg"
+  "imagen": "/img/p051.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p107",
   "nombre": "Nike · Café y blanco",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 230000,
   "tallas": [],
-  "imagen": "/img/p107.jpg"
+  "imagen": "/img/p107.jpg",
+  "colores": [
+   "Café",
+   "Blanco"
+  ]
  },
  {
   "id": "p075",
@@ -542,15 +740,24 @@
   "tallas": [
    "L"
   ],
-  "imagen": "/img/p075.jpg"
+  "imagen": "/img/p075.jpg",
+  "colores": [
+   "Blanco"
+  ]
  },
  {
   "id": "p010",
   "nombre": "Gorra curva · Blanca y negra 02",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p010.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p010.jpg",
+  "colores": [
+   "Blanco",
+   "Negro"
+  ]
  },
  {
   "id": "p052",
@@ -561,15 +768,22 @@
    "32-12",
    "34-14"
   ],
-  "imagen": "/img/p052.jpg"
+  "imagen": "/img/p052.jpg",
+  "colores": [
+   "Café"
+  ]
  },
  {
   "id": "p108",
   "nombre": "Nike · Gris y negro",
   "categoria": "Zapatos",
-  "precio": null,
+  "precio": 230000,
   "tallas": [],
-  "imagen": "/img/p108.jpg"
+  "imagen": "/img/p108.jpg",
+  "colores": [
+   "Gris",
+   "Negro"
+  ]
  },
  {
   "id": "p076",
@@ -579,15 +793,23 @@
   "tallas": [
    "M"
   ],
-  "imagen": "/img/p076.jpg"
+  "imagen": "/img/p076.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p011",
   "nombre": "Gorra curva · Roja",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p011.jpg"
+  "precio": 45000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p011.jpg",
+  "colores": [
+   "Rojo"
+  ]
  },
  {
   "id": "p053",
@@ -597,7 +819,10 @@
   "tallas": [
    "32-12"
   ],
-  "imagen": "/img/p053.jpg"
+  "imagen": "/img/p053.jpg",
+  "colores": [
+   "Verde"
+  ]
  },
  {
   "id": "p077",
@@ -608,15 +833,23 @@
    "M",
    "XL"
   ],
-  "imagen": "/img/p077.jpg"
+  "imagen": "/img/p077.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p012",
   "nombre": "Gorra curva 1.1 · Roja",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p012.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p012.jpg",
+  "colores": [
+   "Rojo"
+  ]
  },
  {
   "id": "p054",
@@ -626,7 +859,10 @@
   "tallas": [
    "28-8"
   ],
-  "imagen": "/img/p054.jpg"
+  "imagen": "/img/p054.jpg",
+  "colores": [
+   "Gris"
+  ]
  },
  {
   "id": "p078",
@@ -636,25 +872,36 @@
   "tallas": [
    "M"
   ],
-  "imagen": "/img/p078.jpg"
+  "imagen": "/img/p078.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p013",
   "nombre": "Gorra curva 1.1 · Negra 01",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p013.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p013.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p055",
   "nombre": "Jean 1.1 · Azul roto 01",
   "categoria": "Pantalones",
-  "precio": null,
+  "precio": 160000,
   "tallas": [
    "28"
   ],
-  "imagen": "/img/p055.jpg"
+  "imagen": "/img/p055.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p079",
@@ -664,25 +911,37 @@
   "tallas": [
    "M"
   ],
-  "imagen": "/img/p079.jpg"
+  "imagen": "/img/p079.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p014",
   "nombre": "Gorra curva 1.1 · Negra y roja 01",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p014.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p014.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p056",
   "nombre": "Jean 1.1 · Azul con estampado 01",
   "categoria": "Pantalones",
-  "precio": null,
+  "precio": 175000,
   "tallas": [
    "28"
   ],
-  "imagen": "/img/p056.jpg"
+  "imagen": "/img/p056.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p080",
@@ -692,25 +951,37 @@
   "tallas": [
    "M"
   ],
-  "imagen": "/img/p080.jpg"
+  "imagen": "/img/p080.jpg",
+  "colores": [
+   "Rojo"
+  ]
  },
  {
   "id": "p015",
   "nombre": "Gorra curva 1.1 · Blanca y roja 01",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p015.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p015.jpg",
+  "colores": [
+   "Blanco",
+   "Rojo"
+  ]
  },
  {
   "id": "p057",
   "nombre": "Jean 1.1 · Azul roto 02",
   "categoria": "Pantalones",
-  "precio": null,
+  "precio": 160000,
   "tallas": [
    "32"
   ],
-  "imagen": "/img/p057.jpg"
+  "imagen": "/img/p057.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p081",
@@ -720,25 +991,37 @@
   "tallas": [
    "XL"
   ],
-  "imagen": "/img/p081.jpg"
+  "imagen": "/img/p081.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p016",
   "nombre": "Gorra curva 1.1 · Blanca y roja 02",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p016.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p016.jpg",
+  "colores": [
+   "Blanco",
+   "Rojo"
+  ]
  },
  {
   "id": "p058",
   "nombre": "Jean 1.1 · Azul con estampado 02",
   "categoria": "Pantalones",
-  "precio": null,
+  "precio": 175000,
   "tallas": [
    "32"
   ],
-  "imagen": "/img/p058.jpg"
+  "imagen": "/img/p058.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p082",
@@ -748,15 +1031,25 @@
   "tallas": [
    "XL"
   ],
-  "imagen": "/img/p082.jpg"
+  "imagen": "/img/p082.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p017",
   "nombre": "Gorra curva 1.1 · Azul, blanca y roja",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p017.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p017.jpg",
+  "colores": [
+   "Azul",
+   "Blanco",
+   "Rojo"
+  ]
  },
  {
   "id": "p083",
@@ -766,15 +1059,24 @@
   "tallas": [
    "XL"
   ],
-  "imagen": "/img/p083.jpg"
+  "imagen": "/img/p083.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p018",
   "nombre": "Gorra curva 1.1 · Negra 02",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p018.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p018.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p084",
@@ -784,15 +1086,23 @@
   "tallas": [
    "XL"
   ],
-  "imagen": "/img/p084.jpg"
+  "imagen": "/img/p084.jpg",
+  "colores": [
+   "Celeste"
+  ]
  },
  {
   "id": "p019",
   "nombre": "Gorra curva 1.1 · Negra 03",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p019.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p019.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p085",
@@ -802,15 +1112,24 @@
   "tallas": [
    "XL"
   ],
-  "imagen": "/img/p085.jpg"
+  "imagen": "/img/p085.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p020",
   "nombre": "Gorra curva 1.1 · Negra y roja 02",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p020.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p020.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p086",
@@ -820,15 +1139,25 @@
   "tallas": [
    "XL"
   ],
-  "imagen": "/img/p086.jpg"
+  "imagen": "/img/p086.jpg",
+  "colores": [
+   "Negro",
+   "Gris"
+  ]
  },
  {
   "id": "p021",
   "nombre": "Gorra curva 1.1 · Negra y blanca",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p021.jpg"
+  "precio": 60000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p021.jpg",
+  "colores": [
+   "Negro",
+   "Blanco"
+  ]
  },
  {
   "id": "p087",
@@ -838,15 +1167,24 @@
   "tallas": [
    "XXL"
   ],
-  "imagen": "/img/p087.jpg"
+  "imagen": "/img/p087.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p022",
   "nombre": "Gorra plana · Blanca y azul",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p022.jpg"
+  "precio": 55000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p022.jpg",
+  "colores": [
+   "Blanco",
+   "Azul"
+  ]
  },
  {
   "id": "p088",
@@ -856,192 +1194,267 @@
   "tallas": [
    "XXL"
   ],
-  "imagen": "/img/p088.jpg"
+  "imagen": "/img/p088.jpg",
+  "colores": [
+   "Verde"
+  ]
  },
  {
   "id": "p023",
   "nombre": "Gorra plana · Negra",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p023.jpg"
+  "precio": 55000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p023.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p024",
   "nombre": "Gorra plana · Negra y roja",
   "categoria": "Gorras",
-  "precio": null,
-  "tallas": [],
-  "imagen": "/img/p024.jpg"
+  "precio": 55000,
+  "tallas": [
+   "Ajustable"
+  ],
+  "imagen": "/img/p024.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p025",
   "nombre": "Gorra cerrada · Blanca y azul 01",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/2"
   ],
-  "imagen": "/img/p025.jpg"
+  "imagen": "/img/p025.jpg",
+  "colores": [
+   "Blanco",
+   "Azul"
+  ]
  },
  {
   "id": "p026",
   "nombre": "Gorra cerrada · Azul oscuro",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/4"
   ],
-  "imagen": "/img/p026.jpg"
+  "imagen": "/img/p026.jpg",
+  "colores": [
+   "Azul"
+  ]
  },
  {
   "id": "p027",
   "nombre": "Gorra cerrada · Negra y rosa",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/4"
   ],
-  "imagen": "/img/p027.jpg"
+  "imagen": "/img/p027.jpg",
+  "colores": [
+   "Negro",
+   "Rosa"
+  ]
  },
  {
   "id": "p028",
   "nombre": "Gorra cerrada · Negra y naranja",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/8"
   ],
-  "imagen": "/img/p028.jpg"
+  "imagen": "/img/p028.jpg",
+  "colores": [
+   "Negro",
+   "Naranja"
+  ]
  },
  {
   "id": "p029",
   "nombre": "Gorra cerrada · Negra 01",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/8"
   ],
-  "imagen": "/img/p029.jpg"
+  "imagen": "/img/p029.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p030",
   "nombre": "Gorra cerrada · Negra 02",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/8"
   ],
-  "imagen": "/img/p030.jpg"
+  "imagen": "/img/p030.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p031",
   "nombre": "Gorra cerrada · Negra y roja",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/8"
   ],
-  "imagen": "/img/p031.jpg"
+  "imagen": "/img/p031.jpg",
+  "colores": [
+   "Negro",
+   "Rojo"
+  ]
  },
  {
   "id": "p032",
   "nombre": "Gorra cerrada · Crema y negra 01",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/8"
   ],
-  "imagen": "/img/p032.jpg"
+  "imagen": "/img/p032.jpg",
+  "colores": [
+   "Crema",
+   "Negro"
+  ]
  },
  {
   "id": "p033",
   "nombre": "Gorra cerrada · Negra y celeste",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/8"
   ],
-  "imagen": "/img/p033.jpg"
+  "imagen": "/img/p033.jpg",
+  "colores": [
+   "Negro",
+   "Celeste"
+  ]
  },
  {
   "id": "p034",
   "nombre": "Gorra cerrada · Café y azul",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7 1/8"
   ],
-  "imagen": "/img/p034.jpg"
+  "imagen": "/img/p034.jpg",
+  "colores": [
+   "Café",
+   "Azul"
+  ]
  },
  {
   "id": "p035",
   "nombre": "Gorra cerrada · Negra 03",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7"
   ],
-  "imagen": "/img/p035.jpg"
+  "imagen": "/img/p035.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p036",
   "nombre": "Gorra cerrada · Crema y negra 02",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7"
   ],
-  "imagen": "/img/p036.jpg"
+  "imagen": "/img/p036.jpg",
+  "colores": [
+   "Crema",
+   "Negro"
+  ]
  },
  {
   "id": "p037",
   "nombre": "Gorra cerrada · Negra 04",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7"
   ],
-  "imagen": "/img/p037.jpg"
+  "imagen": "/img/p037.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p038",
   "nombre": "Gorra cerrada · Negra y amarilla",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7"
   ],
-  "imagen": "/img/p038.jpg"
+  "imagen": "/img/p038.jpg",
+  "colores": [
+   "Negro",
+   "Amarillo"
+  ]
  },
  {
   "id": "p039",
   "nombre": "Gorra cerrada · Negra 05",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7"
   ],
-  "imagen": "/img/p039.jpg"
+  "imagen": "/img/p039.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p040",
   "nombre": "Gorra cerrada · Negra 06",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7"
   ],
-  "imagen": "/img/p040.jpg"
+  "imagen": "/img/p040.jpg",
+  "colores": [
+   "Negro"
+  ]
  },
  {
   "id": "p041",
   "nombre": "Gorra cerrada · Blanca y azul 02",
   "categoria": "Gorras",
-  "precio": null,
+  "precio": 75000,
   "tallas": [
    "7"
   ],
-  "imagen": "/img/p041.jpg"
+  "imagen": "/img/p041.jpg",
+  "colores": [
+   "Blanco",
+   "Azul"
+  ]
  }
 ]

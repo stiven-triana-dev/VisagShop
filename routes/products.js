@@ -11,8 +11,12 @@ const wrap=require('../middleware/asyncHandler');
 const money=value=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(value);
 
 // Rutas REST y método HTTP indicados en Sprint 4.
+// Listado y buscador: /products?q=jean&categoria=Pantalones
 router.get('/',wrap(async (req,res)=>{
-  res.render('products/list',{pageTitle:'Colección | VisagShop',products:await products.all(),money,pageScript:'productList.js',isHome:false});
+  const q=typeof req.query.q==='string'?req.query.q.trim().slice(0,80):'';
+  const categoria=products.categories.includes(req.query.categoria)?req.query.categoria:'';
+  const list=q||categoria?await products.search({q,categoria}):await products.all();
+  res.render('products/list',{pageTitle:q?`Buscar “${q}” | VisagShop`:'Colección | VisagShop',products:list,money,q,categoria,categories:products.categories,pageScript:'productList.js',isHome:false});
 }));
 router.get('/create',requireAdmin,wrap(admin.newForm));
 router.post('/',mutationLimit,requireAdmin,sameOrigin,wrap(admin.create));

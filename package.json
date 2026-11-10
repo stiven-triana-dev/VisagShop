@@ -1,7 +1,7 @@
 {
   "name": "visagshop",
-  "version": "5.3.0",
-  "description": "VisagShop Sprint 5 - Render Free + Neon PostgreSQL: sesiones, productos, fotos y clientes persistentes",
+  "version": "6.0.0",
+  "description": "VisagShop - tienda de moda urbana con Express, EJS, PostgreSQL y Sequelize",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -9,15 +9,20 @@
     "check": "node --check app.js",
     "test": "node --test tests/*.test.js",
     "seed:users": "node scripts/seedDemoUsers.js",
-    "test:deploy": "node --test tests/*.test.js",
-    "test:cloud": "node --test tests/freeHosting.test.js"
+    "catalog:import": "node scripts/importCatalog.js",
+    "db:data-sql": "node scripts/generateDataSql.js",
+    "test:db": "node --test tests/database.test.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
     "ejs": "^3.1.10",
-    "pg": "^8.16.3"
+    "express": "^4.19.2",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.8"
   },
   "engines": {
     "node": ">=20 <25"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.5"
   }
 }

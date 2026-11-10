@@ -20,7 +20,7 @@
 
 **VisagShop** es una aplicación web para explorar y gestionar un catálogo de moda urbana. Integra una interfaz adaptable a móviles, herramientas para encontrar prendas, un carrito de compra y un **flujo de solicitud de pedidos por WhatsApp**. En el servidor dispone de cuentas de clientes, sesiones y administración del catálogo.
 
-El proyecto se desarrolló como práctica de arquitectura web con **Node.js, Express, plantillas EJS y persistencia de datos**. Se puede ejecutar con JSON en desarrollo local o con **PostgreSQL (Neon)** cuando se configura `DATABASE_URL` para su publicación en Render.
+El proyecto se desarrolló como práctica de arquitectura web con **Node.js, Express, plantillas EJS, PostgreSQL y Sequelize**. Con `DATABASE_URL` usa una base relacional PostgreSQL (Neon en producción); sin ella funciona con archivos JSON para abrirlo rápido en local.
 
 > **Alcance real:** la plataforma permite **solicitar** y preparar pedidos, no efectuar cobros automáticos. Disponibilidad, costos de envío y pagos anticipados se confirman con la tienda. La página de recuperación de contraseña por correo aún no está implementada.
 
@@ -41,22 +41,22 @@ El proyecto se desarrolló como práctica de arquitectura web con **Node.js, Exp
 
 | Área | Funciones incluidas |
 | --- | --- |
-| **Catálogo** | Productos por categoría, búsqueda, orden por nombre/precio y favoritos locales. |
-| **Fichas** | Fotografías, referencias, tallas y precio, cuando está definido. |
+| **Catálogo** | Productos por categoría, buscador (`/products?q=`), orden por nombre/precio y favoritos locales. |
+| **Fichas** | Fotografías, referencias, precio, tallas y colores. |
 | **Carrito** | Cantidades, selección de talla, subtotal y ficha descargable con fotos. |
 | **Pedidos** | Formulario de entrega y preparación de mensaje para WhatsApp. |
 | **Pago solicitado** | Contraentrega, Nequi o tarjeta por enlace enviado por la tienda; **sin cobro integrado**. |
 | **Clientes** | Registro, acceso, cierre de sesión, “recordarme”, perfil y cambio de contraseña. |
 | **Administración** | Alta, consulta, edición y eliminación de productos con validación de imágenes. |
-| **Persistencia** | JSON local para desarrollo; PostgreSQL en la configuración de alojamiento gratuito. |
+| **Persistencia** | PostgreSQL con Sequelize (tablas relacionadas); JSON local como alternativa de desarrollo. |
 
-El catálogo inicial incluye **108 referencias y 108 fotografías**. Algunas referencias aún requieren completar información comercial (por ejemplo, precio o tallas), por lo que se presentan como **por consultar** cuando corresponde.
+El catálogo inicial incluye **108 referencias y 108 fotografías**, todas con precio. Los tenis aún no tienen tallas cargadas; se confirman con la tienda.
 
 ## Tecnologías
 
 - **Frontend:** HTML5, CSS3, JavaScript y plantillas EJS.
 - **Backend:** Node.js, Express 4, controladores y rutas HTTP.
-- **Datos:** archivos JSON locales; PostgreSQL con el paquete `pg` en la versión desplegada.
+- **Datos:** PostgreSQL con el ORM **Sequelize** (modelos y relaciones en `database/`); archivos JSON como alternativa local.
 - **Autenticación:** contraseñas derivadas con `scrypt` y sesiones revocables almacenadas en el servidor.
 - **Despliegue:** GitHub como repositorio, Render como servidor y Neon para PostgreSQL.
 - **Calidad:** pruebas automatizadas con `node:test`.
@@ -73,11 +73,36 @@ flowchart TD
     D --> F
     E --> F
     F -->|Desarrollo local| G[Archivos JSON]
-    F -->|Despliegue| H[(Neon PostgreSQL)]
+    F -->|Sequelize| H[(PostgreSQL / Neon)]
     A --> I[Pedido preparado en WhatsApp]
 ```
 
-Consulta [**la documentación de arquitectura**](docs/ARQUITECTURA.md) para entender las carpetas y el almacenamiento de imágenes.
+Consulta [**la documentación de arquitectura**](docs/ARQUITECTURA.md) para entender las carpetas, las tablas y cómo se migraron los datos.
+
+## Base de datos (Sprint 6)
+
+| Entregable | Archivo |
+| --- | --- |
+| Diagrama entidad-relación | [`docs/sprint6/DER-VisagShop.pdf`](docs/sprint6/DER-VisagShop.pdf) |
+| Script de estructura | [`database/structure.sql`](database/structure.sql) |
+| Script de datos | [`database/data.sql`](database/data.sql) (se regenera con `npm run db:data-sql`) |
+| Configuración y modelos de Sequelize | [`database/config/`](database/config/config.js), [`database/models/`](database/models/index.js) |
+| Retrospectiva | [`retro.md`](retro.md) |
+
+Para crear la base en un PostgreSQL local:
+
+```bash
+psql -U postgres -f database/structure.sql
+psql -U postgres -d visagshop -f database/data.sql
+```
+
+Luego arranca la tienda apuntando a esa base (en Git Bash):
+
+```bash
+DATABASE_URL=postgresql://postgres:TU_CLAVE@localhost:5432/visagshop npm start
+```
+
+Si la base está vacía, la aplicación crea las tablas y carga el catálogo sola al arrancar. `data.sql` incluye dos clientes ficticios (`andrea.demo@example.test` y `mateo.demo@example.test`, contraseña `VisagDemo-2026`) solo para pruebas locales.
 
 ## Instalación local
 
@@ -94,9 +119,11 @@ Visita **http://localhost:3000**. En desarrollo local, sin `DATABASE_URL`, la ap
 Otros comandos disponibles:
 
 ```bash
-npm run dev  # Recarga de Node al cambiar archivos
-npm test     # Pruebas automatizadas
-npm run check # Validación sintáctica del servidor
+npm run dev         # Recarga de Node al cambiar archivos
+npm test            # Pruebas automatizadas
+npm run test:db     # Pruebas contra PostgreSQL (requiere TEST_DATABASE_URL)
+npm run db:data-sql # Regenera database/data.sql desde data/products.json
+npm run check       # Validación sintáctica del servidor
 ```
 
 > **No ejecutes `npm install` desde una carpeta superior sin `package.json`.** En Windows, usa Visual Studio Code → **Archivo → Abrir carpeta** y selecciona la carpeta del proyecto.
@@ -121,7 +148,7 @@ La URL de comprobación del servicio es `/health`.
 | Ruta | Descripción |
 | --- | --- |
 | `/` | Inicio y catálogo. |
-| `/products` | Listado de productos. |
+| `/products` | Listado de productos y buscador (`?q=texto&categoria=Gorras`). |
 | `/products/:id` | Detalle de producto. |
 | `/productCart` | Carrito y solicitud de compra. |
 | `/register`, `/login` | Registro y acceso. |
@@ -132,7 +159,9 @@ La URL de comprobación del servicio es `/health`.
 
 ## Pruebas y consideraciones
 
-Ejecuta `npm test` desde la raíz. Las pruebas cubren modelos de productos, registro, autenticación, sesiones, rutas, controles de acceso y adaptadores de persistencia. **Las pruebas con adaptadores simulados no equivalen a una auditoría de seguridad ni a pruebas en infraestructura real**.
+Ejecuta `npm test` desde la raíz: revisa las rutas del CRUD, la protección de administrador, las fotos del catálogo y el importador de precios.
+
+`npm run test:db` prueba contra un PostgreSQL real: que `structure.sql` y `data.sql` funcionen, el CRUD de productos y usuarios con Sequelize y la migración de los datos del esquema anterior. Necesita `TEST_DATABASE_URL` apuntando a un servidor de pruebas: crea bases temporales `visag_test_*` y las borra al terminar. **Nunca uses la URL de producción.**
 
 Para conocer las restricciones actuales y las verificaciones recomendadas antes de mostrar la tienda a un reclutador o usarla con clientes, consulta [**Pruebas y limitaciones**](docs/PRUEBAS_Y_LIMITACIONES.md).
 

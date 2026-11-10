@@ -16,6 +16,12 @@ function all() {
   return rows;
 }
 function find(id) {return all().find(p => p.id === id) || null;}
+// Misma búsqueda que la versión con base de datos: texto en nombre, descripción o categoría.
+function search({q='', categoria=''}={}) {
+  const text = String(q).trim().slice(0,80).toLowerCase();
+  return all().filter(p => (!categories.includes(categoria) || p.categoria === categoria) &&
+    (!text || [p.nombre, p.descripcion, p.categoria].some(v => String(v||'').toLowerCase().includes(text))));
+}
 function atomicWrite(items) {
   const tmp = path.join(path.dirname(file), `.products-${process.pid}-${crypto.randomUUID()}.tmp`);
   try {
@@ -104,4 +110,4 @@ function remove(id) {
   }
   return removed;
 }
-module.exports={all,find,create,update,remove,categories,validate};
+module.exports={all,find,search,create,update,remove,categories,validate};
