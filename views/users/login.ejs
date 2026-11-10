@@ -1,4 +1,23 @@
 <%- include("../partials/head") %>
 <%- include("../partials/header") %>
-<main id="contenido" class="auth-main"><div class="shell auth-layout"><div class="auth-poster"><span class="kicker">VISAGSHOP / COMUNIDAD</span><h2>YOUR STYLE.<br><i>YOUR RULES.</i></h2><img src="/img/p029.jpg" alt="Gorra de VisagShop"></div><div class="auth-panel"><span class="kicker">CUENTA DE CLIENTE</span><h1>BIENVENIDO <i>DE NUEVO.</i></h1><p>Inicia sesión en tu cuenta VisagShop. También puedes explorar y comprar sin registrarte.</p><div class="demo-notice" role="note"><strong>SPRINT 5 / TU CUENTA</strong><span>Inicia sesión para entrar a tu perfil. Si marcas «Recordarme», se mantendrá iniciada en este navegador durante 30 días, salvo que cierres sesión.</span></div><form id="demo-form" data-mode="login"><label>Correo electrónico<input type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required></label><label>Contraseña<input type="password" name="password" autocomplete="current-password" placeholder="Tu contraseña" required minlength="10"></label><label class="remember-row"><input type="checkbox" name="remember" value="on"><span><strong>Recordarme en este dispositivo</strong><small>Mantener mi sesión hasta 30 días. No lo marques en equipos compartidos.</small></span></label><input type="hidden" name="next" id="auth-next" value="/profile"><p class="form-message" id="form-message" role="status" aria-live="polite"></p><button class="btn btn-dark btn-full" type="submit">INICIAR SESIÓN ↗</button></form><p class="auth-other">¿Aún no tienes cuenta? <a href="/register">Regístrate</a> · <a href="/recover">Recuperar acceso</a></p><a class="auth-shop-link" href="/#catalogo">← SEGUIR COMPRANDO</a></div></div></main>
+<main id="contenido" class="auth-main">
+ <div class="shell auth-layout">
+  <div class="auth-poster"><span class="kicker">VISAGSHOP / COMUNIDAD</span><h2>TU ESTILO.<br><i>TUS REGLAS.</i></h2><img src="/img/p029.jpg" alt="Gorra de VisagShop"></div>
+  <div class="auth-panel">
+   <span class="kicker">CUENTA DE CLIENTE</span>
+   <h1>BIENVENIDO <i>DE NUEVO.</i></h1>
+   <p>Inicia sesión para ver tu perfil. También puedes explorar y comprar sin registrarte.</p>
+   <form id="demo-form" data-mode="login" novalidate>
+    <label>Correo electrónico<input type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required maxlength="180"></label>
+    <label>Contraseña<input type="password" name="password" autocomplete="current-password" placeholder="Tu contraseña" required maxlength="128"></label>
+    <label class="remember-row"><input type="checkbox" name="remember" value="on"><span><strong>Recordarme en este dispositivo</strong><small>Mantiene tu sesión abierta hasta 30 días. No lo marques en equipos compartidos.</small></span></label>
+    <input type="hidden" name="next" id="auth-next" value="/profile">
+    <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+    <button class="btn btn-dark btn-full" type="submit">INICIAR SESIÓN ↗</button>
+   </form>
+   <p class="auth-other">¿Aún no tienes cuenta? <a href="/register">Regístrate</a> · <a href="/recover">Recuperar acceso</a></p>
+   <a class="auth-shop-link" href="/#catalogo">← SEGUIR COMPRANDO</a>
+  </div>
+ </div>
+</main>
 <%- include("../partials/footer") %>

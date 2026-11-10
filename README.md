@@ -104,6 +104,19 @@ DATABASE_URL=postgresql://postgres:TU_CLAVE@localhost:5432/visagshop npm start
 
 Si la base está vacía, la aplicación crea las tablas y carga el catálogo sola al arrancar. `data.sql` incluye dos clientes ficticios (`andrea.demo@example.test` y `mateo.demo@example.test`, contraseña `VisagDemo-2026`) solo para pruebas locales.
 
+## Validaciones (Sprint 7)
+
+Cada formulario se valida dos veces con las mismas reglas: en el **navegador** con JavaScript propio ([`public/js/validation.js`](public/js/validation.js)), que muestra el error debajo de cada campo, y en el **servidor** con **express-validator** ([`validations/`](validations/)), que es la protección real porque el navegador se puede saltar.
+
+| Formulario | Reglas |
+| --- | --- |
+| Registro | Nombre y apellido obligatorios (mín. 2 caracteres). Correo obligatorio, válido y no registrado. Contraseña obligatoria de mín. 8 caracteres con mayúscula, minúscula, número y carácter especial; confirmación igual. Foto de perfil opcional: JPG, JPEG, PNG, GIF o WebP, máx. 3 MB y con contenido de imagen real. |
+| Login | Correo obligatorio, válido y registrado. Contraseña obligatoria y correcta. |
+| Productos (crear y editar) | Nombre obligatorio (mín. 5). Descripción opcional; si se escribe, mín. 20. La categoría debe existir en la tabla `categories`. Precio entero. Foto obligatoria al crear: JPG, JPEG, PNG, GIF o WebP. |
+| Perfil y contraseña | Mismas reglas de nombre, correo y contraseña; teléfono opcional con formato válido. |
+
+Los errores del servidor llegan como `{error, errors: {campo: mensaje}}` y el navegador los coloca en el campo correspondiente.
+
 ## Instalación local
 
 Necesitas **Node.js 20 o superior** y npm.

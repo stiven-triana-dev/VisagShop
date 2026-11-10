@@ -1,4 +1,28 @@
 <%- include("../partials/head") %>
 <%- include("../partials/header") %>
-<main id="contenido" class="auth-main"><div class="shell auth-layout"><div class="auth-poster"><span class="kicker">VISAGSHOP / COMUNIDAD</span><h2>YOUR STYLE.<br><i>YOUR RULES.</i></h2><img src="/img/p029.jpg" alt="Gorra de VisagShop"></div><div class="auth-panel"><span class="kicker">CUENTA DE CLIENTE</span><h1>CREA TU <i>CUENTA.</i></h1><p>Crea tu cuenta para guardar tu perfil de cliente. El catálogo y las compras siguen disponibles sin registrarte.</p><div class="demo-notice" role="note"><strong>SPRINT 5 / CREAR PERFIL</strong><span>Tu cuenta será creada en el servidor; después podrás ver y modificar tus datos desde Mi perfil.</span></div><form id="demo-form" data-mode="register"><label>Nombre<input type="text" name="firstName" autocomplete="given-name" placeholder="Tu nombre" required minlength="2" maxlength="75"></label><label>Apellidos<input type="text" name="lastName" autocomplete="family-name" placeholder="Tus apellidos" required minlength="2" maxlength="75"></label><label>Correo electrónico<input type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required></label><label>Contraseña<input type="password" name="password" autocomplete="new-password" placeholder="Mínimo 10 caracteres" required minlength="10" maxlength="128"></label><label>Confirmar contraseña<input type="password" name="confirm" autocomplete="new-password" placeholder="Repite la contraseña" required minlength="10" maxlength="128"></label><p class="form-message" id="form-message" role="status" aria-live="polite"></p><button class="btn btn-dark btn-full" type="submit">CREAR CUENTA ↗</button></form><p class="auth-other">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p><a class="auth-shop-link" href="/#catalogo">← SEGUIR COMPRANDO</a></div></div></main>
+<main id="contenido" class="auth-main">
+ <div class="shell auth-layout">
+  <div class="auth-poster"><span class="kicker">VISAGSHOP / COMUNIDAD</span><h2>TU ESTILO.<br><i>TUS REGLAS.</i></h2><img src="/img/p029.jpg" alt="Gorra de VisagShop"></div>
+  <div class="auth-panel">
+   <span class="kicker">CUENTA DE CLIENTE</span>
+   <h1>CREA TU <i>CUENTA.</i></h1>
+   <p>Guarda tus datos y compra más rápido. El catálogo y el carrito funcionan también sin registrarte.</p>
+   <form id="demo-form" data-mode="register" novalidate>
+    <label>Nombre<input type="text" name="firstName" autocomplete="given-name" placeholder="Tu nombre" required minlength="2" maxlength="75"></label>
+    <label>Apellido<input type="text" name="lastName" autocomplete="family-name" placeholder="Tu apellido" required minlength="2" maxlength="75"></label>
+    <label>Correo electrónico<input type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required maxlength="180"></label>
+    <label>Contraseña<input type="password" name="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required minlength="8" maxlength="128"><span class="field-hint">Usa al menos 8 caracteres con mayúscula, minúscula, número y un símbolo.</span></label>
+    <label>Confirmar contraseña<input type="password" name="confirm" data-matches="password" autocomplete="new-password" placeholder="Repite la contraseña" required minlength="8" maxlength="128"></label>
+    <label class="avatar-field">Foto de perfil (opcional)
+     <span class="avatar-row"><img id="avatar-preview" class="avatar-preview" alt="Vista previa de tu foto" hidden><input type="file" name="avatar" accept="image/jpeg,image/png,image/gif,image/webp"></span>
+     <span class="field-hint">JPG, JPEG, PNG, GIF o WebP · máximo 3 MB.</span>
+    </label>
+    <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+    <button class="btn btn-dark btn-full" type="submit">CREAR CUENTA ↗</button>
+   </form>
+   <p class="auth-other">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+   <a class="auth-shop-link" href="/#catalogo">← SEGUIR COMPRANDO</a>
+  </div>
+ </div>
+</main>
 <%- include("../partials/footer") %>

@@ -6,26 +6,14 @@ const crypto = require('node:crypto');
 const {Op} = require('sequelize');
 const db = require('../models');
 const local = require('../../models/productModel');
+const {decodeImage} = require('../../validations/image');
 
 const categories = local.categories;
-const MAX_BYTES = 3 * 1024 * 1024;
-const mimeTypes = {jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif'};
-const extensions = {'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif'};
 
-function decodeImage(data) {
-  if (typeof data !== 'string' || data.length > Math.ceil(MAX_BYTES * 4 / 3) + 100) throw new Error('Fotografía inválida o mayor a 3 MB.');
-  const match = /^data:image\/(jpeg|png|webp|gif);base64,([a-zA-Z0-9+/=]+)$/.exec(data);
-  if (!match) throw new Error('Usa una imagen JPG, PNG, WebP o GIF.');
-  const bytes = Buffer.from(match[2], 'base64');
-  if (bytes.length < 12 || bytes.length > MAX_BYTES) throw new Error('Foto inválida o mayor a 3 MB.');
-  const signatures = {
-    jpeg: bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff,
-    png: bytes.subarray(0, 8).equals(Buffer.from('89504e470d0a1a0a', 'hex')),
-    webp: bytes.toString('ascii', 0, 4) === 'RIFF' && bytes.toString('ascii', 8, 12) === 'WEBP',
-    gif: ['GIF87a', 'GIF89a'].includes(bytes.toString('ascii', 0, 6))
-  };
-  if (!signatures[match[1]]) throw new Error('El archivo no coincide con su tipo de imagen.');
-  return {bytes, mime: mimeTypes[match[1]]};
+// Nombres de la tabla secundaria categories (para validar que el valor exista en la base).
+async function listCategories() {
+  const rows = await db.models.Category.findAll({attributes: ['name'], order: [['id', 'ASC']]});
+  return rows.map(r => r.name);
 }
 
 const include = () => {
@@ -115,7 +103,7 @@ async function categoryId(name, transaction) {
 async function saveUpload(imageData, transaction) {
   const image = decodeImage(imageData);
   const row = await db.models.Upload.create({id: crypto.randomUUID(), mime: image.mime, data: image.bytes}, {transaction});
-  return {uploadId: row.id, image: `/img/uploads/${row.id}.${extensions[image.mime]}`};
+  return {uploadId: row.id, image: `/img/uploads/${row.id}.${image.extension}`};
 }
 
 async function create(input) {
@@ -203,4 +191,4 @@ async function image(id) {
   return row ? {mime: row.mime, image_bytes: row.data} : null;
 }
 
-module.exports = {all, find, search, create, update, remove, image, patch, importProduct, setRelations, categories, decodeImage, toPlain};
+module.exports = {all, find, search, create, update, remove, image, patch, importProduct, setRelations, categories, listCategories, decodeImage, toPlain};

@@ -116,6 +116,8 @@
     <div><b></b><span>phone</span><span>VARCHAR(25)</span></div>
     <div><b></b><span>password_hash</span><span>VARCHAR(200)</span></div>
     <div><b></b><span>role</span><span>VARCHAR(20)</span></div>
+    <div><b></b><span>avatar</span><span>VARCHAR(200) NULL</span></div>
+    <div class="fk"><b class="k-fk">FK</b><span>upload_id</span><span>UUID NULL</span></div>
     <div><b></b><span>created_at</span><span>TIMESTAMPTZ</span></div>
     <div><b></b><span>updated_at</span><span>TIMESTAMPTZ</span></div>
   </div>
@@ -151,6 +153,8 @@
     <path class="rel" d="M 260 163 L 283 163 L 283 273 L 310 273" marker-start="url(#one)" marker-end="url(#manyOpt)"/>
     <!-- uploads.id 0..1 — 0..1 products.upload_id -->
     <path class="rel" d="M 260 333 L 295 333 L 295 295 L 310 295" marker-start="url(#zeroOne)" marker-end="url(#zeroOne)"/>
+    <!-- uploads.id 0..1 — 0..1 users.upload_id (foto de perfil) -->
+    <path class="rel" d="M 260 333 L 280 333 L 280 693 L 310 693" marker-start="url(#zeroOne)" marker-end="url(#zeroOne)"/>
     <!-- products.id 1 — 0..N product_sizes.product_id -->
     <path class="rel" d="M 540 163 L 562 163 L 562 123 L 590 123" marker-start="url(#one)" marker-end="url(#manyOpt)"/>
     <!-- products.id 1 — 0..N product_colors.product_id -->

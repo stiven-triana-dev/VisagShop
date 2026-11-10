@@ -6,7 +6,7 @@ const cleanNext=raw=>typeof raw==='string'&&raw.startsWith('/')&&!raw.startsWith
 const safeError=(e,defaultText)=>e?.code?.startsWith('08')?defaultText:(e?.message||defaultText);
 async function register(req,res){
  try{
-  if(req.body.password!==req.body.confirm)return fail(res,'Las contraseñas no coinciden.');
+  // Los campos ya pasaron por express-validator (validations/userValidations.js).
   const user=await model.register(req.body);
   await session.login(req,res,user,false);
   return res.status(201).json({ok:true,user,redirect:'/profile'});
@@ -15,7 +15,8 @@ async function register(req,res){
 async function login(req,res){
  try{
   const user=await model.authenticate(req.body.email,req.body.password);
-  if(!user)return fail(res,'Correo o contraseña incorrectos.',401);
+  // El correo ya se validó como existente: si no autentica, la contraseña no coincide.
+  if(!user)return res.status(401).json({ok:false,error:'La contraseña no es correcta.',errors:{password:'La contraseña no es correcta.'}});
   const remember=req.body.remember===true||req.body.remember==='on';
   await session.login(req,res,user,remember);
   return res.json({ok:true,user,redirect:cleanNext(req.body.next)});

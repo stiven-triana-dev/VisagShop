@@ -13,7 +13,7 @@ for(const person of [
  if(users.all().some(u=>u.email===person.email)){
   console.log(`${person.email}: ya existe; se omite.`);continue;
  }
- const password=`Demo-${crypto.randomBytes(14).toString('base64url')}`;
+ const password=`Demo-${crypto.randomBytes(14).toString('base64url')}-7a`;
  users.register({...person,password});
  console.log(`Cuenta ficticia creada: ${person.email} · contraseña de prueba: ${password}`);
 }

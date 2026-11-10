@@ -1,4 +1,20 @@
 <%- include("../partials/head") %>
 <%- include("../partials/header") %>
-<main id="contenido" class="auth-main"><div class="shell auth-layout"><div class="auth-poster"><span class="kicker">VISAGSHOP / COMUNIDAD</span><h2>YOUR STYLE.<br><i>YOUR RULES.</i></h2><img src="/img/p029.jpg" alt="Gorra de VisagShop"></div><div class="auth-panel"><span class="kicker">CUENTA DE CLIENTE</span><h1>RECUPERA TU <i>ACCESO.</i></h1><p>La recuperación por correo todavía no está habilitada. No enviaremos mensajes desde este formulario.</p><div class="demo-notice" role="note"><strong>VERSIÓN DEMOSTRATIVA</strong><span>La recuperación mediante correo está pendiente de configurar; este formulario no envía mensajes.</span></div><form id="demo-form" data-mode="recover"><label>Correo electrónico<input type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required></label><p class="form-message" id="form-message" role="status" aria-live="polite"></p><button class="btn btn-dark btn-full" type="submit">SOLICITAR ENLACE ↗</button></form><p class="auth-other"><a href="/login">← Volver a iniciar sesión</a></p><a class="auth-shop-link" href="/#catalogo">← SEGUIR COMPRANDO</a></div></div></main>
+<main id="contenido" class="auth-main">
+ <div class="shell auth-layout">
+  <div class="auth-poster"><span class="kicker">VISAGSHOP / COMUNIDAD</span><h2>TU ESTILO.<br><i>TUS REGLAS.</i></h2><img src="/img/p029.jpg" alt="Gorra de VisagShop"></div>
+  <div class="auth-panel">
+   <span class="kicker">CUENTA DE CLIENTE</span>
+   <h1>RECUPERA TU <i>ACCESO.</i></h1>
+   <p>Por ahora la recuperación por correo no está disponible. Escríbenos por WhatsApp y te ayudamos a entrar de nuevo.</p>
+   <form id="demo-form" data-mode="recover" novalidate>
+    <label>Correo electrónico<input type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required maxlength="180"></label>
+    <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+    <button class="btn btn-dark btn-full" type="submit">SOLICITAR AYUDA ↗</button>
+   </form>
+   <p class="auth-other"><a href="/login">← Volver a iniciar sesión</a></p>
+   <a class="auth-shop-link" href="/#catalogo">← SEGUIR COMPRANDO</a>
+  </div>
+ </div>
+</main>
 <%- include("../partials/footer") %>

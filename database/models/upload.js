@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Upload.associate = models => {
     Upload.hasOne(models.Product, {as: 'product', foreignKey: 'uploadId'});
+    Upload.hasOne(models.User, {as: 'user', foreignKey: 'uploadId'});
   };
   return Upload;
 };

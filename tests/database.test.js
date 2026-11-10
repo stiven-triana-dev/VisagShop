@@ -92,13 +92,13 @@ test('CRUD de productos y usuarios con Sequelize', {skip}, async () => {
   const again = await products.create({nombre: 'Otra gorra', categoria: 'Gorras', imageData: png});
   assert.equal(again.id, 'p110', 'no reutiliza la referencia eliminada');
 
-  const user = await users.register({firstName: 'Ana', lastName: 'Prueba', email: 'Ana@Example.test', password: 'clave-segura-1'});
+  const user = await users.register({firstName: 'Ana', lastName: 'Prueba', email: 'Ana@Example.test', password: 'Clave-segura-1'});
   assert.equal(user.email, 'ana@example.test');
-  await assert.rejects(users.register({firstName: 'Ana', lastName: 'Otra', email: 'ana@example.test', password: 'clave-segura-1'}), /Ya existe/);
+  await assert.rejects(users.register({firstName: 'Ana', lastName: 'Otra', email: 'ana@example.test', password: 'Clave-segura-1'}), /Ya existe/);
   assert.equal((await users.updateProfile(user.id, {firstName: 'Ana M.', lastName: 'Prueba', email: 'ana@example.test', phone: '3001234567'})).phone, '3001234567');
-  await users.changePassword(user.id, 'clave-segura-1', 'clave-segura-2', 'clave-segura-2');
-  assert.equal(await users.authenticate('ana@example.test', 'clave-segura-1'), null);
-  assert.equal((await users.authenticate('ana@example.test', 'clave-segura-2')).firstName, 'Ana M.');
+  await users.changePassword(user.id, 'Clave-segura-1', 'Clave-segura-2', 'Clave-segura-2');
+  assert.equal(await users.authenticate('ana@example.test', 'Clave-segura-1'), null);
+  assert.equal((await users.authenticate('ana@example.test', 'Clave-segura-2')).firstName, 'Ana M.');
 });
 
 test('migra los datos del esquema anterior (tablas visag_*) sin perder nada', {skip}, async () => {
