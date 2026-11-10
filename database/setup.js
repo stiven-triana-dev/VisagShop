@@ -120,6 +120,9 @@ async function initialize() {
   const {sequelize, Product, User, Category} = db.connect();
   await sequelize.authenticate();
   await sequelize.sync();
+  // Sprint 7: foto de perfil. sync() no agrega columnas a tablas que ya existen.
+  await sequelize.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar VARCHAR(200) NULL');
+  await sequelize.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS upload_id UUID NULL REFERENCES uploads(id) ON UPDATE CASCADE ON DELETE SET NULL');
   await sequelize.query('CREATE SEQUENCE IF NOT EXISTS product_number_seq START WITH 1');
   await sequelize.query('CREATE TABLE IF NOT EXISTS app_meta (key VARCHAR(80) PRIMARY KEY, value JSONB NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())');
   await sequelize.transaction(async transaction => {

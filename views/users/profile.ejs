@@ -3,13 +3,13 @@
 <main id="contenido" class="shell profile-main">
   <div class="breadcrumbs"><a href="/">INICIO</a><span>/</span><span>MI CUENTA</span></div>
   <section class="profile-head">
-    <div><span class="kicker">VISAGSHOP / MI ESPACIO</span><h1>Mi <i>perfil.</i></h1><p>Administra tu información personal, la seguridad de tu cuenta y tus próximas compras.</p></div>
-    <div class="profile-identity"><div class="profile-avatar" aria-hidden="true"><%= (customer.firstName.charAt(0)+customer.lastName.charAt(0)).toUpperCase() %></div><div><strong><%= customer.firstName %> <%= customer.lastName %></strong><small><%= customer.email %></small><span class="profile-active">● Sesión activa</span></div></div>
+    <div><span class="kicker">VISAGSHOP / MI ESPACIO</span><h1>MI <i>perfil.</i></h1><p>Administra tu información personal, la seguridad de tu cuenta y tus próximas compras.</p></div>
+    <div class="profile-identity"><div class="profile-avatar" aria-hidden="true"><% if (customer.avatar) { %><img src="<%= customer.avatar %>" alt=""><% } else { %><%= (customer.firstName.charAt(0)+customer.lastName.charAt(0)).toUpperCase() %><% } %></div><div><strong><%= customer.firstName %> <%= customer.lastName %></strong><small><%= customer.email %></small><span class="profile-active">● Sesión activa</span></div></div>
   </section>
   <div class="profile-grid">
     <section class="profile-card" aria-labelledby="profile-personal-title">
       <div class="profile-card-top"><span class="profile-number">01 / DATOS PERSONALES</span><h2 id="profile-personal-title">Tus datos.</h2><p>Usaremos esta información para identificar tu cuenta. Tu carrito sigue siendo independiente.</p></div>
-      <form id="profile-form" autocomplete="on">
+      <form id="profile-form" autocomplete="on" novalidate>
         <div class="profile-field-grid">
           <label>Nombre <input name="firstName" type="text" minlength="2" maxlength="75" required autocomplete="given-name" value="<%= customer.firstName %>"></label>
           <label>Apellidos <input name="lastName" type="text" minlength="2" maxlength="75" required autocomplete="family-name" value="<%= customer.lastName %>"></label>
@@ -23,15 +23,15 @@
     <div class="profile-side">
       <section class="profile-card" aria-labelledby="profile-password-title">
         <div class="profile-card-top"><span class="profile-number">02 / PRIVACIDAD</span><h2 id="profile-password-title">Seguridad.</h2><p>Al cambiar tu contraseña, cerraremos las sesiones de todos tus dispositivos.</p></div>
-        <form id="password-form" autocomplete="on">
-          <label>Contraseña actual <input type="password" name="currentPassword" autocomplete="current-password" required minlength="10"></label>
-          <label>Nueva contraseña <input type="password" name="newPassword" autocomplete="new-password" required minlength="10" maxlength="128"></label>
-          <label>Confirmar contraseña nueva <input type="password" name="confirmPassword" autocomplete="new-password" required minlength="10" maxlength="128"></label>
+        <form id="password-form" autocomplete="on" novalidate>
+          <label>Contraseña actual <input type="password" name="currentPassword" autocomplete="current-password" required maxlength="128"></label>
+          <label>Nueva contraseña <input type="password" name="newPassword" autocomplete="new-password" required minlength="8" maxlength="128"><span class="field-hint">Mínimo 8 caracteres con mayúscula, minúscula, número y un símbolo.</span></label>
+          <label>Confirmar contraseña nueva <input type="password" name="confirmPassword" data-matches="newPassword" autocomplete="new-password" required minlength="8" maxlength="128"></label>
           <p class="profile-response" id="password-response" role="status" aria-live="polite"></p>
           <button class="btn btn-outline-dark" type="submit">ACTUALIZAR CONTRASEÑA <span aria-hidden="true">↗</span></button>
         </form>
       </section>
-      <section class="profile-card profile-extras"><span class="profile-number">03 / EXPLORAR</span><h2>Tu próximo fit.</h2><p>Descubre el catálogo completo y confirma tu compra desde el carrito.</p><div class="profile-shortcuts"><a href="/#catalogo">VER CATÁLOGO <span>↗</span></a><a href="/productCart">IR A MI CARRITO <span>↗</span></a><button type="button" id="cerrar-sesion-perfil">CERRAR SESIÓN <span>↗</span></button></div></section>
+      <section class="profile-card profile-extras"><span class="profile-number">03 / EXPLORAR</span><h2>Tu próximo look.</h2><p>Descubre el catálogo completo y confirma tu compra desde el carrito.</p><div class="profile-shortcuts"><a href="/#catalogo">VER CATÁLOGO <span>↗</span></a><a href="/productCart">IR A MI CARRITO <span>↗</span></a><button type="button" id="cerrar-sesion-perfil">CERRAR SESIÓN <span>↗</span></button></div></section>
     </div>
   </div>
 </main>

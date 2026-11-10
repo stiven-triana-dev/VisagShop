@@ -3,7 +3,7 @@
 <main id="contenido" class="shell admin-main">
   <div class="admin-crumb"><a href="/">Tienda</a><span>/</span>Panel de productos</div>
   <div class="admin-top">
-    <div><span class="admin-kicker">PANEL / CRUD DE PRODUCTOS</span><h1>Gestiona la <em>colección.</em></h1><p>Actualiza referencias, tallas y precios. Los cambios se publican en el catálogo al guardar.</p></div>
+    <div><span class="admin-kicker">PANEL / GESTIÓN DE PRODUCTOS</span><h1>Gestiona la <em>colección.</em></h1><p>Actualiza referencias, tallas y precios. Los cambios se publican en el catálogo al guardar.</p></div>
     <a class="admin-primary" href="/products/create">+ AÑADIR PRODUCTO</a>
   </div>
   <div class="admin-stats"><div><small>REFERENCIAS</small><strong id="admin-count-products"><%= products.length %></strong></div><div><small>CON PRECIO</small><strong><%= products.filter(p=>Number.isFinite(p.precio)).length %></strong></div><div><small>PRECIO POR DEFINIR</small><strong><%= products.filter(p=>!Number.isFinite(p.precio)).length %></strong></div><div><small>CON TALLAS</small><strong><%= products.filter(p=>p.tallas?.length).length %></strong></div></div>

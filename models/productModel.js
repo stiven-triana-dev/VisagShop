@@ -2,13 +2,14 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const rules = require('../validations/rules');
+const {decodeImage} = require('../validations/image');
 
 const dataDir = path.resolve(process.env.VISAG_DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH || path.join(__dirname, '..', 'data'));
 const file = path.join(dataDir, 'products.json');
 const uploadDirectory = (process.env.VISAG_DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH) ? path.join(dataDir, 'uploads') : path.join(__dirname, '..', 'public', 'img', 'uploads');
 const sequenceFile=path.join(dataDir,'product-sequence.json');
 const categories = Object.freeze(['Pantalones','Pantalonetas','Bermudas','Sudaderas','Gorras','Zapatos']);
-const MAX_FILE = 3 * 1024 * 1024;
 
 function all() {
   const rows = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -38,7 +39,8 @@ function validate(input, previous) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Datos de producto inválidos.');
   const nombre=stringField(input.nombre,120), descripcion=stringField(input.descripcion,1000);
   const categoria=stringField(input.categoria,70);
-  if (nombre.length<3) throw new Error('El nombre debe tener al menos 3 caracteres.');
+  if (nombre.length<rules.PRODUCT_NAME_MIN) throw new Error(`El nombre debe tener al menos ${rules.PRODUCT_NAME_MIN} caracteres.`);
+  if (descripcion && descripcion.length<rules.DESCRIPTION_MIN) throw new Error(`La descripción debe tener al menos ${rules.DESCRIPTION_MIN} caracteres.`);
   if (!categories.includes(categoria)) throw new Error('Categoría no válida.');
   const rawPrice = String(input.precio??'').trim();
   const precio = rawPrice === '' ? null : Number(rawPrice);
@@ -53,24 +55,17 @@ function validate(input, previous) {
     imagen:previous ? previous.imagen : '/img/p001.jpg'
   };
 }
+// Guarda una imagen (data URL) en la carpeta de subidas y devuelve su ruta pública.
+// También la usa userModel para la foto de perfil.
 function uploadedPhoto(data) {
   if (!data) return null;
-  if (typeof data !== 'string' || data.length > Math.ceil(MAX_FILE*4/3)+100) throw new Error('Foto demasiado grande. Máximo 3 MB.');
-  const match=/^data:image\/(jpeg|png|webp);base64,([a-zA-Z0-9+/=]+)$/.exec(data);
-  if (!match) throw new Error('Formato de imagen inválido: usa JPG, PNG o WebP.');
-  const buf=Buffer.from(match[2],'base64');
-  if (!buf.length || buf.length>MAX_FILE) throw new Error('La imagen debe pesar 3 MB o menos.');
-  const jpeg=buf.length>3&&buf[0]===0xff&&buf[1]===0xd8&&buf[2]===0xff;
-  const png=buf.length>8&&buf.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex'));
-  const webp=buf.length>12&&buf.toString('ascii',0,4)==='RIFF'&&buf.toString('ascii',8,12)==='WEBP';
-  const type=match[1];
-  if (!((type==='jpeg'&&jpeg)||(type==='png'&&png)||(type==='webp'&&webp))) throw new Error('La imagen no corresponde al formato declarado.');
-  const ext=type==='jpeg'?'jpg':type;
+  const image=decodeImage(data);
   fs.mkdirSync(uploadDirectory,{recursive:true});
-  const name=crypto.randomUUID()+'.'+ext;
-  fs.writeFileSync(path.join(uploadDirectory,name),buf,{flag:'wx'});
+  const name=crypto.randomUUID()+'.'+image.extension;
+  fs.writeFileSync(path.join(uploadDirectory,name),image.bytes,{flag:'wx'});
   return '/img/uploads/'+name;
 }
+function listCategories() {return [...categories];}
 function create(input) {
   const product=validate(input,null);
   if (!input.imageData) throw new Error('Selecciona una fotografía para el producto nuevo.');
@@ -110,4 +105,4 @@ function remove(id) {
   }
   return removed;
 }
-module.exports={all,find,search,create,update,remove,categories,validate};
+module.exports={all,find,search,create,update,remove,categories,listCategories,validate,uploadedPhoto};

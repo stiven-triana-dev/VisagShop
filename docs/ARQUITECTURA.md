@@ -13,7 +13,8 @@ Este documento describe el código del repositorio incluido en la entrega, no un
 | `public/` | JavaScript y CSS del navegador, además de imágenes originales. |
 | `database/` | Todo lo de la base de datos (Sprint 6): ver la sección siguiente. |
 | `models/` | Modelos JSON para desarrollo local sin base de datos y selección del almacenamiento activo (`activeProducts`, `activeUsers`). |
-| `middleware/` | Comprobaciones de sesión, invitado, administrador, origen y límites de solicitudes. |
+| `middleware/` | Comprobaciones de sesión, invitado, administrador, origen, límites de solicitudes y `validate.js` (respuesta de express-validator). |
+| `validations/` | Sprint 7: reglas de express-validator para usuarios y productos, reglas compartidas y validación de imágenes. |
 | `data/` | Catálogo semilla (`products.json`) y datos locales de desarrollo. |
 | `scripts/` | Generación de `data.sql`, importación de precios y usuarios de demostración. |
 | `tests/` | Pruebas del catálogo, del importador y de la base de datos con PostgreSQL. |
@@ -37,6 +38,7 @@ Este documento describe el código del repositorio incluido en la entrega, no un
 - `products` N — M `colors` mediante `product_colors`.
 - `uploads` 0..1 — 0..1 `products` (`products.upload_id`): fotos subidas desde el panel.
 - `users` 1 — N `sessions` (`sessions.user_id`).
+- `uploads` 0..1 — 0..1 `users` (`users.upload_id`): foto de perfil (Sprint 7).
 
 La referencia de cada producto (`p001`, `p002`…) se mantiene como clave primaria porque aparece en las URLs y en los carritos guardados por los clientes. Las referencias nuevas salen de la secuencia `product_number_seq`, así nunca se reutiliza la de un producto eliminado.
 

@@ -2,7 +2,7 @@
 <%- include('../partials/header') %>
 <main id="contenido" class="inner-main shell sprint4-list">
  <div class="breadcrumbs"><a href="/">INICIO</a><span>/</span><span>PRODUCTOS</span></div>
- <div class="page-title"><span class="kicker">VISAGSHOP / COLECCIÓN</span><h1>Todos los <i>productos.</i></h1><p>Explora nuestro catálogo actualizado directamente desde los datos de la tienda.</p></div>
+ <div class="page-title"><span class="kicker">VISAGSHOP / COLECCIÓN</span><h1>TODOS LOS <i>productos.</i></h1><p>Todas nuestras prendas en un solo lugar. Busca por nombre o filtra por categoría.</p></div>
  <form class="product-search" action="/products" method="get" role="search">
   <label class="product-search-field"><span class="sr-only">Buscar productos</span><input type="search" name="q" value="<%= q %>" maxlength="80" placeholder="Buscar: jean, gorra, Nike…"></label>
   <label class="product-search-field"><span class="sr-only">Categoría</span><select name="categoria"><option value="">Todas las categorías</option><% categories.forEach(function(c){ %><option value="<%= c %>" <%= categoria===c?'selected':'' %>><%= c %></option><% }) %></select></label>

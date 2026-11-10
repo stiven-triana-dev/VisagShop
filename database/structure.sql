@@ -98,6 +98,8 @@ CREATE TABLE users (
   phone         VARCHAR(25)  NOT NULL DEFAULT '',
   password_hash VARCHAR(200) NOT NULL,
   role          VARCHAR(20)  NOT NULL DEFAULT 'customer' CHECK (role IN ('customer')),
+  avatar        VARCHAR(200) NULL,                     -- foto de perfil (Sprint 7)
+  upload_id     UUID         NULL REFERENCES uploads(id) ON UPDATE CASCADE ON DELETE SET NULL,
   created_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
   updated_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );

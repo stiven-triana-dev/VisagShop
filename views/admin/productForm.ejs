@@ -5,10 +5,10 @@
   <div class="admin-top admin-top-form"><div><span class="admin-kicker">ADMINISTRACIÓN / <%= mode==='new'?'CREACIÓN':'EDICIÓN' %></span><h1><%= mode==='new'?'Nueva':'Edita la' %> <em>prenda.</em></h1><p>Completa la información que verá el cliente en el catálogo de VisagShop.</p></div><a href="/admin/products" class="admin-secondary">← VOLVER AL LISTADO</a></div>
   <div class="admin-editor-grid">
     <section class="admin-panel admin-editor">
-      <form id="admin-product-form" data-mode="<%= mode %>" data-id="<%= product?.id||'' %>">
+      <form id="admin-product-form" data-mode="<%= mode %>" data-id="<%= product?.id||'' %>" novalidate>
         <div class="admin-form-heading"><span>01</span><h2>Información principal</h2></div>
-        <label class="admin-field">Nombre del producto <span>*</span><input name="nombre" required minlength="3" maxlength="120" value="<%= product?.nombre||'' %>" placeholder="Ej. Jean baggy azul lavado"></label>
-        <label class="admin-field">Descripción<textarea name="descripcion" maxlength="1000" rows="4" placeholder="Describe el diseño, material y características."><%= product?.descripcion||'' %></textarea></label>
+        <label class="admin-field">Nombre del producto <span>*</span><input name="nombre" required minlength="5" maxlength="120" value="<%= product?.nombre||'' %>" placeholder="Ej. Jean baggy azul lavado"></label>
+        <label class="admin-field">Descripción<textarea name="descripcion" minlength="20" maxlength="1000" rows="4" placeholder="Describe el diseño, el material y los detalles (mínimo 20 caracteres)."><%= product?.descripcion||'' %></textarea></label>
         <div class="admin-field-grid">
           <label class="admin-field">Categoría <span>*</span><select name="categoria" required><option value="" disabled <%= !product?'selected':'' %>>Seleccionar categoría</option><% categories.forEach(function(c){ %><option value="<%= c %>" <%= product?.categoria===c?'selected':'' %>><%= c %></option><% }) %></select></label>
           <label class="admin-field">Precio (COP)<input name="precio" type="number" min="0" max="999999999" step="1" value="<%= product?.precio??'' %>" placeholder="Ej. 130000"><small>Si no está definido, déjalo vacío para mostrar «Por consultar».</small></label>
@@ -18,7 +18,7 @@
           <label class="admin-field">Colores<input name="colores" value="<%= (product?.colores||[]).join(', ') %>" placeholder="Ej. Negro, Gris, Azul"><small>Separa los colores con comas.</small></label>
         </div>
         <div class="admin-form-heading"><span>02</span><h2>Fotografía del producto</h2></div>
-        <label class="admin-image-field" for="imagen-input"><strong>Selecciona una fotografía</strong><span>JPG, PNG o WebP · Máximo 3 MB<% if(mode==='edit'){ %> · Dejar vacío conserva la actual<% } %></span><input id="imagen-input" type="file" name="imagen" accept="image/jpeg,image/png,image/webp" <%= mode==='new'?'required':'' %>></label>
+        <label class="admin-image-field" for="imagen-input"><strong>Selecciona una fotografía</strong><span>JPG, JPEG, PNG, GIF o WebP · Máximo 3 MB<% if(mode==='edit'){ %> · Dejar vacío conserva la actual<% } %></span><input id="imagen-input" type="file" name="imagen" accept="image/jpeg,image/png,image/gif,image/webp" <%= mode==='new'?'required':'' %>></label>
         <div id="admin-feedback" class="admin-feedback" role="status" aria-live="polite"></div>
         <div class="admin-form-actions"><button class="admin-primary" type="submit" id="guardar-producto"><%= mode==='new'?'CREAR PRODUCTO':'GUARDAR CAMBIOS' %> ↗</button><a href="/admin/products" class="admin-secondary">CANCELAR</a></div>
       </form>
