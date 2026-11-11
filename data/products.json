@@ -14,7 +14,8 @@
   "imagen": "/img/p042.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono negro. Para un look urbano relajado."
  },
  {
   "id": "p098",
@@ -26,7 +27,8 @@
   "colores": [
    "Negro",
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis Adidas en negro y blanco. Combínalos con jeans, bermudas o sudaderas."
  },
  {
   "id": "p059",
@@ -39,7 +41,8 @@
   "imagen": "/img/p059.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta en algodón, negra con franjas a los lados. Cómoda para el día a día o para entrenar."
  },
  {
   "id": "p089",
@@ -53,7 +56,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Sudadera de la línea 1.1, negra con diseño rojo. Cómoda y con un diseño que se nota."
  },
  {
   "id": "p001",
@@ -66,7 +70,8 @@
   "imagen": "/img/p001.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, negra, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p062",
@@ -79,7 +84,8 @@
   "imagen": "/img/p062.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Bermuda en jean, azul con tachas. Ideal para clima cálido sin perder el estilo."
  },
  {
   "id": "p043",
@@ -94,7 +100,8 @@
   "imagen": "/img/p043.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono negro con costuras. Para un look urbano relajado."
  },
  {
   "id": "p099",
@@ -106,7 +113,8 @@
   "colores": [
    "Gris",
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis Jordan en gris y blanco. Un clásico del estilo urbano."
  },
  {
   "id": "p060",
@@ -119,7 +127,8 @@
   "imagen": "/img/p060.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta en algodón, negra con franjas a los lados. Cómoda para el día a día o para entrenar."
  },
  {
   "id": "p090",
@@ -133,7 +142,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Sudadera de la línea 1.1, negra con diseño rojo. Cómoda y con un diseño que se nota."
  },
  {
   "id": "p002",
@@ -147,7 +157,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, negra y roja, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p063",
@@ -160,7 +171,8 @@
   "imagen": "/img/p063.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Bermuda en jean, negra con parches. Ideal para clima cálido sin perder el estilo."
  },
  {
   "id": "p044",
@@ -174,7 +186,8 @@
   "imagen": "/img/p044.jpg",
   "colores": [
    "Gris"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono gris lavado. Para un look urbano relajado."
  },
  {
   "id": "p100",
@@ -185,7 +198,8 @@
   "imagen": "/img/p100.jpg",
   "colores": [
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis Jordan en blanco. Un clásico del estilo urbano."
  },
  {
   "id": "p061",
@@ -198,7 +212,8 @@
   "imagen": "/img/p061.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta en algodón, negra con franjas a los lados. Cómoda para el día a día o para entrenar."
  },
  {
   "id": "p091",
@@ -213,7 +228,8 @@
   "imagen": "/img/p091.jpg",
   "colores": [
    "Rojo"
-  ]
+  ],
+  "descripcion": "Sudadera en algodón, roja. Cómoda para el día a día y fácil de combinar."
  },
  {
   "id": "p003",
@@ -226,7 +242,8 @@
   "imagen": "/img/p003.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, negra, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p064",
@@ -239,7 +256,8 @@
   "imagen": "/img/p064.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Bermuda en jean, negra con brillos. Ideal para clima cálido sin perder el estilo."
  },
  {
   "id": "p045",
@@ -252,7 +270,8 @@
   "imagen": "/img/p045.jpg",
   "colores": [
    "Verde"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono verde lavado. Para un look urbano relajado."
  },
  {
   "id": "p101",
@@ -263,7 +282,8 @@
   "imagen": "/img/p101.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Tenis Jordan en negro. Un clásico del estilo urbano."
  },
  {
   "id": "p069",
@@ -276,7 +296,8 @@
   "imagen": "/img/p069.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p092",
@@ -291,7 +312,8 @@
   "imagen": "/img/p092.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Sudadera en algodón, negra con franjas. Cómoda para el día a día y fácil de combinar."
  },
  {
   "id": "p004",
@@ -304,7 +326,8 @@
   "imagen": "/img/p004.jpg",
   "colores": [
    "Gris"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, gris oscuro, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p065",
@@ -317,7 +340,8 @@
   "imagen": "/img/p065.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Bermuda en jean, negra con strass. Ideal para clima cálido sin perder el estilo."
  },
  {
   "id": "p046",
@@ -331,7 +355,8 @@
   "imagen": "/img/p046.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono azul claro. Para un look urbano relajado."
  },
  {
   "id": "p102",
@@ -343,7 +368,8 @@
   "colores": [
    "Gris",
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis New Balance en gris y blanco. Cómodos para todo el día."
  },
  {
   "id": "p070",
@@ -357,7 +383,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra y roja. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p093",
@@ -372,7 +399,8 @@
   "imagen": "/img/p093.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Sudadera en algodón, negra con ribete. Cómoda para el día a día y fácil de combinar."
  },
  {
   "id": "p005",
@@ -386,7 +414,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, negra y roja, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p066",
@@ -399,7 +428,8 @@
   "imagen": "/img/p066.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Bermuda en jean, azul rota. Ideal para clima cálido sin perder el estilo."
  },
  {
   "id": "p047",
@@ -414,7 +444,8 @@
   "imagen": "/img/p047.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono azul roto. Para un look urbano relajado."
  },
  {
   "id": "p103",
@@ -425,7 +456,8 @@
   "imagen": "/img/p103.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Tenis Nike en negro. Combínalos con jeans, bermudas o sudaderas."
  },
  {
   "id": "p071",
@@ -438,7 +470,8 @@
   "imagen": "/img/p071.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p094",
@@ -454,7 +487,8 @@
   "colores": [
    "Blanco",
    "Negro"
-  ]
+  ],
+  "descripcion": "Sudadera en algodón, blanca y negra. Cómoda para el día a día y fácil de combinar."
  },
  {
   "id": "p006",
@@ -467,7 +501,8 @@
   "imagen": "/img/p006.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, negra, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p067",
@@ -480,7 +515,8 @@
   "imagen": "/img/p067.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Bermuda en jean, azul con estampado. Ideal para clima cálido sin perder el estilo."
  },
  {
   "id": "p048",
@@ -495,7 +531,8 @@
   "imagen": "/img/p048.jpg",
   "colores": [
    "Gris"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono gris oscuro. Para un look urbano relajado."
  },
  {
   "id": "p104",
@@ -507,7 +544,8 @@
   "colores": [
    "Verde",
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis Nike en verde y blanco. Combínalos con jeans, bermudas o sudaderas."
  },
  {
   "id": "p072",
@@ -521,7 +559,8 @@
   "imagen": "/img/p072.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p095",
@@ -536,7 +575,8 @@
   "imagen": "/img/p095.jpg",
   "colores": [
    "Gris"
-  ]
+  ],
+  "descripcion": "Sudadera en algodón, gris. Cómoda para el día a día y fácil de combinar."
  },
  {
   "id": "p007",
@@ -550,7 +590,8 @@
   "colores": [
    "Negro",
    "Celeste"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, negra y celeste, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p068",
@@ -563,7 +604,8 @@
   "imagen": "/img/p068.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Bermuda en jean, azul con brillos. Ideal para clima cálido sin perder el estilo."
  },
  {
   "id": "p049",
@@ -579,7 +621,8 @@
   "colores": [
    "Azul",
    "Turquesa"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono azul turquesa. Para un look urbano relajado."
  },
  {
   "id": "p105",
@@ -590,7 +633,8 @@
   "imagen": "/img/p105.jpg",
   "colores": [
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis Nike en blanco. Combínalos con jeans, bermudas o sudaderas."
  },
  {
   "id": "p073",
@@ -605,7 +649,8 @@
    "Negro",
    "Gris",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra, gris y roja. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p096",
@@ -620,7 +665,8 @@
   "imagen": "/img/p096.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Sudadera en algodón, negra. Cómoda para el día a día y fácil de combinar."
  },
  {
   "id": "p008",
@@ -634,7 +680,8 @@
   "colores": [
    "Blanco",
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, blanca y negra, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p050",
@@ -649,7 +696,8 @@
   "imagen": "/img/p050.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono negro lavado. Para un look urbano relajado."
  },
  {
   "id": "p106",
@@ -660,7 +708,8 @@
   "imagen": "/img/p106.jpg",
   "colores": [
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis Nike en blanco. Combínalos con jeans, bermudas o sudaderas."
  },
  {
   "id": "p074",
@@ -675,7 +724,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra y roja. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p097",
@@ -690,7 +740,8 @@
   "imagen": "/img/p097.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Sudadera en algodón, negra con ribete. Cómoda para el día a día y fácil de combinar."
  },
  {
   "id": "p009",
@@ -704,7 +755,8 @@
   "colores": [
    "Rojo",
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, roja y negra, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p051",
@@ -718,7 +770,8 @@
   "imagen": "/img/p051.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono azul medio. Para un look urbano relajado."
  },
  {
   "id": "p107",
@@ -730,7 +783,8 @@
   "colores": [
    "Café",
    "Blanco"
-  ]
+  ],
+  "descripcion": "Tenis Nike en café y blanco. Combínalos con jeans, bermudas o sudaderas."
  },
  {
   "id": "p075",
@@ -743,7 +797,8 @@
   "imagen": "/img/p075.jpg",
   "colores": [
    "Blanco"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, blanca estampada. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p010",
@@ -757,7 +812,8 @@
   "colores": [
    "Blanco",
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, blanca y negra, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p052",
@@ -771,7 +827,8 @@
   "imagen": "/img/p052.jpg",
   "colores": [
    "Café"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono café lavado. Para un look urbano relajado."
  },
  {
   "id": "p108",
@@ -783,7 +840,8 @@
   "colores": [
    "Gris",
    "Negro"
-  ]
+  ],
+  "descripcion": "Tenis Nike en gris y negro. Combínalos con jeans, bermudas o sudaderas."
  },
  {
   "id": "p076",
@@ -796,7 +854,8 @@
   "imagen": "/img/p076.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p011",
@@ -809,7 +868,8 @@
   "imagen": "/img/p011.jpg",
   "colores": [
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva, roja, con cierre ajustable atrás. Un básico urbano que combina con todo."
  },
  {
   "id": "p053",
@@ -822,7 +882,8 @@
   "imagen": "/img/p053.jpg",
   "colores": [
    "Verde"
-  ]
+  ],
+  "descripcion": "Jean de corte baggy, amplio de la cadera a la bota, en tono verde oscuro. Para un look urbano relajado."
  },
  {
   "id": "p077",
@@ -836,7 +897,8 @@
   "imagen": "/img/p077.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p012",
@@ -849,7 +911,8 @@
   "imagen": "/img/p012.jpg",
   "colores": [
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, roja, con cierre ajustable atrás."
  },
  {
   "id": "p054",
@@ -862,7 +925,8 @@
   "imagen": "/img/p054.jpg",
   "colores": [
    "Gris"
-  ]
+  ],
+  "descripcion": "Jean cargo de corte amplio, gris, con bolsillos laterales. Cómodo y con espacio para tus cosas."
  },
  {
   "id": "p078",
@@ -875,7 +939,8 @@
   "imagen": "/img/p078.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p013",
@@ -888,7 +953,8 @@
   "imagen": "/img/p013.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, negra, con cierre ajustable atrás."
  },
  {
   "id": "p055",
@@ -901,7 +967,8 @@
   "imagen": "/img/p055.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Jean de la línea 1.1, azul roto. Un diseño con más carácter para destacar tu outfit."
  },
  {
   "id": "p079",
@@ -914,7 +981,8 @@
   "imagen": "/img/p079.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, azul oscuro estampada. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p014",
@@ -928,7 +996,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, negra y roja, con cierre ajustable atrás."
  },
  {
   "id": "p056",
@@ -941,7 +1010,8 @@
   "imagen": "/img/p056.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Jean de la línea 1.1, azul con estampado. Un diseño con más carácter para destacar tu outfit."
  },
  {
   "id": "p080",
@@ -954,7 +1024,8 @@
   "imagen": "/img/p080.jpg",
   "colores": [
    "Rojo"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, roja. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p015",
@@ -968,7 +1039,8 @@
   "colores": [
    "Blanco",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, blanca y roja, con cierre ajustable atrás."
  },
  {
   "id": "p057",
@@ -981,7 +1053,8 @@
   "imagen": "/img/p057.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Jean de la línea 1.1, azul roto. Un diseño con más carácter para destacar tu outfit."
  },
  {
   "id": "p081",
@@ -994,7 +1067,8 @@
   "imagen": "/img/p081.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, azul tie-dye. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p016",
@@ -1008,7 +1082,8 @@
   "colores": [
    "Blanco",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, blanca y roja, con cierre ajustable atrás."
  },
  {
   "id": "p058",
@@ -1021,7 +1096,8 @@
   "imagen": "/img/p058.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Jean de la línea 1.1, azul con estampado. Un diseño con más carácter para destacar tu outfit."
  },
  {
   "id": "p082",
@@ -1034,7 +1110,8 @@
   "imagen": "/img/p082.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p017",
@@ -1049,7 +1126,8 @@
    "Azul",
    "Blanco",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, azul, blanca y roja, con cierre ajustable atrás."
  },
  {
   "id": "p083",
@@ -1063,7 +1141,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra y roja. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p018",
@@ -1076,7 +1155,8 @@
   "imagen": "/img/p018.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, negra, con cierre ajustable atrás."
  },
  {
   "id": "p084",
@@ -1089,7 +1169,8 @@
   "imagen": "/img/p084.jpg",
   "colores": [
    "Celeste"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, celeste. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p019",
@@ -1102,7 +1183,8 @@
   "imagen": "/img/p019.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, negra, con cierre ajustable atrás."
  },
  {
   "id": "p085",
@@ -1115,7 +1197,8 @@
   "imagen": "/img/p085.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, azul marino. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p020",
@@ -1129,7 +1212,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, negra y roja, con cierre ajustable atrás."
  },
  {
   "id": "p086",
@@ -1143,7 +1227,8 @@
   "colores": [
    "Negro",
    "Gris"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra y gris. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p021",
@@ -1157,7 +1242,8 @@
   "colores": [
    "Negro",
    "Blanco"
-  ]
+  ],
+  "descripcion": "Gorra de visera curva de la línea 1.1, negra y blanca, con cierre ajustable atrás."
  },
  {
   "id": "p087",
@@ -1170,7 +1256,8 @@
   "imagen": "/img/p087.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, negra. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p022",
@@ -1184,7 +1271,8 @@
   "colores": [
    "Blanco",
    "Azul"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana, blanca y azul, con cierre ajustable atrás para un estilo más callejero."
  },
  {
   "id": "p088",
@@ -1197,7 +1285,8 @@
   "imagen": "/img/p088.jpg",
   "colores": [
    "Verde"
-  ]
+  ],
+  "descripcion": "Pantaloneta estilo baloncesto NBA, verde agua estampada. Liviana y amplia, para la cancha o la calle."
  },
  {
   "id": "p023",
@@ -1210,7 +1299,8 @@
   "imagen": "/img/p023.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana, negra, con cierre ajustable atrás para un estilo más callejero."
  },
  {
   "id": "p024",
@@ -1224,7 +1314,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana, negra y roja, con cierre ajustable atrás para un estilo más callejero."
  },
  {
   "id": "p025",
@@ -1238,7 +1329,8 @@
   "colores": [
    "Blanco",
    "Azul"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), blanca y azul. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p026",
@@ -1251,7 +1343,8 @@
   "imagen": "/img/p026.jpg",
   "colores": [
    "Azul"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), azul oscuro. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p027",
@@ -1265,7 +1358,8 @@
   "colores": [
    "Negro",
    "Rosa"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra y rosa. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p028",
@@ -1279,7 +1373,8 @@
   "colores": [
    "Negro",
    "Naranja"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra y naranja. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p029",
@@ -1292,7 +1387,8 @@
   "imagen": "/img/p029.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p030",
@@ -1305,7 +1401,8 @@
   "imagen": "/img/p030.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p031",
@@ -1319,7 +1416,8 @@
   "colores": [
    "Negro",
    "Rojo"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra y roja. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p032",
@@ -1333,7 +1431,8 @@
   "colores": [
    "Crema",
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), crema y negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p033",
@@ -1347,7 +1446,8 @@
   "colores": [
    "Negro",
    "Celeste"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra y celeste. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p034",
@@ -1361,7 +1461,8 @@
   "colores": [
    "Café",
    "Azul"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), café y azul. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p035",
@@ -1374,7 +1475,8 @@
   "imagen": "/img/p035.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p036",
@@ -1388,7 +1490,8 @@
   "colores": [
    "Crema",
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), crema y negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p037",
@@ -1401,7 +1504,8 @@
   "imagen": "/img/p037.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p038",
@@ -1415,7 +1519,8 @@
   "colores": [
    "Negro",
    "Amarillo"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra y amarilla. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p039",
@@ -1428,7 +1533,8 @@
   "imagen": "/img/p039.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p040",
@@ -1441,7 +1547,8 @@
   "imagen": "/img/p040.jpg",
   "colores": [
    "Negro"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), negra. Elige tu talla exacta antes de pedir."
  },
  {
   "id": "p041",
@@ -1455,6 +1562,7 @@
   "colores": [
    "Blanco",
    "Azul"
-  ]
+  ],
+  "descripcion": "Gorra de visera plana y talla cerrada (sin ajuste atrás), blanca y azul. Elige tu talla exacta antes de pedir."
  }
 ]

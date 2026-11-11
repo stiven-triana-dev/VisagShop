@@ -116,6 +116,21 @@ async function fillCatalogGaps(transaction) {
   return {prices, sizes, colors};
 }
 
+// Noviembre 2026: descripciones del catálogo. Solo llena las que están vacías y una
+// sola vez, así no pisa lo que el administrador haya escrito.
+async function fillDescriptions(transaction) {
+  const {Product} = db.models;
+  const seed = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'products.json'), 'utf8'));
+  let count = 0;
+  for (const item of seed) {
+    if (!item.descripcion) continue;
+    const [updated] = await Product.update({description: item.descripcion}, {where: {id: item.id, description: ''}, transaction});
+    count += updated;
+  }
+  console.info(`Descripciones agregadas: ${count}.`);
+  return {descriptions: count};
+}
+
 async function initialize() {
   const {sequelize, Product, User, Category} = db.connect();
   await sequelize.authenticate();
@@ -142,6 +157,7 @@ async function initialize() {
       console.info(`Migración: ${moved.users} usuarios y ${moved.sessions} sesiones activas copiados.`);
     }
     await runOnce('catalog-fill-2026-11', transaction, () => fillCatalogGaps(transaction));
+    await runOnce('descriptions-2026-11', transaction, () => fillDescriptions(transaction));
     await syncSequence(transaction);
   });
 }
