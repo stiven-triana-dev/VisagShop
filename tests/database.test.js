@@ -119,6 +119,11 @@ test('CRUD de productos y usuarios con Sequelize', {skip}, async () => {
   assert.equal(kept.items[1].productId, null);
   assert.equal(kept.items[1].name, 'Otra gorra');
   assert.equal(kept.items[0].lineTotal, 260000);
+  // Exportaciones del panel
+  assert.deepEqual((await orders.exportAll()).map(o => o.code), ['VS-1002', 'VS-1001']);
+  const exported = await users.exportAll();
+  assert.equal(exported.length, 1);
+  assert.equal(exported[0].passwordHash, undefined, 'sin contraseñas');
 });
 
 test('migra los datos del esquema anterior (tablas visag_*) sin perder nada', {skip}, async () => {

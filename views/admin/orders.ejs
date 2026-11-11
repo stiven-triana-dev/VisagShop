@@ -5,6 +5,10 @@
   <%- include('nav', {current: 'orders'}) %>
   <div class="admin-top">
     <div><span class="admin-kicker">PANEL / PEDIDOS</span><h1>Tus <em>pedidos.</em></h1><p>Cada compra confirmada en el carrito queda registrada aquí, aunque el cliente no termine de enviar el mensaje de WhatsApp.</p></div>
+    <div class="admin-downloads">
+      <a class="admin-primary" href="/admin/orders/export.csv<%= status ? '?estado='+status : '' %>" download>DESCARGAR EN EXCEL ↓</a>
+      <a class="admin-secondary" href="/admin/backup.json" download title="Productos, pedidos y clientes (sin contraseñas)">RESPALDO COMPLETO ↓</a>
+    </div>
   </div>
   <div class="admin-stats admin-stats-orders">
     <% statuses.forEach(function(s){ %><div><small><%= statusLabels[s].toUpperCase() %></small><strong><%= counts[s] %></strong></div><% }) %>

@@ -73,4 +73,10 @@ async function updateStatus(number, status, adminNote) {
   return find(number);
 }
 
-module.exports = {...common, create, list, find, listByUser, updateStatus};
+async function exportAll() {
+  const {Order, OrderItem} = db.models;
+  const rows = await Order.findAll({order: [['number', 'DESC']], include: [{model: OrderItem, as: 'items'}]});
+  return rows.map(toPlain);
+}
+
+module.exports = {...common, create, list, find, listByUser, updateStatus, exportAll};
