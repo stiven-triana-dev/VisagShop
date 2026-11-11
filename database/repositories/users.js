@@ -113,4 +113,9 @@ async function changePassword(id, currentPassword, newPassword, confirmPassword)
   return true;
 }
 
-module.exports = {register, authenticate, find, updateProfile, changePassword, emailExists, publicUser, credential};
+async function exportAll() {
+  const rows = await db.models.User.findAll({order: [['createdAt', 'ASC']]});
+  return rows.map(publicUser);
+}
+
+module.exports = {exportAll, register, authenticate, find, updateProfile, changePassword, emailExists, publicUser, credential};

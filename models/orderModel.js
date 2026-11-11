@@ -96,6 +96,8 @@ async function list({status = '', page = 1} = {}) {
   return {orders: filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE).map(decorate), total: filtered.length, all: all.length, counts, page: current, pages};
 }
 
+async function exportAll() { return read().sort((a, b) => b.number - a.number).map(decorate); }
+
 async function find(number) { return decorate(read().find(o => o.number === Number(number)) || null); }
 
 async function listByUser(userId) {
@@ -115,5 +117,5 @@ async function updateStatus(number, status, adminNote) {
 
 module.exports = {
   STATUSES, STATUS_LABELS, PAYMENTS, PAYMENT_LABELS, FIRST_NUMBER, PAGE_SIZE,
-  code, buildOrder, decorate, create, list, find, listByUser, updateStatus
+  code, buildOrder, decorate, create, list, find, listByUser, updateStatus, exportAll
 };

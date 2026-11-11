@@ -103,3 +103,4 @@
 #order-status-form select,#order-status-form textarea{width:100%;border:1px solid #dadcd4;padding:10px 12px;font:inherit;font-size:13px;background:#fff}
 @media(max-width:900px){.admin-stats-orders{grid-template-columns:repeat(3,1fr)}.order-data{grid-template-columns:1fr}.order-data dt{padding-top:8px}}
 @media(max-width:560px){.admin-stats-orders{grid-template-columns:repeat(2,1fr)}.order-lines li{grid-template-columns:52px 1fr}.order-lines b{grid-column:2}}
+.admin-downloads{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}

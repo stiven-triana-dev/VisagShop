@@ -76,6 +76,16 @@ app.use(express.static(path.join(__dirname,'public'),{index:false,dotfiles:'deny
  const req=res.req,versioned=/\.(css|js)$/.test(file)&&req.query.v===assetVersion;
  res.set('Cache-Control',versioned?'public, max-age=31536000, immutable':/\.(jpe?g|png|webp|gif|svg)$/i.test(file)?'public, max-age=604800':'public, max-age=3600');
 }}));
+// Para buscadores: qué pueden recorrer y la lista de páginas públicas (todas las prendas).
+app.get('/robots.txt',(req,res)=>{
+ res.type('text/plain').set('Cache-Control','public, max-age=86400').send(['User-agent: *','Disallow: /admin','Disallow: /api/','Disallow: /profile','Disallow: /productCart','',`Sitemap: ${res.locals.baseUrl}/sitemap.xml`,''].join('\n'));
+});
+app.get('/sitemap.xml',wrap(async(req,res)=>{
+ const base=res.locals.baseUrl,esc=s=>String(s).replace(/&/g,'&amp;');
+ const urls=['/','/products',...products.categories.map(c=>`/products?categoria=${encodeURIComponent(c)}`),...(await products.all()).map(p=>`/products/${encodeURIComponent(p.id)}`)];
+ res.type('application/xml').set('Cache-Control','public, max-age=3600')
+  .send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u=>`  <url><loc>${esc(base+u)}</loc></url>`).join('\n')}\n</urlset>\n`);
+}));
 app.use(session.attach);
 app.get('/api/products',wrap(async(req,res)=>res.set('Cache-Control','no-store').json(await products.all())));
 app.get('/api/products/:id',wrap(async(req,res)=>{

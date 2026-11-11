@@ -70,4 +70,5 @@ function changePassword(id,currentPassword,newPassword,confirmPassword){
  items[index].password=credential(newPassword);
  items[index].updatedAt=new Date().toISOString();write(items);return true;
 }
-module.exports={all,register,authenticate,find,publicUser,updateProfile,changePassword,checkPassword,emailExists};
+function exportAll(){return all().map(publicUser);}
+module.exports={exportAll,all,register,authenticate,find,publicUser,updateProfile,changePassword,checkPassword,emailExists};
