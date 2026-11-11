@@ -5,22 +5,33 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f7f6f1">
   <meta name="visag-whatsapp-number" content="<%= whatsappNumber %>">
-  <meta name="description" content="VisagShop - ropa urbana al detal y por mayor desde Lebrija, Santander.">
+  <meta name="description" content="<%= metaDescription %>">
   <title><%= pageTitle || 'VisagShop' %></title>
+  <link rel="canonical" href="<%= pageUrl %>">
+  <%# Vista previa al compartir el enlace (WhatsApp, Facebook, Instagram, X) %>
+  <meta property="og:site_name" content="VisagShop">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:type" content="<%= ogType %>">
+  <meta property="og:title" content="<%= pageTitle || 'VisagShop' %>">
+  <meta property="og:description" content="<%= metaDescription %>">
+  <meta property="og:url" content="<%= pageUrl %>">
+  <meta property="og:image" content="<%= baseUrl + ogImage %>">
+  <meta property="og:image:alt" content="<%= pageTitle || 'VisagShop' %>">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="/img/logo-visagshop-128.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/modern.css">
-  <link rel="stylesheet" href="/css/atelier.css">
-  <% if (isCheckout) { %><link rel="stylesheet" href="/css/checkout.css"><% } %>
-  <% if (isAdmin) { %><link rel="stylesheet" href="/css/admin.css"><% } %>
-  <link rel="stylesheet" href="/css/sprint4.css">
-  <link rel="stylesheet" href="/css/sprint5.css">
-  <script src="/js/site.js" defer></script>
-  <script src="/js/validation.js" defer></script>
-  <% if (pageScript) { %><script src="/js/<%= pageScript %>" defer></script><% } %>
+  <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>">
+  <link rel="stylesheet" href="/css/modern.css?v=<%= assetVersion %>">
+  <link rel="stylesheet" href="/css/atelier.css?v=<%= assetVersion %>">
+  <% if (isCheckout) { %><link rel="stylesheet" href="/css/checkout.css?v=<%= assetVersion %>"><% } %>
+  <% if (isAdmin) { %><link rel="stylesheet" href="/css/admin.css?v=<%= assetVersion %>"><% } %>
+  <link rel="stylesheet" href="/css/sprint4.css?v=<%= assetVersion %>">
+  <link rel="stylesheet" href="/css/sprint5.css?v=<%= assetVersion %>">
+  <script src="/js/site.js?v=<%= assetVersion %>" defer></script>
+  <script src="/js/validation.js?v=<%= assetVersion %>" defer></script>
+  <% if (pageScript) { %><script src="/js/<%= pageScript %>?v=<%= assetVersion %>" defer></script><% } %>
 </head>
 <body<% if (isCheckout) { %> class="checkout-page"<% } %>>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
