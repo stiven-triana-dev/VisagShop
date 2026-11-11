@@ -9,6 +9,11 @@ module.exports={
  register:render('users/register','Registro | VisagShop',{pageScript:'auth.js'}),
  login:render('users/login','Ingresar | VisagShop',{pageScript:'auth.js'}),
  recover:render('users/recover','Recuperar contraseña | VisagShop',{pageScript:'auth.js'}),
- profile(req,res){res.set('Cache-Control','no-store');res.render('users/profile',{pageTitle:'Mi perfil | VisagShop',pageScript:'profile.js'});},
+ async profile(req,res){
+  const {money:formatMoney,date}=require('./orderController');
+  const orders=await require('../models/activeOrders').listByUser(req.customer.id);
+  res.set('Cache-Control','no-store');
+  res.render('users/profile',{pageTitle:'Mi perfil | VisagShop',pageScript:'profile.js',orders,money:formatMoney,date});
+ },
  notFound(req,res){res.status(404).render('404',{pageTitle:'Página no encontrada | VisagShop'});}
 };

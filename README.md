@@ -44,7 +44,7 @@ El proyecto se desarrolló como práctica de arquitectura web con **Node.js, Exp
 | **Catálogo** | Productos por categoría, buscador (`/products?q=`), orden por nombre/precio y favoritos locales. |
 | **Fichas** | Fotografías, referencias, precio, tallas y colores. |
 | **Carrito** | Cantidades, selección de talla, subtotal y ficha descargable con fotos. |
-| **Pedidos** | Formulario de entrega y preparación de mensaje para WhatsApp. |
+| **Pedidos** | Cada compra se guarda en la base con un número (VS-1001…) y se envía por WhatsApp. El administrador los gestiona en `/admin/orders` (estados: nuevo, confirmado, enviado, entregado, cancelado) y el cliente con cuenta los ve en su perfil. |
 | **Pago solicitado** | Contraentrega, Nequi o tarjeta por enlace enviado por la tienda; **sin cobro integrado**. |
 | **Clientes** | Registro, acceso, cierre de sesión, “recordarme”, perfil y cambio de contraseña. |
 | **Administración** | Alta, consulta, edición y eliminación de productos con validación de imágenes. |
@@ -167,6 +167,8 @@ La URL de comprobación del servicio es `/health`.
 | `/register`, `/login` | Registro y acceso. |
 | `/profile` | Área privada de cliente. |
 | `/admin/products` | Administración de productos con credenciales. |
+| `/admin/orders` | Pedidos recibidos, detalle y cambio de estado. |
+| `POST /api/orders` | Registra un pedido del carrito (precios calculados en el servidor). |
 | `/api/products` | Consulta JSON del catálogo. |
 | `/health` | Comprobación básica del servicio. |
 

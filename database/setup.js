@@ -124,6 +124,7 @@ async function initialize() {
   await sequelize.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar VARCHAR(200) NULL');
   await sequelize.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS upload_id UUID NULL REFERENCES uploads(id) ON UPDATE CASCADE ON DELETE SET NULL');
   await sequelize.query('CREATE SEQUENCE IF NOT EXISTS product_number_seq START WITH 1');
+  await sequelize.query('CREATE SEQUENCE IF NOT EXISTS order_number_seq START WITH 1001'); // pedidos VS-1001, VS-1002...
   await sequelize.query('CREATE TABLE IF NOT EXISTS app_meta (key VARCHAR(80) PRIMARY KEY, value JSONB NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())');
   await sequelize.transaction(async transaction => {
     await sequelize.query(`SELECT pg_advisory_xact_lock(${LOCK_ID})`, {transaction});

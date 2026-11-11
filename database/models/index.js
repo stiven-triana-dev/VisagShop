@@ -17,7 +17,9 @@ const definitions = [
   require('./productSize'),
   require('./productColor'),
   require('./user'),
-  require('./session')
+  require('./session'),
+  require('./order'),
+  require('./orderItem')
 ];
 
 const db = {};

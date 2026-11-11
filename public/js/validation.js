@@ -98,7 +98,8 @@
       showServerErrors(errors) {
         let first = null;
         for (const [name, message] of Object.entries(errors || {})) {
-          const input = form.elements[name === 'imageData' ? (form.querySelector('input[type=file]')?.name || name) : name];
+          let input = form.elements[name === 'imageData' ? (form.querySelector('input[type=file]')?.name || name) : name];
+          if (input && !(input instanceof Element)) input = input[0]; // grupo de radios: primer botón
           if (!input) continue;
           setError(input, message);
           if (!first) first = input;

@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = models => {
     User.hasMany(models.Session, {as: 'sessions', foreignKey: 'userId'});
     User.belongsTo(models.Upload, {as: 'photo', foreignKey: 'uploadId', onDelete: 'SET NULL', onUpdate: 'CASCADE'});
+    User.hasMany(models.Order, {as: 'orders', foreignKey: 'userId'});
   };
   return User;
 };

@@ -49,3 +49,18 @@ input[aria-invalid="true"]:focus,select[aria-invalid="true"]:focus,textarea[aria
 .pagination-step[aria-hidden="true"]{color:#b9b8b0}
 a.pagination-step:hover{text-decoration:underline;text-underline-offset:3px}
 @media(max-width:680px){.pagination{gap:4px}.pagination-step{padding:0 6px}}
+
+/* Mis pedidos (perfil) */
+.profile-orders{margin-top:22px}
+.profile-orders-empty{font-size:13px;color:#666970}
+.profile-orders-empty a{text-decoration:underline;color:var(--ink)}
+.profile-orders-list{list-style:none;margin:0;padding:0}
+.profile-orders-list li{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid #ecebe5}
+.profile-orders-pics{display:flex}
+.profile-orders-pics img{width:44px;height:52px;object-fit:cover;border:2px solid #fff;margin-left:-10px;background:#eeeee8}
+.profile-orders-pics img:first-child{margin-left:0}
+.profile-orders-info strong{display:block;font-size:14px}
+.profile-orders-info span{display:block;font-size:12px;color:#666970;margin-top:2px}
+.order-status{display:inline-block;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;white-space:nowrap}
+.order-status-nuevo{color:#1b5fa3;background:#eef5fc}.order-status-confirmado{color:#7a5b00;background:#fdf7e3}.order-status-enviado{color:#5a3fa0;background:#f4f0fc}.order-status-entregado{color:#2f7d4a;background:#edf7f0}.order-status-cancelado{color:#9a2f28;background:#fbeeed}
+@media(max-width:520px){.profile-orders-list li{grid-template-columns:1fr auto}.profile-orders-pics{display:none}}
