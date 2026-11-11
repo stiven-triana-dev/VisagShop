@@ -9,13 +9,24 @@
   <button class="btn btn-dark" type="submit">BUSCAR</button>
   <% if (q || categoria) { %><a class="product-search-clear" href="/products">Limpiar</a><% } %>
  </form>
- <p class="sprint4-list-intro"><% if (q || categoria) { %><%= products.length %> resultado<%= products.length===1?'':'s' %><% if (q) { %> para “<%= q %>”<% } %><% if (categoria) { %> en <%= categoria %><% } %><% } else { %><%= products.length %> referencias<% } %> · Los precios y la disponibilidad final se confirman con VisagShop.</p>
- <% if (!products.length) { %><p class="product-search-empty">No encontramos productos con esa búsqueda. Prueba con otra palabra o <a href="/products">mira toda la colección</a>.</p><% } %>
+ <p class="sprint4-list-intro"><% if (q || categoria) { %><%= total %> resultado<%= total===1?'':'s' %><% if (q) { %> para “<%= q %>”<% } %><% if (categoria) { %> en <%= categoria %><% } %><% } else { %><%= total %> referencias<% } %><% if (pages > 1) { %> · Página <%= page %> de <%= pages %><% } %> · Los precios y la disponibilidad final se confirman con VisagShop.</p>
+ <% if (!total) { %><p class="product-search-empty">No encontramos productos con esa búsqueda. Prueba con otra palabra o <a href="/products">mira toda la colección</a>.</p><% } %>
  <div class="productos sprint4-grid">
  <% products.forEach(function(p,index){ %>
   <%- include('../partials/productCard',{p,index,money}) %>
  <% }) %>
  </div>
+ <% if (pages > 1) { %>
+ <nav class="pagination" aria-label="Páginas de productos">
+  <% if (page > 1) { %><a class="pagination-step" href="<%= pageLink(page-1) %>" rel="prev">← ANTERIOR</a><% } else { %><span class="pagination-step" aria-hidden="true">← ANTERIOR</span><% } %>
+  <ol class="pagination-pages">
+   <% for (let n = 1; n <= pages; n++) { %>
+    <li><% if (n === page) { %><span aria-current="page"><%= n %></span><% } else { %><a href="<%= pageLink(n) %>" aria-label="Página <%= n %>"><%= n %></a><% } %></li>
+   <% } %>
+  </ol>
+  <% if (page < pages) { %><a class="pagination-step" href="<%= pageLink(page+1) %>" rel="next">SIGUIENTE →</a><% } else { %><span class="pagination-step" aria-hidden="true">SIGUIENTE →</span><% } %>
+ </nav>
+ <% } %>
  <div class="sprint4-list-end"><a href="/" class="btn btn-outline-dark">VOLVER A LA TIENDA ↗</a></div>
 </main>
 <%- include('../partials/footer') %>

@@ -17,6 +17,14 @@ const cloud=Boolean(process.env.DATABASE_URL);
 const production=process.env.NODE_ENV==='production';
 if(production&&!cloud)throw Error('No es seguro iniciar VisagShop en hosting gratuito sin DATABASE_URL de Neon.');
 if(!cloud)store.setup();
+// Versión de CSS/JS: huella del contenido de esos archivos. Va en sus URLs (?v=...),
+// así el navegador puede guardarlos en caché y aun así recibe los cambios de cada despliegue.
+const assetVersion=(()=>{
+ const fs=require('node:fs'),crypto=require('node:crypto'),hash=crypto.createHash('sha1');
+ for(const dir of ['css','js'])for(const name of fs.readdirSync(path.join(__dirname,'public',dir)).sort())hash.update(name).update(fs.readFileSync(path.join(__dirname,'public',dir,name)));
+ return hash.digest('hex').slice(0,10);
+})();
+const DESCRIPTION='Ropa urbana al detal y por mayor desde Lebrija, Santander. Jeans, gorras, tenis y más; pide por WhatsApp.';
 app.set('trust proxy',1);
 app.disable('x-powered-by');
 app.set('views',path.join(__dirname,'views'));
@@ -24,6 +32,13 @@ app.set('view engine','ejs');
 app.use((req,res,next)=>{
  res.locals.isHome=false;res.locals.isCheckout=false;res.locals.isAdmin=false;res.locals.pageScript='';res.locals.pageTitle='VisagShop';
  res.locals.whatsappNumber=/^\d{8,15}$/.test(process.env.WHATSAPP_NUMBER||'')?process.env.WHATSAPP_NUMBER:'';
+ // Datos para la vista previa al compartir un enlace (WhatsApp, Facebook...). Las páginas pueden cambiarlos.
+ res.locals.assetVersion=assetVersion;
+ res.locals.baseUrl=`${req.protocol}://${req.get('host')}`;
+ res.locals.pageUrl=res.locals.baseUrl+req.originalUrl.split('?')[0];
+ res.locals.metaDescription=DESCRIPTION;
+ res.locals.ogImage='/img/p042.jpg';
+ res.locals.ogType='website';
  res.set('X-Content-Type-Options','nosniff');
  res.set('Referrer-Policy','strict-origin-when-cross-origin');
  res.set('X-Frame-Options','DENY');
@@ -51,11 +66,16 @@ if(cloud){
   if(!match)return res.sendStatus(404);
   const file=await products.image(match[1]);
   if(!file)return res.sendStatus(404);
-  res.set('Cache-Control','public, max-age=3600');
+  res.set('Cache-Control','public, max-age=2592000, immutable'); // nombre único por foto
   res.type(file.mime).send(file.image_bytes);
  }));
-}else app.use('/img/uploads',express.static(store.uploadDir,{index:false,dotfiles:'deny',maxAge:'1h'}));
-app.use(express.static(path.join(__dirname,'public'),{index:false,dotfiles:'deny'}));
+}else app.use('/img/uploads',express.static(store.uploadDir,{index:false,dotfiles:'deny',maxAge:'30d',immutable:true}));
+// Caché del navegador: CSS/JS pedidos con ?v=versión no cambian nunca (1 año);
+// las fotos del catálogo, 7 días; el resto, 1 hora.
+app.use(express.static(path.join(__dirname,'public'),{index:false,dotfiles:'deny',setHeaders(res,file){
+ const req=res.req,versioned=/\.(css|js)$/.test(file)&&req.query.v===assetVersion;
+ res.set('Cache-Control',versioned?'public, max-age=31536000, immutable':/\.(jpe?g|png|webp|gif|svg)$/i.test(file)?'public, max-age=604800':'public, max-age=3600');
+}}));
 app.use(session.attach);
 app.get('/api/products',wrap(async(req,res)=>res.set('Cache-Control','no-store').json(await products.all())));
 app.get('/api/products/:id',wrap(async(req,res)=>{
