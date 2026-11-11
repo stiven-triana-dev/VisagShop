@@ -11,7 +11,9 @@
   ![Express](https://img.shields.io/badge/Express-4-262626?logo=express&logoColor=white)
   ![EJS](https://img.shields.io/badge/EJS-Plantillas-262626)
   ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-262626?logo=postgresql&logoColor=white)
+  ![Sequelize](https://img.shields.io/badge/Sequelize-6-262626?logo=sequelize&logoColor=white)
   ![Estado](https://img.shields.io/badge/Estado-Demo%20en%20l%C3%ADnea-1f6f50)
+  [![Pruebas](https://github.com/stiven-triana-dev/VisagShop/actions/workflows/tests.yml/badge.svg)](https://github.com/stiven-triana-dev/VisagShop/actions/workflows/tests.yml)
 </div>
 
 ---
