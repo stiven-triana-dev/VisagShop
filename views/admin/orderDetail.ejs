@@ -1,0 +1,55 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<main id="contenido" class="shell admin-main">
+  <div class="admin-crumb"><a href="/">Tienda</a><span>/</span><a href="/admin/orders">Pedidos</a><span>/</span><%= order.code %></div>
+  <%- include('nav', {current: 'orders'}) %>
+  <div class="admin-top admin-top-form">
+    <div><span class="admin-kicker">PEDIDO / <%= date(order.createdAt).toUpperCase() %></span><h1>Pedido <em><%= order.code %>.</em></h1><p><span class="order-status order-status-<%= order.status %>" id="order-status-badge"><%= order.statusLabel %></span> · <%= order.itemCount %> prenda<%= order.itemCount===1?'':'s' %> · <%= order.paymentLabel %></p></div>
+    <a href="/admin/orders" class="admin-secondary">← VOLVER A PEDIDOS</a>
+  </div>
+  <div class="admin-editor-grid">
+    <section class="admin-panel">
+      <div class="admin-form-heading"><span>01</span><h2>Prendas</h2></div>
+      <ul class="order-lines">
+        <% order.items.forEach(function(i){ %>
+        <li>
+          <img src="<%= i.image || '/img/p049.jpg' %>" alt="" width="64" height="74" loading="lazy">
+          <div><strong><%= i.name %></strong><span><% if (i.productId) { %>Ref. <%= i.productId.toUpperCase() %> · <% } %>Talla <%= i.size || 'por confirmar' %> · Cantidad <%= i.quantity %></span></div>
+          <b><%= i.lineTotal === null ? 'Por confirmar' : money(i.lineTotal) %></b>
+        </li>
+        <% }) %>
+      </ul>
+      <div class="order-total"><span>Total productos</span><strong><%= money(order.subtotal) %><% if (order.hasUnpriced) { %> + por confirmar<% } %></strong></div>
+      <p class="admin-muted">Precios del catálogo al momento del pedido. El envío se confirma con el cliente.</p>
+
+      <div class="admin-form-heading"><span>02</span><h2>Cliente y entrega</h2></div>
+      <dl class="order-data">
+        <dt>Cliente</dt><dd><%= order.customer.firstName %> <%= order.customer.lastName %><% if (order.userId) { %> <span class="admin-muted">(con cuenta)</span><% } %></dd>
+        <dt>Celular</dt><dd><%= order.customer.phone %> · <a class="admin-edit" href="https://wa.me/<%= order.customer.phone.replace(/\D/g,'').replace(/^(3\d{9})$/,'57$1') %>?text=<%= encodeURIComponent('Hola ' + order.customer.firstName + ', te escribimos de VisagShop por tu pedido ' + order.code + '.') %>" target="_blank" rel="noopener">Escribir por WhatsApp ↗</a></dd>
+        <% if (order.customer.email) { %><dt>Correo</dt><dd><%= order.customer.email %></dd><% } %>
+        <% if (order.customer.document) { %><dt>Documento</dt><dd><%= order.customer.document %></dd><% } %>
+        <dt>Dirección</dt><dd><%= order.shipping.address %><% if (order.shipping.addressExtra) { %>, <%= order.shipping.addressExtra %><% } %></dd>
+        <dt>Ciudad</dt><dd><%= order.shipping.city %>, <%= order.shipping.department %><% if (order.shipping.postalCode) { %> · CP <%= order.shipping.postalCode %><% } %></dd>
+        <dt>Facturación</dt><dd><%= order.billingAddress || 'Misma dirección de entrega' %></dd>
+        <dt>Pago</dt><dd><%= order.paymentLabel %></dd>
+      </dl>
+    </section>
+    <aside class="admin-panel">
+      <div class="admin-form-heading"><span>03</span><h2>Estado</h2></div>
+      <form id="order-status-form" data-number="<%= order.number %>" novalidate>
+        <label class="admin-field">Estado del pedido
+          <select name="status">
+            <% statuses.forEach(function(s){ %><option value="<%= s %>" <%= order.status===s?'selected':'' %>><%= statusLabels[s] %></option><% }) %>
+          </select>
+        </label>
+        <label class="admin-field">Nota interna (opcional)
+          <textarea name="adminNote" rows="4" maxlength="500" placeholder="Ej. Pagó por Nequi, guía de envío 12345."><%= order.adminNote %></textarea>
+        </label>
+        <div id="order-feedback" class="admin-feedback" role="status" aria-live="polite"></div>
+        <button class="admin-primary" type="submit">GUARDAR ESTADO ↗</button>
+      </form>
+      <p class="admin-muted">Actualizado: <span id="order-updated"><%= date(order.updatedAt) %></span></p>
+    </aside>
+  </div>
+</main>
+<%- include('../partials/footer') %>

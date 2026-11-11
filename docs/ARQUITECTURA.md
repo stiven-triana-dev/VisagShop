@@ -38,6 +38,8 @@ Este documento describe el código del repositorio incluido en la entrega, no un
 - `products` N — M `colors` mediante `product_colors`.
 - `uploads` 0..1 — 0..1 `products` (`products.upload_id`): fotos subidas desde el panel.
 - `users` 1 — N `sessions` (`sessions.user_id`).
+- `users` 0..1 — N `orders` (`orders.user_id`, opcional: se puede comprar sin cuenta).
+- `orders` 1 — N `order_items`; `order_items.product_id` queda en NULL si el producto se elimina, pero el pedido conserva nombre, foto y precio.
 - `uploads` 0..1 — 0..1 `users` (`users.upload_id`): foto de perfil (Sprint 7).
 
 La referencia de cada producto (`p001`, `p002`…) se mantiene como clave primaria porque aparece en las URLs y en los carritos guardados por los clientes. Las referencias nuevas salen de la secuencia `product_number_seq`, así nunca se reutiliza la de un producto eliminado.
@@ -73,7 +75,7 @@ Crear, editar y eliminar productos exige credenciales de administrador (`ADMIN_U
 ## Notas sobre datos
 
 - Las cuentas de clientes no se incluyen en el repositorio; se crean durante la ejecución. `data.sql` solo trae dos cuentas ficticias de demostración.
-- El carrito y los favoritos usan el almacenamiento del navegador; **no existe un sistema de órdenes persistidas** (el carrito en base de datos era opcional en el Sprint 6).
+- El carrito y los favoritos viven en el navegador. Al confirmar la compra, el pedido se guarda en `orders`/`order_items` con un número público (`order_number_seq`, desde VS-1001) y los precios del catálogo del servidor; luego se abre WhatsApp con ese número.
 - La solicitud de pedido se prepara para WhatsApp. La confirmación comercial ocurre fuera de la aplicación.
 
 ## Despliegue

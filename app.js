@@ -85,6 +85,7 @@ app.get('/api/products/:id',wrap(async(req,res)=>{
 }));
 app.get('/data/products.json',wrap(async(req,res)=>res.set('Cache-Control','no-store').json(await products.all())));
 app.use('/api/account',accounts);
+app.use('/api/orders',require('./routes/orders'));
 app.use('/admin',admin);
 app.use('/products',productRoutes);
 app.use('/',pages);

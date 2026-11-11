@@ -1,0 +1,48 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<main id="contenido" class="shell admin-main">
+  <div class="admin-crumb"><a href="/">Tienda</a><span>/</span>Panel de pedidos</div>
+  <%- include('nav', {current: 'orders'}) %>
+  <div class="admin-top">
+    <div><span class="admin-kicker">PANEL / PEDIDOS</span><h1>Tus <em>pedidos.</em></h1><p>Cada compra confirmada en el carrito queda registrada aquí, aunque el cliente no termine de enviar el mensaje de WhatsApp.</p></div>
+  </div>
+  <div class="admin-stats admin-stats-orders">
+    <% statuses.forEach(function(s){ %><div><small><%= statusLabels[s].toUpperCase() %></small><strong><%= counts[s] %></strong></div><% }) %>
+  </div>
+  <section class="admin-panel">
+    <div class="admin-panel-heading">
+      <div><h2><%= status ? statusLabels[status] : 'Todos los pedidos' %></h2><span><%= total %> pedido<%= total===1?'':'s' %><% if (pages>1) { %> · Página <%= page %> de <%= pages %><% } %></span></div>
+      <nav class="order-filters" aria-label="Filtrar por estado">
+        <a href="/admin/orders" <%- !status ? 'aria-current="page"' : '' %>>Todos (<%= all %>)</a>
+        <% statuses.forEach(function(s){ %><a href="/admin/orders?estado=<%= s %>" <%- status===s ? 'aria-current="page"' : '' %>><%= statusLabels[s] %> (<%= counts[s] %>)</a><% }) %>
+      </nav>
+    </div>
+    <% if (!orders.length) { %>
+      <p class="admin-empty"><%= status ? 'No hay pedidos con este estado.' : 'Todavía no hay pedidos. Aparecerán aquí cuando un cliente confirme su compra en el carrito.' %></p>
+    <% } else { %>
+    <div class="admin-table-wrap"><table class="admin-table admin-orders-table">
+      <thead><tr><th>Pedido</th><th>Fecha</th><th>Cliente</th><th>Destino</th><th>Prendas</th><th>Total</th><th>Estado</th><th></th></tr></thead>
+      <tbody>
+      <% orders.forEach(function(o){ %>
+        <tr>
+          <td><a class="admin-edit" href="/admin/orders/<%= o.number %>"><%= o.code %></a></td>
+          <td><%= date(o.createdAt) %></td>
+          <td><strong><%= o.customer.firstName %> <%= o.customer.lastName %></strong><br><span class="admin-muted"><%= o.customer.phone %></span></td>
+          <td><%= o.shipping.city %>, <%= o.shipping.department %></td>
+          <td><%= o.itemCount %></td>
+          <td><%= money(o.subtotal) %><% if (o.hasUnpriced) { %><br><span class="admin-no-price">+ por confirmar</span><% } %></td>
+          <td><span class="order-status order-status-<%= o.status %>"><%= o.statusLabel %></span></td>
+          <td><a class="admin-edit" href="/admin/orders/<%= o.number %>">Ver ↗</a></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table></div>
+    <% } %>
+    <% if (pages > 1) { %>
+    <nav class="pagination" aria-label="Páginas de pedidos">
+      <% for (let n = 1; n <= pages; n++) { %><% if (n === page) { %><span class="pagination-pages"><span aria-current="page"><%= n %></span></span><% } else { %><span class="pagination-pages"><a href="/admin/orders?<%= status ? 'estado='+status+'&' : '' %>page=<%= n %>"><%= n %></a></span><% } %><% } %>
+    </nav>
+    <% } %>
+  </section>
+</main>
+<%- include('../partials/footer') %>

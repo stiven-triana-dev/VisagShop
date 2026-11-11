@@ -6,6 +6,8 @@ const sameOrigin=require('../middleware/writeOrigin');
 const limitRequests=require('../middleware/limitRequests');
 const validate=require('../middleware/validate');
 const rules=require('../validations/productValidations');
+const orders=require('../controllers/orderController');
+const orderRules=require('../validations/orderValidations');
 const router=express.Router();
 const wrap=require('../middleware/asyncHandler');
 router.use(limitRequests({max:100,windowMs:15*60*1000,namespace:'admin'}));
@@ -17,4 +19,8 @@ router.get('/products/:id/edit',wrap(controller.editForm));
 router.post('/api/products',sameOrigin,validate(rules.create),wrap(controller.create));
 router.put('/api/products/:id',sameOrigin,validate(rules.update),wrap(controller.update));
 router.delete('/api/products/:id',sameOrigin,wrap(controller.remove));
+// Pedidos
+router.get('/orders',wrap(orders.list));
+router.get('/orders/:number(\\d+)',wrap(orders.detail));
+router.put('/api/orders/:number(\\d+)',sameOrigin,validate(orderRules.status),wrap(orders.updateStatus));
 module.exports=router;

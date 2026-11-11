@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <title>DER VisagShop</title>
 <style>
-  @page { size: A4 landscape; margin: 0; }
+  @page { size: 1123px 1190px; margin: 0; }
   :root { --ink:#1e1e1b; --muted:#6b6b64; --line:#c9c8c0; --fk:#4f6b2a; --pk:#8a5a00; --paper:#fff; --head:#1e1e1b; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--paper); color: var(--ink); font: 12px/1.3 "Segoe UI", Arial, sans-serif; }
-  .page { position: relative; width: 1123px; height: 794px; overflow: hidden; }
+  .page { position: relative; width: 1123px; height: 1190px; overflow: hidden; }
   h1 { position: absolute; left: 30px; top: 18px; margin: 0; font-size: 22px; letter-spacing: -.01em; }
   .sub { position: absolute; left: 30px; top: 50px; margin: 0; color: var(--muted); font-size: 12px; }
   .group { position: absolute; font-size: 10px; letter-spacing: .14em; font-weight: 700; color: var(--muted); text-transform: uppercase; }
@@ -25,7 +25,7 @@
   svg { position: absolute; inset: 0; }
   .rel { fill: none; stroke: var(--ink); stroke-width: 1.4; }
   .lbl { font-size: 10px; fill: var(--muted); }
-  .legend { position: absolute; left: 860px; top: 470px; width: 233px; border: 1px solid var(--line); padding: 10px 12px; font-size: 11px; color: var(--ink); }
+  .legend { position: absolute; left: 30px; top: 800px; width: 233px; border: 1px solid var(--line); padding: 10px 12px; font-size: 11px; color: var(--ink); }
   .legend p { margin: 0 0 6px; }
   .legend svg { position: static; vertical-align: middle; margin-right: 6px; }
   .legend h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
@@ -34,7 +34,7 @@
 <body>
 <div class="page">
   <h1>VisagShop · Diagrama Entidad-Relación</h1>
-  <p class="sub">Sprint 6 · PostgreSQL + Sequelize · tablas en inglés · claves primarias (PK), foráneas (FK) y únicas (UQ)</p>
+  <p class="sub">Sprints 6 y 7 + pedidos · PostgreSQL + Sequelize · tablas en inglés · claves primarias (PK), foráneas (FK) y únicas (UQ)</p>
 
   <span class="group" style="left:30px;top:96px">Catálogo</span>
   <span class="group" style="left:30px;top:450px">Clientes</span>
@@ -131,7 +131,47 @@
     <div><b></b><span>created_at</span><span>TIMESTAMPTZ</span></div>
   </div>
 
-  <svg width="1123" height="794" viewBox="0 0 1123 794" aria-hidden="true">
+
+  <span class="group" style="left:590px;top:626px">Pedidos</span>
+  <div class="t" style="left:590px;top:650px">
+    <h2>orders <small>pedidos</small></h2>
+    <div class="pk"><b class="k-pk">PK</b><span>id</span><span>UUID</span></div>
+    <div><b>UQ</b><span>number</span><span>INTEGER</span></div>
+    <div class="fk"><b class="k-fk">FK</b><span>user_id</span><span>UUID NULL</span></div>
+    <div><b></b><span>status</span><span>VARCHAR(20)</span></div>
+    <div><b></b><span>first_name</span><span>VARCHAR(65)</span></div>
+    <div><b></b><span>last_name</span><span>VARCHAR(65)</span></div>
+    <div><b></b><span>phone</span><span>VARCHAR(22)</span></div>
+    <div><b></b><span>email</span><span>VARCHAR(120)</span></div>
+    <div><b></b><span>document</span><span>VARCHAR(20)</span></div>
+    <div><b></b><span>department</span><span>VARCHAR(70)</span></div>
+    <div><b></b><span>city</span><span>VARCHAR(70)</span></div>
+    <div><b></b><span>address</span><span>VARCHAR(140)</span></div>
+    <div><b></b><span>address_extra</span><span>VARCHAR(140)</span></div>
+    <div><b></b><span>postal_code</span><span>VARCHAR(12)</span></div>
+    <div><b></b><span>billing_address</span><span>VARCHAR(300)</span></div>
+    <div><b></b><span>payment_method</span><span>VARCHAR(20)</span></div>
+    <div><b></b><span>subtotal</span><span>INTEGER</span></div>
+    <div><b></b><span>has_unpriced</span><span>BOOLEAN</span></div>
+    <div><b></b><span>admin_note</span><span>VARCHAR(500)</span></div>
+    <div><b></b><span>created_at</span><span>TIMESTAMPTZ</span></div>
+    <div><b></b><span>updated_at</span><span>TIMESTAMPTZ</span></div>
+  </div>
+
+  <div class="t" style="left:860px;top:650px">
+    <h2>order_items <small>prendas</small></h2>
+    <div class="pk"><b class="k-pk">PK</b><span>id</span><span>SERIAL</span></div>
+    <div class="fk"><b class="k-fk">FK</b><span>order_id</span><span>UUID</span></div>
+    <div class="fk"><b class="k-fk">FK</b><span>product_id</span><span>VARCHAR(10) NULL</span></div>
+    <div><b></b><span>product_name</span><span>VARCHAR(120)</span></div>
+    <div><b></b><span>image</span><span>VARCHAR(200)</span></div>
+    <div><b></b><span>size</span><span>VARCHAR(50)</span></div>
+    <div><b></b><span>quantity</span><span>SMALLINT</span></div>
+    <div><b></b><span>unit_price</span><span>INTEGER NULL</span></div>
+    <div><b></b><span>position</span><span>SMALLINT</span></div>
+  </div>
+
+  <svg width="1123" height="1190" viewBox="0 0 1123 1190" aria-hidden="true">
     <defs>
       <marker id="one" viewBox="0 -10 20 20" refX="20" refY="0" markerWidth="20" markerHeight="20" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
         <path d="M 11 -7 L 11 7 M 15 -7 L 15 7" stroke="#1e1e1b" stroke-width="1.4" fill="none"/>
@@ -155,6 +195,12 @@
     <path class="rel" d="M 260 333 L 295 333 L 295 295 L 310 295" marker-start="url(#zeroOne)" marker-end="url(#zeroOne)"/>
     <!-- uploads.id 0..1 — 0..1 users.upload_id (foto de perfil) -->
     <path class="rel" d="M 260 333 L 280 333 L 280 693 L 310 693" marker-start="url(#zeroOne)" marker-end="url(#zeroOne)"/>
+    <!-- users.id 0..1 — 0..N orders.user_id -->
+    <path class="rel" d="M 540 737 L 590 737" marker-start="url(#zeroOne)" marker-end="url(#manyOpt)"/>
+    <!-- orders.id 1 — 1..N order_items.order_id -->
+    <path class="rel" d="M 820 693 L 840 693 L 840 715 L 860 715" marker-start="url(#one)" marker-end="url(#many)"/>
+    <!-- products.id 0..1 — 0..N order_items.product_id -->
+    <path class="rel" d="M 450 350 L 450 440 L 1105 440 L 1105 737 L 1090 737" marker-start="url(#zeroOne)" marker-end="url(#manyOpt)"/>
     <!-- products.id 1 — 0..N product_sizes.product_id -->
     <path class="rel" d="M 540 163 L 562 163 L 562 123 L 590 123" marker-start="url(#one)" marker-end="url(#manyOpt)"/>
     <!-- products.id 1 — 0..N product_colors.product_id -->

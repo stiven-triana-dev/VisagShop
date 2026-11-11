@@ -141,3 +141,8 @@
 /* Labels keep optional and required markers on the same line as their field names. */
 .input-label{display:block}
 .input-label input,.input-label select{display:block;margin-top:7px}
+/* Pedido registrado */
+.order-saved .checkout-empty-icon{color:#2f7d4a;font-weight:700}
+.order-saved h3{font-size:22px}
+.order-saved p{font-size:13px;color:#4f5555;max-width:440px;margin:0 auto 14px;line-height:1.5}
+.order-saved a{display:inline-block;margin:6px 10px}

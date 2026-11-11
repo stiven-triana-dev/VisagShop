@@ -6,6 +6,8 @@ npm-debug.log*
 .DS_Store
 # Solo semillas de catálogo, nunca bases de datos reales de clientes
 data/users.json
+data/orders.json
+data/orders.json.*.tmp
 data/sessions.json
 data/.sessions-*.tmp
 data/.users-*.tmp
@@ -20,4 +22,6 @@ public/img/uploads/*
 node_modules/
 data/sessions.json
 data/users.json
+data/orders.json
+data/orders.json.*.tmp
 public/img/uploads/

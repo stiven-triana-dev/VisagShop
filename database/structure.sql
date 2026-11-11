@@ -116,6 +116,52 @@ CREATE INDEX sessions_user_idx    ON sessions(user_id);
 CREATE INDEX sessions_expires_idx ON sessions(expires_at);
 
 -- ---------------------------------------------------------------------
+-- Pedidos (carrito de compras guardado)
+-- Copian los datos de entrega y de cada prenda al momento de la compra.
+-- ---------------------------------------------------------------------
+CREATE SEQUENCE order_number_seq START WITH 1001;
+
+CREATE TABLE orders (
+  id              UUID         PRIMARY KEY,
+  number          INTEGER      NOT NULL UNIQUE,          -- se muestra como VS-1001
+  user_id         UUID         NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL,
+  status          VARCHAR(20)  NOT NULL DEFAULT 'nuevo'
+                  CHECK (status IN ('nuevo', 'confirmado', 'enviado', 'entregado', 'cancelado')),
+  first_name      VARCHAR(65)  NOT NULL,
+  last_name       VARCHAR(65)  NOT NULL,
+  phone           VARCHAR(22)  NOT NULL,
+  email           VARCHAR(120) NOT NULL DEFAULT '',
+  document        VARCHAR(20)  NOT NULL DEFAULT '',
+  department      VARCHAR(70)  NOT NULL,
+  city            VARCHAR(70)  NOT NULL,
+  address         VARCHAR(140) NOT NULL,
+  address_extra   VARCHAR(140) NOT NULL DEFAULT '',
+  postal_code     VARCHAR(12)  NOT NULL DEFAULT '',
+  billing_address VARCHAR(300) NOT NULL DEFAULT '',
+  payment_method  VARCHAR(20)  NOT NULL CHECK (payment_method IN ('contraentrega', 'nequi', 'tarjeta')),
+  subtotal        INTEGER      NOT NULL DEFAULT 0 CHECK (subtotal >= 0),
+  has_unpriced    BOOLEAN      NOT NULL DEFAULT FALSE,
+  admin_note      VARCHAR(500) NOT NULL DEFAULT '',
+  created_at      TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
+  updated_at      TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+CREATE INDEX orders_user_idx   ON orders(user_id);
+CREATE INDEX orders_status_idx ON orders(status);
+
+CREATE TABLE order_items (
+  id           SERIAL       PRIMARY KEY,
+  order_id     UUID         NOT NULL REFERENCES orders(id)   ON UPDATE CASCADE ON DELETE CASCADE,
+  product_id   VARCHAR(10)  NULL     REFERENCES products(id) ON UPDATE CASCADE ON DELETE SET NULL,
+  product_name VARCHAR(120) NOT NULL,
+  image        VARCHAR(200) NOT NULL DEFAULT '',
+  size         VARCHAR(50)  NOT NULL DEFAULT '',
+  quantity     SMALLINT     NOT NULL CHECK (quantity BETWEEN 1 AND 99),
+  unit_price   INTEGER      NULL CHECK (unit_price >= 0),
+  position     SMALLINT     NOT NULL DEFAULT 0
+);
+CREATE INDEX order_items_order_idx ON order_items(order_id);
+
+-- ---------------------------------------------------------------------
 -- Tabla técnica: registra los ajustes de datos que la aplicación ejecuta
 -- una sola vez al arrancar (no tiene relaciones con el resto).
 -- ---------------------------------------------------------------------

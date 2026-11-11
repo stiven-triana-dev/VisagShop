@@ -11,7 +11,7 @@
 ## Limitaciones comerciales
 
 - El checkout **no procesa pagos**; solo recoge una modalidad para coordinar con la tienda (contraentrega, Nequi o tarjeta a través de un eventual enlace de pago seguro).
-- No existe un registro persistente de pedidos enviados. El usuario debe completar el envío del mensaje de WhatsApp.
+- Los pedidos quedan registrados en la base con número y estado; la confirmación de pago y envío sigue haciéndose por WhatsApp.
 - La ficha visual con fotografías se descarga o comparte aparte; un enlace normal de WhatsApp no puede adjuntar imágenes automáticamente.
 - La recuperación de contraseñas mediante correo no está configurada.
 - En el catálogo de semilla hay productos sin precio visible y sin tallas.

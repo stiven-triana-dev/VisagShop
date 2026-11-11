@@ -75,7 +75,7 @@
     if (location.protocol !== 'https:' || ['localhost','127.0.0.1','0.0.0.0'].includes(location.hostname)) return '';
     return new URL(src, location.origin).href;
   }
-  function orderMessage(lines, totals) {
+  function orderMessage(lines, totals, saved) {
     const fd=data();
     const entries=lines.map(({p,item},i) => {
       const photo=photoURL(p.imagen);
@@ -96,7 +96,7 @@
     const billing=field(fd,'facturacion')==='diferente' ?
       `Dirección de facturación: ${field(fd,'fact_direccion')}, ${field(fd,'fact_ciudad')}, ${field(fd,'fact_departamento')}` :
       'Dirección de facturación: misma dirección de entrega';
-    return `*SOLICITUD DE PEDIDO · VISAGSHOP*\n\n*PRENDAS*\n${entries.join('\n\n')}\n\n*DATOS DE ENTREGA*\n${contact.join('\n')}\n\n*FORMA DE PAGO*\n${paymentLabel()}\n${billing}\n\n*RESUMEN*\nProductos: ${formatMoney(totals.subtotal)}${totals.unpriced?' (faltan precios por confirmar)':''}\nEnvío: ${payment()==='contraentrega'?'Por confirmar según destino':'Gratis, sujeto a cobertura y condiciones'}\nTotal estimado: ${totals.unpriced?'Por confirmar':formatMoney(totals.subtotal)}${payment()==='contraentrega'?' + envío':''}\n\nHola, quiero confirmar disponibilidad, costo final y pasos para completar este pedido. Gracias.`;
+    return `*SOLICITUD DE PEDIDO · VISAGSHOP*${saved ? `\n*Pedido N.º ${saved.code}*` : ''}\n\n*PRENDAS*\n${entries.join('\n\n')}\n\n*DATOS DE ENTREGA*\n${contact.join('\n')}\n\n*FORMA DE PAGO*\n${paymentLabel()}\n${billing}\n\n*RESUMEN*\nProductos: ${formatMoney(totals.subtotal)}${totals.unpriced?' (faltan precios por confirmar)':''}\nEnvío: ${payment()==='contraentrega'?'Por confirmar según destino':'Gratis, sujeto a cobertura y condiciones'}\nTotal estimado: ${totals.unpriced?'Por confirmar':formatMoney(totals.subtotal)}${payment()==='contraentrega'?' + envío':''}\n\nHola, quiero confirmar disponibilidad, costo final y pasos para completar este pedido. Gracias.`;
   }
 
   itemsEl.addEventListener('click', e => {
@@ -141,15 +141,63 @@
     try {await navigator.clipboard.writeText(messageEl.value);notify('Pedido copiado. Pégalo en el chat de VisagShop.');}
     catch {messageEl.focus();messageEl.select();notify('Selecciona y copia el texto para pegarlo en WhatsApp.');}
   });
-  form.addEventListener('submit', e=>{
+  // Guarda el pedido en la tienda (POST /api/orders). Los precios los calcula el servidor.
+  const errors=window.VisagValidate?.attach(form,{});
+  async function saveOrder() {
+    const body={};
+    for (const [key,value] of data().entries()) if (typeof value==='string') body[key]=value;
+    body.items=getLines().map(({item}) => ({id:item.id, talla:item.talla, cant:item.cant}));
+    const response=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(body)});
+    const result=await response.json().catch(()=>({}));
+    if (response.status===400) {const error=new Error(result.error||'Revisa los datos del pedido.');error.fields=result.errors;error.invalid=true;throw error;}
+    if (!response.ok) throw new Error(result.error||'No pudimos registrar el pedido.');
+    return result;
+  }
+  function showSaved(saved, waUrl) {
+    itemsEl.innerHTML = `<div class="checkout-empty order-saved" role="status">
+      <div class="checkout-empty-icon">✓</div>
+      <h3>Pedido ${escapeHTML(saved.code)} registrado.</h3>
+      <p>Lo recibimos en la tienda. Envíanos el mensaje por WhatsApp para confirmar disponibilidad, envío y pago.${saved.mine ? ' También lo verás en <a href="/profile">Mi perfil</a>.' : ''}</p>
+      ${waUrl ? `<a href="${escapeHTML(waUrl)}" target="_blank" rel="noopener">ABRIR WHATSAPP ↗</a>` : ''}
+      <a href="/#catalogo">SEGUIR COMPRANDO ↗</a>
+    </div>`;
+    summaryEl.innerHTML = '';
+    countEl.textContent='(0)';
+    confirmBtn.disabled=true;sheetBtn.disabled=true;
+    itemsEl.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  form.addEventListener('submit', async e=>{
     e.preventDefault();
-    if (!getLines().length){notify('Primero añade prendas a tu carrito.');return;}
+    const lines=getLines();
+    if (!lines.length){notify('Primero añade prendas a tu carrito.');return;}
     if (!form.reportValidity())return;
-    const text=orderMessage(getLines(),calc(getLines()));
-    if(hasDirectWhatsApp()){
-      const url=checkoutWhatsAppURL(text);
-      const popup=window.open(url,'_blank','noopener,noreferrer');
-      if(!popup){window.location.href=url;}
+    // La ventana de WhatsApp se abre ya (en el clic) para que el navegador no la bloquee.
+    const direct=hasDirectWhatsApp();
+    const popup=direct?window.open('about:blank','_blank'):null;
+    if(popup)popup.opener=null;
+    const label=confirmBtn.innerHTML;
+    confirmBtn.disabled=true;confirmBtn.textContent='REGISTRANDO PEDIDO…';
+    let saved=null;
+    try {
+      saved=await saveOrder();
+    } catch (error) {
+      if (error.invalid) {
+        popup?.close();
+        confirmBtn.disabled=false;confirmBtn.innerHTML=label;
+        if(!errors?.showServerErrors(error.fields))notify(error.message);
+        return;
+      }
+      // Si la tienda no responde, el pedido igual puede enviarse por WhatsApp.
+      notify('No pudimos registrar el pedido en la tienda, pero puedes enviarlo por WhatsApp.');
+    }
+    confirmBtn.disabled=false;confirmBtn.innerHTML=label;
+    const text=orderMessage(lines,calc(lines),saved);
+    const url=direct?checkoutWhatsAppURL(text):'';
+    if(saved){
+      saveCart([]);updateBadge();showSaved(saved,url);
+    }
+    if(direct){
+      if(popup)popup.location.href=url;else window.location.href=url;
       return;
     }
     modalShow(text);

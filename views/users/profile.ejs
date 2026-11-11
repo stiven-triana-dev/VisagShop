@@ -8,7 +8,7 @@
   </section>
   <div class="profile-grid">
     <section class="profile-card" aria-labelledby="profile-personal-title">
-      <div class="profile-card-top"><span class="profile-number">01 / DATOS PERSONALES</span><h2 id="profile-personal-title">Tus datos.</h2><p>Usaremos esta información para identificar tu cuenta. Tu carrito sigue siendo independiente.</p></div>
+      <div class="profile-card-top"><span class="profile-number">01 / DATOS PERSONALES</span><h2 id="profile-personal-title">Tus datos</h2><p>Usaremos esta información para identificar tu cuenta. Tu carrito sigue siendo independiente.</p></div>
       <form id="profile-form" autocomplete="on" novalidate>
         <div class="profile-field-grid">
           <label>Nombre <input name="firstName" type="text" minlength="2" maxlength="75" required autocomplete="given-name" value="<%= customer.firstName %>"></label>
@@ -22,7 +22,7 @@
     </section>
     <div class="profile-side">
       <section class="profile-card" aria-labelledby="profile-password-title">
-        <div class="profile-card-top"><span class="profile-number">02 / PRIVACIDAD</span><h2 id="profile-password-title">Seguridad.</h2><p>Al cambiar tu contraseña, cerraremos las sesiones de todos tus dispositivos.</p></div>
+        <div class="profile-card-top"><span class="profile-number">02 / PRIVACIDAD</span><h2 id="profile-password-title">Seguridad</h2><p>Al cambiar tu contraseña, cerraremos las sesiones de todos tus dispositivos.</p></div>
         <form id="password-form" autocomplete="on" novalidate>
           <label>Contraseña actual <input type="password" name="currentPassword" autocomplete="current-password" required maxlength="128"></label>
           <label>Nueva contraseña <input type="password" name="newPassword" autocomplete="new-password" required minlength="8" maxlength="128"><span class="field-hint">Mínimo 8 caracteres con mayúscula, minúscula, número y un símbolo.</span></label>
@@ -31,8 +31,24 @@
           <button class="btn btn-outline-dark" type="submit">ACTUALIZAR CONTRASEÑA <span aria-hidden="true">↗</span></button>
         </form>
       </section>
-      <section class="profile-card profile-extras"><span class="profile-number">03 / EXPLORAR</span><h2>Tu próximo look.</h2><p>Descubre el catálogo completo y confirma tu compra desde el carrito.</p><div class="profile-shortcuts"><a href="/#catalogo">VER CATÁLOGO <span>↗</span></a><a href="/productCart">IR A MI CARRITO <span>↗</span></a><button type="button" id="cerrar-sesion-perfil">CERRAR SESIÓN <span>↗</span></button></div></section>
+      <section class="profile-card profile-extras"><span class="profile-number">03 / EXPLORAR</span><h2>Tu próximo look</h2><p>Descubre el catálogo completo y confirma tu compra desde el carrito.</p><div class="profile-shortcuts"><a href="/#catalogo">VER CATÁLOGO <span>↗</span></a><a href="/productCart">IR A MI CARRITO <span>↗</span></a><button type="button" id="cerrar-sesion-perfil">CERRAR SESIÓN <span>↗</span></button></div></section>
     </div>
   </div>
+  <section class="profile-card profile-orders" aria-labelledby="profile-orders-title">
+    <div class="profile-card-top"><span class="profile-number">04 / MIS PEDIDOS</span><h2 id="profile-orders-title">Tus pedidos</h2><p>Los pedidos que confirmas en el carrito con tu sesión iniciada aparecen aquí con su estado.</p></div>
+    <% if (!orders.length) { %>
+      <p class="profile-orders-empty">Aún no tienes pedidos. Cuando confirmes uno desde el carrito, lo verás aquí. <a href="/#catalogo">Ver catálogo ↗</a></p>
+    <% } else { %>
+      <ul class="profile-orders-list">
+        <% orders.forEach(function(o){ %>
+        <li>
+          <div class="profile-orders-pics"><% o.items.slice(0,3).forEach(function(i){ %><img src="<%= i.image || '/img/p049.jpg' %>" alt="" width="44" height="52" loading="lazy"><% }) %></div>
+          <div class="profile-orders-info"><strong>Pedido <%= o.code %></strong><span><%= date(o.createdAt) %> · <%= o.itemCount %> prenda<%= o.itemCount===1?'':'s' %> · <%= money(o.subtotal) %><%= o.hasUnpriced ? ' + por confirmar' : '' %></span></div>
+          <span class="order-status order-status-<%= o.status %>"><%= o.statusLabel %></span>
+        </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
 </main>
 <%- include('../partials/footer') %>

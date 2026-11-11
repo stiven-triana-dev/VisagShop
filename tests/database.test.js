@@ -99,6 +99,26 @@ test('CRUD de productos y usuarios con Sequelize', {skip}, async () => {
   await users.changePassword(user.id, 'Clave-segura-1', 'Clave-segura-2', 'Clave-segura-2');
   assert.equal(await users.authenticate('ana@example.test', 'Clave-segura-1'), null);
   assert.equal((await users.authenticate('ana@example.test', 'Clave-segura-2')).firstName, 'Ana M.');
+
+  // Pedidos
+  const orders = require('../database/repositories/orders');
+  const form = {nombre: 'Ana', apellidos: 'Prueba', celular: '3001234567', departamento: 'Santander', ciudad: 'Lebrija', direccion: 'Calle 1 #2-3', 'medio-pago': 'contraentrega'};
+  const order = await orders.create({...form, items: [{id: 'p042', talla: '28-8', cant: 2}, {id: again.id, talla: '', cant: 1}]}, user.id);
+  assert.equal(order.code, 'VS-1001');
+  assert.equal(order.subtotal, 260000);
+  assert.equal(order.hasUnpriced, true, 'la gorra nueva no tiene precio');
+  assert.equal((await orders.create({...form, items: [{id: 'p001', talla: 'Ajustable', cant: 1}]})).code, 'VS-1002');
+  assert.deepEqual((await orders.listByUser(user.id)).map(o => o.code), ['VS-1001']);
+  const listed = await orders.list({});
+  assert.deepEqual([listed.all, listed.counts.nuevo, listed.orders[0].code], [2, 2, 'VS-1002']);
+  assert.equal((await orders.updateStatus(1001, 'enviado', 'Guía 123')).statusLabel, 'Enviado');
+  assert.equal((await orders.list({status: 'enviado'})).total, 1);
+  // Si se borra el producto del catálogo, el pedido conserva su nombre y precio.
+  await products.remove(again.id);
+  const kept = await orders.find(1001);
+  assert.equal(kept.items[1].productId, null);
+  assert.equal(kept.items[1].name, 'Otra gorra');
+  assert.equal(kept.items[0].lineTotal, 260000);
 });
 
 test('migra los datos del esquema anterior (tablas visag_*) sin perder nada', {skip}, async () => {
