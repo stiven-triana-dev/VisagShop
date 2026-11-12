@@ -24,6 +24,14 @@ const assetVersion=(()=>{
  for(const dir of ['css','js'])for(const name of fs.readdirSync(path.join(__dirname,'public',dir)).sort())hash.update(name).update(fs.readFileSync(path.join(__dirname,'public',dir,name)));
  return hash.digest('hex').slice(0,10);
 })();
+// Número de WhatsApp de la tienda (variable WHATSAPP_NUMBER). Acepta "+57 300 123 4567",
+// "300-123-4567" o "573001234567": se quitan los símbolos y a un celular colombiano de
+// 10 dígitos se le antepone el 57. Si no queda un número válido, la tienda ofrece copiar el pedido.
+function whatsappNumber(value){
+ let digits=String(value||'').replace(/\D/g,'');
+ if(/^3\d{9}$/.test(digits))digits='57'+digits;
+ return /^\d{8,15}$/.test(digits)?digits:'';
+}
 const DESCRIPTION='Ropa urbana al detal y por mayor desde Lebrija, Santander. Jeans, gorras, tenis y más; pide por WhatsApp.';
 app.set('trust proxy',1);
 app.disable('x-powered-by');
@@ -31,7 +39,7 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 app.use((req,res,next)=>{
  res.locals.isHome=false;res.locals.isCheckout=false;res.locals.isAdmin=false;res.locals.pageScript='';res.locals.pageTitle='VisagShop';
- res.locals.whatsappNumber=/^\d{8,15}$/.test(process.env.WHATSAPP_NUMBER||'')?process.env.WHATSAPP_NUMBER:'';
+ res.locals.whatsappNumber=whatsappNumber(process.env.WHATSAPP_NUMBER);
  // Datos para la vista previa al compartir un enlace (WhatsApp, Facebook...). Las páginas pueden cambiarlos.
  res.locals.assetVersion=assetVersion;
  res.locals.baseUrl=`${req.protocol}://${req.get('host')}`;
