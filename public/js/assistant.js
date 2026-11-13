@@ -12,8 +12,8 @@
   ?['¿Qué pedidos están pendientes?','¿Cómo van las ventas este mes?','¿Qué productos están incompletos?']
   :['¿Tienen gorras por menos de 60 mil?','¿Qué categorías manejan?','¿Cómo va mi pedido?'];
  const greeting=admin
-  ?'Hola 👋 Soy VisagAssist. Puedo consultar pedidos pendientes, ventas y productos incompletos.'
-  :'Hola 👋 Soy VisagAssist, el asistente de VisagShop. Pregúntame por productos, tallas, precios o tus pedidos.';
+  ?'Soy VisagAssist. Consulto pedidos pendientes, ventas y productos incompletos con los datos reales del panel.'
+  :'Soy VisagAssist. Te ayudo a encontrar prendas por talla, precio o estilo, y a revisar tus pedidos.';
 
  let state={conversation:null,messages:[]};
  try{const saved=JSON.parse(sessionStorage.getItem(storageKey)||'null');if(saved&&Array.isArray(saved.messages))state=saved;}catch{}
@@ -67,33 +67,52 @@
   return box;
  }
 
+ const LOGO='/img/logo-visagshop-128.png';
+ const logo=(cls,size)=>el('img',{class:cls,src:LOGO,alt:'',width:String(size),height:String(size),decoding:'async'});
  const log=el('div',{class:'va-log',role:'log','aria-live':'polite','aria-label':'Conversación con el asistente'});
  const status=el('p',{class:'va-status',role:'status'});
- const input=el('textarea',{class:'va-input',rows:'1',maxlength:'500',placeholder:'Escribe tu pregunta…','aria-label':'Tu pregunta'});
- const send=el('button',{class:'va-send',type:'submit','aria-label':'Enviar'},'➤');
+ const input=el('textarea',{class:'va-input',rows:'1',maxlength:'500',placeholder:admin?'Pregunta por pedidos o ventas…':'Busca prendas, tallas o tu pedido…','aria-label':'Tu pregunta'});
+ const send=el('button',{class:'va-send',type:'submit','aria-label':'Enviar pregunta'},el('span',{'aria-hidden':'true'},'→'));
  const form=el('form',{class:'va-form'},input,send);
- const chips=el('div',{class:'va-chips'},...suggestions.map(text=>el('button',{type:'button',class:'va-chip',onclick:()=>ask(text)},text)));
+ const chips=el('div',{class:'va-chips','aria-label':'Preguntas sugeridas'},
+  ...suggestions.map(text=>el('button',{type:'button',class:'va-chip',onclick:()=>ask(text)},el('span',{},text),el('b',{'aria-hidden':'true'},'↗'))));
  const reset=el('button',{type:'button',class:'va-icon',title:'Nueva conversación','aria-label':'Nueva conversación',onclick:restart},'↺');
  const close=el('button',{type:'button',class:'va-icon',title:'Cerrar','aria-label':'Cerrar asistente',onclick:()=>toggle(false)},'✕');
  const panel=el('section',{class:'va-panel',id:'va-panel',role:'dialog','aria-label':'Asistente VisagAssist',hidden:''},
-  el('header',{class:'va-head'},el('div',{},el('strong',{},'VisagAssist'),el('small',{},admin?'Asistente del panel':'Asistente de la tienda · IA')),el('div',{},reset,close)),
+  el('header',{class:'va-head'},
+   el('span',{class:'va-head-mark'},logo('va-head-logo',44)),
+   el('div',{class:'va-head-title'},
+    el('strong',{},'Visag',el('em',{},'Assist')),
+    el('small',{},el('i',{class:'va-dot','aria-hidden':'true'}),admin?'Asistente del panel · IA':'Asistente de la tienda · IA')),
+   el('div',{class:'va-head-actions'},reset,close)),
   log,chips,status,form,
-  el('p',{class:'va-note'},'Respuestas generadas con IA: pueden tener errores. Para pagos y envíos, escríbenos por WhatsApp.'));
- const bubble=el('button',{type:'button',class:'va-bubble','aria-controls':'va-panel','aria-expanded':'false',onclick:()=>toggle()},
-  el('span',{class:'va-bubble-icon','aria-hidden':'true'},'✦'),el('span',{class:'va-bubble-text'},'Pregúntale al asistente'));
+  el('p',{class:'va-note'},'Respuestas generadas con IA: pueden tener errores. Pagos y envíos se confirman por WhatsApp.'));
+ const bubble=el('button',{type:'button',class:'va-bubble','aria-controls':'va-panel','aria-expanded':'false','aria-label':'Abrir el asistente de VisagShop',onclick:()=>toggle()},
+  el('span',{class:'va-bubble-mark'},logo('va-bubble-logo',40)),
+  el('span',{class:'va-bubble-text'},el('small',{},'Asistente IA'),el('strong',{},admin?'Pregúntale al panel':'Pregúntale a Visag')),
+  el('span',{class:'va-bubble-close','aria-hidden':'true'},'✕'));
  document.body.append(panel,bubble);
 
+ function welcome(){
+  return el('div',{class:'va-welcome'},
+   el('span',{class:'va-kicker'},admin?'Panel / Asistente':'VisagShop / Asistente'),
+   el('h2',{},'Pregunta a tu ',el('em',{},'manera.')),
+   el('p',{},greeting));
+ }
  function bubbleOf(author,text){
   const node=el('div',{class:`va-msg va-${author}`});
   if(author==='bot')node.append(formatted(text));else node.textContent=text;
-  return node;
+  return author==='bot'?el('div',{class:'va-row'},logo('va-avatar',26),node):node;
  }
  function render(){
-  log.replaceChildren(bubbleOf('bot',greeting),...state.messages.map(m=>bubbleOf(m.author,m.text)));
+  log.replaceChildren(...(state.messages.length?state.messages.map(m=>bubbleOf(m.author,m.text)):[welcome()]));
   chips.hidden=state.messages.length>0;
   log.scrollTop=log.scrollHeight;
  }
- function add(author,text){state.messages.push({author,text});save();log.append(bubbleOf(author,text));chips.hidden=true;log.scrollTop=log.scrollHeight;}
+ function add(author,text){
+  if(!state.messages.length)log.replaceChildren();
+  state.messages.push({author,text});save();log.append(bubbleOf(author,text));chips.hidden=true;log.scrollTop=log.scrollHeight;
+ }
  function restart(){state={conversation:null,messages:[]};save();status.textContent='';render();input.focus();}
 
  let woke=false;
@@ -114,7 +133,7 @@
   if(question.length>500){status.textContent='Máximo 500 caracteres.';return;}
   busy=true;send.disabled=true;input.value='';autosize();
   add('user',question);
-  const typing=el('div',{class:'va-msg va-bot va-typing','aria-label':'El asistente está escribiendo'},el('span'),el('span'),el('span'));
+  const typing=el('div',{class:'va-row'},logo('va-avatar',26),el('div',{class:'va-msg va-bot va-typing','aria-label':'El asistente está escribiendo'},el('span'),el('span'),el('span')));
   log.append(typing);log.scrollTop=log.scrollHeight;
   status.textContent='';
   const slow=setTimeout(()=>{status.textContent='Despertando al asistente… la primera respuesta puede tardar hasta un minuto.';},6000);
