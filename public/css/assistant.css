@@ -1,41 +1,96 @@
-/* Burbuja de chat de VisagAssist (public/js/assistant.js) */
-.va-bubble{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;align-items:center;gap:10px;padding:13px 18px 13px 14px;border:0;border-radius:999px;background:#111317;color:#fff;font:800 12px/1 var(--body);letter-spacing:.04em;box-shadow:0 10px 30px #0004;transition:transform .2s,background .2s}
-.va-bubble:hover{transform:translateY(-2px);background:#262a31}
-.va-bubble-icon{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--blue);color:var(--ink);font-size:15px}
-.va-bubble.va-open .va-bubble-text{display:none}
-.va-panel{position:fixed;right:20px;bottom:84px;z-index:91;display:flex;flex-direction:column;width:min(390px,calc(100vw - 32px));height:min(600px,calc(100dvh - 120px));background:var(--paper,#f6f6f2);color:var(--ink);border:1px solid #0002;border-radius:16px;box-shadow:0 18px 50px #0005;overflow:hidden}
-.va-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 14px 14px 18px;background:#111317;color:#fff}
-.va-head strong{display:block;font:800 18px/1.1 var(--heading)}
-.va-head small{font-size:11px;color:#b7bac0}
-.va-icon{border:0;background:transparent;color:#fff;width:34px;height:34px;border-radius:50%;font-size:16px}
-.va-icon:hover{background:#ffffff1f}
-.va-log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-.va-msg{max-width:88%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+/* VisagAssist — burbuja y panel de chat (public/js/assistant.js).
+   Mismo lenguaje que la tienda: papel crema, tinta casi negra, acento lima, esquinas rectas,
+   etiquetas en mayúscula espaciada y la cursiva Instrument Serif. El aro del logo
+   (amarillo → naranja → magenta → morado) es el único color vivo. */
+:root{
+ --va-ink:#1e1e1b;--va-paper:#f8f7f3;--va-white:#fff;--va-muted:#74746e;--va-line:#e5e4de;
+ --va-lime:#d5ed59;--va-olive:#575f38;--va-serif:'Instrument Serif',Georgia,serif;
+ --va-ring:conic-gradient(from 200deg,#ffd23f,#ff8a1f,#ff2f7d,#a33bff,#3fa9ff,#ffd23f);
+}
+
+/* ---------- Botón flotante ---------- */
+.va-bubble{position:fixed;right:22px;bottom:22px;z-index:90;display:flex;align-items:center;gap:12px;padding:7px 18px 7px 7px;border:0;border-radius:999px;background:var(--va-ink);color:var(--va-white);font-family:var(--body);box-shadow:0 14px 34px rgba(20,20,16,.28);transition:transform .22s ease,box-shadow .22s ease}
+.va-bubble:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(20,20,16,.34)}
+.va-bubble-mark{position:relative;display:grid;place-items:center;width:46px;height:46px;flex:none;border-radius:50%;background:var(--va-ring);padding:2px}
+.va-bubble-mark::after{content:'';position:absolute;right:1px;bottom:1px;width:11px;height:11px;border-radius:50%;background:var(--va-lime);border:2px solid var(--va-ink)}
+.va-bubble-logo{width:42px;height:42px;border-radius:50%;background:#080b11;object-fit:cover}
+.va-bubble-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1;text-align:left}
+.va-bubble-text small{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--va-lime)}
+.va-bubble-text strong{font:600 15px/1.25 var(--heading);letter-spacing:-.03em;margin-top:3px}
+.va-bubble-close{display:none;font-size:15px}
+.va-bubble.va-open{padding:7px}
+.va-bubble.va-open .va-bubble-text,.va-bubble.va-open .va-bubble-mark{display:none}
+.va-bubble.va-open .va-bubble-close{display:grid;place-items:center;width:46px;height:46px}
+
+/* ---------- Panel ---------- */
+.va-panel{position:fixed;right:22px;bottom:92px;z-index:91;display:flex;flex-direction:column;width:min(400px,calc(100vw - 32px));height:min(620px,calc(100dvh - 124px));background:var(--va-paper);color:var(--va-ink);border:1px solid var(--va-line);box-shadow:0 24px 60px rgba(20,20,16,.22);overflow:hidden;animation:va-in .22s ease}
+.va-panel::before{content:'';height:3px;flex:none;background:linear-gradient(90deg,#ffd23f,#ff8a1f,#ff2f7d,#a33bff)}
+@keyframes va-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.va-head{display:flex;align-items:center;gap:12px;padding:14px 12px 14px 16px;background:var(--va-white);border-bottom:1px solid var(--va-line)}
+.va-head-mark{display:grid;place-items:center;width:46px;height:46px;flex:none;border-radius:50%;background:var(--va-ring);padding:2px}
+.va-head-logo{width:42px;height:42px;border-radius:50%;background:#080b11;object-fit:cover}
+.va-head-title{flex:1;min-width:0}
+.va-head-title strong{display:block;font:700 21px/1 var(--heading);letter-spacing:-.06em}
+.va-head-title strong em{font:400 1.12em/1 var(--va-serif);letter-spacing:-.02em;color:var(--va-olive);margin-left:1px}
+.va-head-title small{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--va-muted)}
+.va-dot{width:7px;height:7px;border-radius:50%;background:#7fb83a;box-shadow:0 0 0 3px #7fb83a2e}
+.va-head-actions{display:flex;gap:2px}
+.va-icon{display:grid;place-items:center;width:36px;height:36px;border:0;background:transparent;color:var(--va-ink);font-size:16px;transition:background .2s}
+.va-icon:hover{background:#efeee8}
+
+/* ---------- Conversación ---------- */
+.va-log{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#cfcdc4 transparent}
+.va-welcome{padding:10px 4px 4px}
+.va-kicker{display:block;font-size:9.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--va-muted)}
+.va-welcome h2{font:700 38px/1 var(--heading);letter-spacing:-.065em;margin:14px 0;color:var(--va-ink)}
+.va-welcome h2 em{font:400 1.08em/1 var(--va-serif);letter-spacing:-.03em;color:var(--va-olive)}
+.va-welcome p{margin:0;color:var(--va-muted);font-size:13.5px;line-height:1.6;max-width:320px}
+
+.va-row{display:flex;align-items:flex-end;gap:8px;max-width:94%}
+.va-avatar{width:26px;height:26px;flex:none;border-radius:50%;background:#080b11;box-shadow:0 0 0 1.5px #ff2f7d66}
+.va-msg{padding:11px 14px;font-size:13.5px;line-height:1.55;overflow-wrap:anywhere}
 .va-msg p{margin:0 0 6px}.va-msg p:last-child{margin:0}
-.va-msg ul{margin:4px 0 6px;padding-left:18px}.va-msg li{margin-bottom:3px}
-.va-msg code{font:700 12.5px/1 ui-monospace,Consolas,monospace;background:#0000000d;padding:2px 5px;border-radius:5px}
-.va-msg a{color:var(--blue-deep);font-weight:700;text-decoration:underline;text-underline-offset:2px}
-.va-bot{align-self:flex-start;background:#fff;border:1px solid var(--line,#e1e1df);border-bottom-left-radius:4px}
-.va-user{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:4px;white-space:pre-wrap}
-.va-typing{display:flex;gap:5px;padding:14px}
-.va-typing span{width:7px;height:7px;border-radius:50%;background:var(--muted,#666);animation:va-dot 1s infinite ease-in-out}
+.va-msg ul{margin:6px 0 8px;padding:0;list-style:none;display:grid;gap:5px}
+.va-msg li{position:relative;padding-left:14px}
+.va-msg li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--va-lime);outline:1px solid #b9cb45}
+.va-msg strong{font-weight:700}
+.va-msg code{font:600 12px/1 ui-monospace,Consolas,monospace;background:#f1f0ea;border:1px solid var(--va-line);padding:2px 5px}
+.va-msg a{color:var(--va-ink);font-weight:700;text-decoration:underline;text-decoration-color:#b9cb45;text-decoration-thickness:2px;text-underline-offset:3px}
+.va-msg a:hover{background:var(--va-lime);text-decoration-color:transparent}
+.va-bot{background:var(--va-white);border:1px solid var(--va-line)}
+.va-user{align-self:flex-end;max-width:84%;background:var(--va-ink);color:#f4f3ee;white-space:pre-wrap}
+.va-typing{display:flex;gap:5px;padding:15px 14px}
+.va-typing span{width:6px;height:6px;border-radius:50%;background:var(--va-muted);animation:va-dot 1s infinite ease-in-out}
 .va-typing span:nth-child(2){animation-delay:.15s}.va-typing span:nth-child(3){animation-delay:.3s}
 @keyframes va-dot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
-.va-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
-.va-chip{border:1px solid var(--ink);background:transparent;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700;color:var(--ink)}
-.va-chip:hover{background:var(--ink);color:#fff}
-.va-status{margin:0;padding:0 16px;font-size:12px;color:var(--error,#bb3434)}
+
+/* ---------- Sugerencias ---------- */
+.va-chips{display:grid;margin:0 16px 12px;border-top:1px solid var(--va-line)}
+.va-chip{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 2px;border:0;border-bottom:1px solid var(--va-line);background:transparent;color:var(--va-ink);font-size:13px;font-weight:600;text-align:left;transition:padding .2s,background .2s}
+.va-chip b{font-size:15px;font-weight:400;color:var(--va-muted);transition:transform .2s,color .2s}
+.va-chip:hover{padding-left:10px;padding-right:10px;background:var(--va-white)}
+.va-chip:hover b{color:var(--va-ink);transform:translate(2px,-2px)}
+
+/* ---------- Escribir ---------- */
+.va-status{margin:0;padding:0 16px 8px;font-size:12px;color:#ad3030}
 .va-status:empty{display:none}
-.va-form{display:flex;align-items:flex-end;gap:8px;padding:10px 12px;border-top:1px solid var(--line,#e1e1df);background:#fff}
-.va-input{flex:1;resize:none;overflow-y:hidden;font-family:var(--body);border:1px solid var(--line,#e1e1df);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4;max-height:120px;background:#fff;color:var(--ink)}
-.va-input:focus{outline:2px solid var(--blue-deep);outline-offset:0}
-.va-send{flex:none;width:42px;height:42px;border:0;border-radius:50%;background:var(--blue);color:var(--ink);font-size:16px}
-.va-note{margin:0;padding:6px 14px 10px;background:#fff;font-size:10.5px;line-height:1.4;color:var(--muted,#666)}
+.va-form{display:flex;align-items:stretch;margin:0 16px;border:1px solid #d9d8d0;background:var(--va-white);transition:border-color .2s}
+.va-form:focus-within{border-color:var(--va-ink)}
+.va-input{flex:1;resize:none;overflow-y:hidden;border:0;outline:0;padding:13px 14px;font:400 13.5px/1.45 var(--body);max-height:120px;background:transparent;color:var(--va-ink)}
+.va-input::placeholder{color:#9a9a92}
+.va-send{flex:none;width:48px;border:0;background:var(--va-lime);color:var(--va-ink);font-size:19px;font-weight:600;transition:background .2s}
+.va-send:hover{background:#c8e23c}
+.va-send:disabled{background:#e9eccd}
+.va-note{margin:0;padding:9px 16px 13px;font-size:10.5px;line-height:1.45;color:var(--va-muted)}
+
+/* ---------- Celular: pantalla completa ---------- */
 @media (max-width:560px){
- .va-bubble{right:12px;bottom:12px;padding:12px}
+ .va-bubble{right:14px;bottom:14px;padding:6px}
  .va-bubble-text{display:none}
- .va-panel{right:0;left:0;bottom:0;width:100%;height:100dvh;border-radius:0;border:0}
+ .va-panel{inset:0;width:100%;height:100dvh;border:0;animation:none}
  .va-panel:not([hidden])~.va-bubble{display:none}
+ .va-welcome h2{font-size:42px}
 }
-@media (prefers-reduced-motion:reduce){.va-typing span{animation:none}.va-log{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.va-typing span,.va-panel{animation:none}.va-log{scroll-behavior:auto}.va-bubble,.va-chip{transition:none}}
 @media print{.va-bubble,.va-panel{display:none!important}}
