@@ -11,6 +11,7 @@ const session=require('./middleware/activeSession');
 const database=require('./database/setup');
 const wrap=require('./middleware/asyncHandler');
 const store=require('./storage');
+const assistant=require('./services/visagAssist');
 const {notFound}=require('./controllers/pageController');
 const PORT=Number(process.env.PORT)||3000;
 const cloud=Boolean(process.env.DATABASE_URL);
@@ -40,6 +41,7 @@ app.set('view engine','ejs');
 app.use((req,res,next)=>{
  res.locals.isHome=false;res.locals.isCheckout=false;res.locals.isAdmin=false;res.locals.pageScript='';res.locals.pageTitle='VisagShop';
  res.locals.whatsappNumber=whatsappNumber(process.env.WHATSAPP_NUMBER);
+ res.locals.assistantEnabled=assistant.enabled();
  // Datos para la vista previa al compartir un enlace (WhatsApp, Facebook...). Las páginas pueden cambiarlos.
  res.locals.assetVersion=assetVersion;
  res.locals.baseUrl=`${req.protocol}://${req.get('host')}`;
@@ -104,6 +106,7 @@ app.get('/api/products/:id',wrap(async(req,res)=>{
 app.get('/data/products.json',wrap(async(req,res)=>res.set('Cache-Control','no-store').json(await products.all())));
 app.use('/api/account',accounts);
 app.use('/api/orders',require('./routes/orders'));
+app.use('/api/asistente',require('./routes/assistant'));
 app.use('/admin',admin);
 app.use('/products',productRoutes);
 app.use('/',pages);

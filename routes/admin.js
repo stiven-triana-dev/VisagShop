@@ -27,4 +27,8 @@ router.get('/orders/export.csv',wrap(exportsCtl.ordersCsv));
 router.get('/backup.json',wrap(exportsCtl.backupJson));
 router.get('/orders/:number(\\d+)',wrap(orders.detail));
 router.put('/api/orders/:number(\\d+)',sameOrigin,validate(orderRules.status),wrap(orders.updateStatus));
+// Asistente con IA: aquí responde con las herramientas de administrador (pedidos pendientes, ventas...)
+const assistant=require('../controllers/assistantController');
+router.get('/api/asistente/estado',wrap(assistant.wake));
+router.post('/api/asistente/chat',sameOrigin,wrap(assistant.chat({admin:true})));
 module.exports=router;

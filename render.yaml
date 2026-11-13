@@ -18,3 +18,7 @@ services:
         sync: false
       - key: WHATSAPP_NUMBER
         sync: false
+      - key: VISAGASSIST_URL
+        sync: false
+      - key: VISAGASSIST_SECRETO
+        sync: false

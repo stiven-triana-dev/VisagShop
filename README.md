@@ -51,6 +51,7 @@ El proyecto se desarrolló como práctica de arquitectura web con **Node.js, Exp
 | **Clientes** | Registro, acceso, cierre de sesión, “recordarme”, perfil y cambio de contraseña. |
 | **Administración** | Alta, consulta, edición y eliminación de productos con validación de imágenes. |
 | **Persistencia** | PostgreSQL con Sequelize (tablas relacionadas); JSON local como alternativa de desarrollo. |
+| **Asistente con IA** | Burbuja de chat de [VisagAssist](https://github.com/stiven-triana-dev/VisagAssist) (servicio en Python): responde sobre productos, tallas y precios; al cliente con sesión, sobre sus pedidos; y en el panel, sobre pedidos pendientes y ventas. El servidor de VisagShop firma quién pregunta (JWT HS256), así nadie puede ver pedidos ajenos. |
 
 El catálogo inicial incluye **108 referencias y 108 fotografías**, todas con precio. Los tenis aún no tienen tallas cargadas; se confirman con la tienda.
 
@@ -172,6 +173,7 @@ La URL de comprobación del servicio es `/health`.
 | `/admin/orders` | Pedidos recibidos, detalle y cambio de estado. |
 | `POST /api/orders` | Registra un pedido del carrito (precios calculados en el servidor). |
 | `/api/products` | Consulta JSON del catálogo. |
+| `POST /api/asistente/chat` | Pregunta al asistente (invitado o cliente); en el panel, `POST /admin/api/asistente/chat`. |
 | `/health` | Comprobación básica del servicio. |
 
 ## Pruebas y consideraciones
