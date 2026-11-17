@@ -18,6 +18,9 @@
   const hasDirectWhatsApp = () => /^\d{8,15}$/.test(WHATSAPP_NUMBER.replace(/\D/g, ''));
   const formatMoney = amount => Number(amount).toLocaleString('es-CO', {style:'currency', currency:'COP', maximumFractionDigits:0});
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+  // Fotos del catálogo (/img/pNNN.jpg): versión WebP liviana en /img/w/ (360 px para tarjetas, 540 px completa).
+  const CARD_SIZES = '(max-width:680px) 50vw, (max-width:900px) 33vw, 320px';
+  const photoSrcset = (src, sizes = CARD_SIZES) => { const m = /^\/img\/(p\d{3})\.jpg$/.exec(String(src || '')); return m ? ` srcset="/img/w/${m[1]}-360.webp 360w, /img/w/${m[1]}.webp 540w" sizes="${sizes}"` : ''; };
   const stored = (key, fallback) => { try { const data = JSON.parse(localStorage.getItem(key)); return data ?? fallback; } catch { return fallback; } };
   const readCart = () => {
     const values = stored(CART_KEY, []);
@@ -54,7 +57,7 @@
     if (!Array.isArray(products)) throw new Error('Catálogo inválido.');
     return products;
   });
-  window.Visag = {formatMoney,escapeHTML,readCart,saveCart,readFavorites,saveFavorites,notify,updateBadge,loadProducts,WHATSAPP,checkoutWhatsAppURL,hasDirectWhatsApp};
+  window.Visag = {formatMoney,escapeHTML,photoSrcset,readCart,saveCart,readFavorites,saveFavorites,notify,updateBadge,loadProducts,WHATSAPP,checkoutWhatsAppURL,hasDirectWhatsApp};
   const menu = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.nav-main');
   if (menu && nav) {

@@ -1,6 +1,6 @@
 <article class="product-card">
   <div class="product-media">
-    <a href="/products/<%= encodeURIComponent(p.id) %>" aria-label="Ver <%= p.nombre %>"><img src="<%= p.imagen %>" alt="<%= p.nombre %>" loading="<%= index<4?'eager':'lazy' %>" width="360" height="450"></a>
+    <a href="/products/<%= encodeURIComponent(p.id) %>" aria-label="Ver <%= p.nombre %>"><img src="<%= p.imagen %>"<%- locals.photoSrcset ? locals.photoSrcset(p.imagen) : '' %> alt="<%= p.nombre %>" loading="<%= index<4?'eager':'lazy' %>" width="360" height="450"></a>
     <span class="product-tag"><%= Number.isFinite(p.precio)?'DISPONIBLE EN CATÁLOGO':'PRECIO POR CONFIRMAR' %></span>
     <button type="button" class="heart-btn" data-favorite="<%= p.id %>" aria-pressed="false" aria-label="Guardar en favoritos: <%= p.nombre %>">♡</button>
   </div>

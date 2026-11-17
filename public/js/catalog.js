@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const {formatMoney,escapeHTML,readFavorites,saveFavorites,loadProducts,notify} = window.Visag;
+  const {formatMoney,escapeHTML,photoSrcset,readFavorites,saveFavorites,loadProducts,notify} = window.Visag;
   const grid = document.getElementById('productos');
   const count = document.getElementById('resultados');
   const more = document.getElementById('mas');
@@ -42,7 +42,7 @@
     const hasPrice = Number.isFinite(p.precio);
     const sizes = Array.isArray(p.tallas) ? p.tallas.join(' · ') : '';
     return `<article class="product-card">
-       <div class="product-media"><a href="${href}" aria-label="Ver ${escapeHTML(p.nombre)}"><img src="${escapeHTML(p.imagen)}" alt="${escapeHTML(p.nombre)}" loading="${index<4?'eager':'lazy'}" width="360" height="450"></a>
+       <div class="product-media"><a href="${href}" aria-label="Ver ${escapeHTML(p.nombre)}"><img src="${escapeHTML(p.imagen)}"${photoSrcset(p.imagen)} alt="${escapeHTML(p.nombre)}" loading="${index<4?'eager':'lazy'}" width="360" height="450"></a>
          <span class="product-tag">${hasPrice?'DISPONIBLE EN CATÁLOGO':'PRECIO POR CONFIRMAR'}</span>
          <button type="button" class="heart-btn" data-favorite="${escapeHTML(p.id)}" aria-pressed="${liked}" aria-label="${liked?'Quitar de favoritos':'Guardar en favoritos'}: ${escapeHTML(p.nombre)}">${liked?'♥':'♡'}</button>
        </div>

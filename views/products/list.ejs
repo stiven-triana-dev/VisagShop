@@ -11,6 +11,7 @@
  </form>
  <p class="sprint4-list-intro"><% if (q || categoria) { %><%= total %> resultado<%= total===1?'':'s' %><% if (q) { %> para “<%= q %>”<% } %><% if (categoria) { %> en <%= categoria %><% } %><% } else { %><%= total %> referencias<% } %><% if (pages > 1) { %> · Página <%= page %> de <%= pages %><% } %> · Los precios y la disponibilidad final se confirman con VisagShop.</p>
  <% if (!total) { %><p class="product-search-empty">No encontramos productos con esa búsqueda. Prueba con otra palabra o <a href="/products">mira toda la colección</a>.</p><% } %>
+ <h2 class="sr-only">Listado de productos</h2>
  <div class="productos sprint4-grid">
  <% products.forEach(function(p,index){ %>
   <%- include('../partials/productCard',{p,index,money}) %>

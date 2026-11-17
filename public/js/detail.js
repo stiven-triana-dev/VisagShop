@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const {formatMoney,escapeHTML,readCart,saveCart,updateBadge,loadProducts,notify,WHATSAPP} = window.Visag;
+  const {formatMoney,escapeHTML,photoSrcset,readCart,saveCart,updateBadge,loadProducts,notify,WHATSAPP} = window.Visag;
   const id = new URLSearchParams(location.search).get('id') || (/^\/products\/(p\d+)\/?$/.exec(location.pathname)?.[1] || null);
   const add = document.getElementById('agregar');
   const feedback = document.getElementById('feedback');
@@ -48,6 +48,6 @@
     });
     const recommendations=list.filter(x => x.id!==p.id && x.categoria===p.categoria).slice(0,4);
     const target=document.getElementById('recomendados');
-    target.innerHTML=recommendations.map(item => `<article class="product-card"><div class="product-media"><a href="/products/${encodeURIComponent(item.id)}"><img src="${escapeHTML(item.imagen)}" loading="lazy" width="360" height="450" alt="${escapeHTML(item.nombre)}"></a></div><div class="product-caption"><span class="product-meta">${escapeHTML(item.categoria)}</span><h3 class="product-title"><a href="/products/${encodeURIComponent(item.id)}">${escapeHTML(item.nombre)}</a></h3><span class="product-price">${Number.isFinite(item.precio)?formatMoney(item.precio):'Consultar precio'}</span></div></article>`).join('');
+    target.innerHTML=recommendations.map(item => `<article class="product-card"><div class="product-media"><a href="/products/${encodeURIComponent(item.id)}"><img src="${escapeHTML(item.imagen)}"${photoSrcset(item.imagen)} loading="lazy" width="360" height="450" alt="${escapeHTML(item.nombre)}"></a></div><div class="product-caption"><span class="product-meta">${escapeHTML(item.categoria)}</span><h3 class="product-title"><a href="/products/${encodeURIComponent(item.id)}">${escapeHTML(item.nombre)}</a></h3><span class="product-price">${Number.isFinite(item.precio)?formatMoney(item.precio):'Consultar precio'}</span></div></article>`).join('');
   }).catch(() => error('No pudimos cargar este producto. Inténtalo más tarde.'));
 })();
