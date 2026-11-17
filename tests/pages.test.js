@@ -63,3 +63,15 @@ test('la ficha de producto trae vista previa con su foto y precio', async () => 
   assert.match(html, /<meta name="description" content="\$\s?130\.000 · Tallas: 24-4, 26-6/);
   assert.match(html, /<link rel="canonical" href="[^"]+\/products\/p042">/);
 });
+
+// Fotos WebP: cada foto del catálogo debe tener sus dos versiones (scripts/webpPhotos.sh),
+// porque el catálogo en el navegador las pide sin comprobar que existan.
+test('cada foto del catálogo tiene su versión WebP y las tarjetas la ofrecen', async () => {
+  const img = path.join(__dirname, '..', 'public', 'img');
+  const faltan = fs.readdirSync(img).filter(f => /^p\d{3}\.jpg$/.test(f))
+    .flatMap(f => [f.replace('.jpg', '.webp'), f.replace('.jpg', '-360.webp')])
+    .filter(f => !fs.existsSync(path.join(img, 'w', f)));
+  assert.deepEqual(faltan, [], 'Ejecuta scripts/webpPhotos.sh');
+  const html = await (await fetch(`${base}/products`)).text();
+  assert.match(html, /srcset="\/img\/w\/p\d{3}-360\.webp 360w, \/img\/w\/p\d{3}\.webp 540w"/);
+});
