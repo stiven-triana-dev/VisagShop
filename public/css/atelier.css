@@ -1,7 +1,7 @@
 /* VISAGSHOP / ATELIER — refinamiento minimalista y comercial 2026.
    Sobreescrituras sobre las hojas previas; mantiene las vistas y funcionalidad. */
 :root {
-  --ink:#1e1e1b; --paper:#f8f7f3; --white:#fff; --muted:#74746e;
+  --ink:#1e1e1b; --paper:#f8f7f3; --white:#fff; --muted:#676762;
   --line:#e5e4de; --lime:#d5ed59; --blue:#d5ed59; --blue-deep:#575f38;
   --heading:'Space Grotesk',Arial,sans-serif; --body:'DM Sans',Arial,sans-serif;
 }
@@ -40,15 +40,15 @@ a,button { -webkit-tap-highlight-color:transparent }
 .atelier-dot {width:6px;height:6px;border-radius:50%;background:#8f9776;flex:none}
 .atelier-season {margin-left:auto;color:#9c9d94;font-weight:400}
 .atelier-copy-main {padding:55px 0}
-.atelier-counter {font-size:10px;letter-spacing:.15em;font-weight:600;color:#85847b}
+.atelier-counter {font-size:10px;letter-spacing:.15em;font-weight:600;color:#686760}
 .atelier-copy h1 {font-size:clamp(66px,6.6vw,108px);letter-spacing:-.082em;line-height:.99;margin:21px 0 25px;font-weight:600;white-space:nowrap}
 .atelier-copy h1 em {font-family:'Instrument Serif',Georgia,serif;font-size:1.01em;font-weight:400;letter-spacing:-.055em}
-.atelier-copy-main>p {font-size:14px;line-height:1.8;color:#72736e;max-width:388px;margin:0 0 28px}
+.atelier-copy-main>p {font-size:14px;line-height:1.8;color:#676763;max-width:388px;margin:0 0 28px}
 .atelier-actions {display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .atelier-actions .btn {min-width:222px}
 .atelier-minor-link {font-size:12px;font-weight:600;white-space:nowrap;border-bottom:1px solid #8f9187;padding-bottom:5px}
 .atelier-minor-link:hover {border-color:#20211e}
-.atelier-caption {display:flex;justify-content:space-between;gap:10px;align-items:center;color:#85877f;font-size:9px;font-weight:500;letter-spacing:.08em}
+.atelier-caption {display:flex;justify-content:space-between;gap:10px;align-items:center;color:#666761;font-size:9px;font-weight:500;letter-spacing:.08em}
 .atelier-visual {background:#e8e7df;min-height:646px;position:relative;display:grid;grid-template-columns:1.22fr .75fr;gap:12px;padding:41px 30px 47px 36px;isolation:isolate}
 .atelier-visual:after {content:'';position:absolute;inset:0 -100vw 0 0;background:#e6e5dc;z-index:-1}
 .atelier-portrait,.atelier-inset {position:relative;min-width:0;overflow:hidden;background:#dddcd4}
@@ -67,11 +67,11 @@ a,button { -webkit-tap-highlight-color:transparent }
 .quick-benefits {min-height:104px;background:transparent}
 .quick-benefits>div {padding:17px 20px}
 .quick-benefits strong {font-size:10px;font-weight:600}
-.quick-benefits small {color:#8d8d87}
+.quick-benefits small {color:#676763}
 .quick-symbol {width:36px;height:36px;border:1px solid #d9d8d0;color:#686a60}
 .section-modern {padding-top:98px;padding-bottom:99px}
-.section-eyebrow {font-weight:600;color:#898980;font-size:10px;letter-spacing:.14em}
-.section-number {color:#787b6b}
+.section-eyebrow {font-weight:600;color:#676761;font-size:10px;letter-spacing:.14em}
+.section-number {color:#65685a}
 .modern-heading {margin-bottom:29px;align-items:end}
 .modern-heading h2 {font-weight:500;letter-spacing:-.075em;font-size:clamp(48px,5.3vw,76px);margin-top:14px}
 .modern-heading h2 em {font-weight:400}
@@ -89,13 +89,13 @@ a,button { -webkit-tap-highlight-color:transparent }
 .statement-image img {filter:saturate(.83)}
 .statement-copy {background:#eeede7;padding:57px clamp(30px,5vw,80px)}
 .statement-copy h2 {font-size:clamp(49px,4.8vw,73px);font-weight:500;margin:24px 0}
-.statement-copy p {font-size:13px;color:#74756f}
+.statement-copy p {font-size:13px;color:#666762}
 .statement-stamp {color:#999a8e}
 /* Catalog */
 .catalog-modern {background:#fff}
 .catalog-heading {margin-bottom:39px}
 .catalog-intro {margin:12px 0 0}
-.catalog-index {font-size:61px;color:#c2c2ba}
+.catalog-index {font-size:61px;color:#8a8a84}
 .catalog-tools {padding:16px 0}
 .search-box {background:#f8f8f5;border:1px solid #e7e6df}
 .search-box:focus-within {border-color:#9b9c8c}
@@ -113,14 +113,14 @@ a,button { -webkit-tap-highlight-color:transparent }
 .heart-btn {border:0;background:#f8f8f3eb;color:#252521}
 .heart-btn[aria-pressed=true] {color:#892d3c}
 .product-caption {padding-top:14px}
-.product-meta {font-size:10px;letter-spacing:.09em;color:#999a93;font-weight:600}
+.product-meta {font-size:10px;letter-spacing:.09em;color:#676762;font-weight:600}
 .product-title {font-size:14px;font-weight:500;letter-spacing:-.01em;color:#373832;margin:6px 0 8px;line-height:1.48}
 .product-bottom {align-items:center;gap:8px}
 .product-price {font-size:14px;letter-spacing:0}
 .product-price.no-price {color:#77796f;font-weight:500}
 .product-arrow {width:auto!important;display:inline-flex!important;align-items:center;gap:6px;font-size:9px!important;white-space:nowrap;letter-spacing:.075em;font-weight:700}
 .product-arrow span {font-size:14px}
-.product-sizes {margin:7px 0 0;color:#9d9d97;font-size:10px}
+.product-sizes {margin:7px 0 0;color:#676763;font-size:10px}
 .load-more {padding-top:45px}
 .empty-state {padding:70px 20px}
 /* Wholesale and easy checkout teaching */
@@ -134,12 +134,12 @@ a,button { -webkit-tap-highlight-color:transparent }
 .wholesale-circle strong {font-size:10px}
 .buying-steps {padding-block:100px;display:grid;grid-template-columns:.8fr 1.4fr;gap:70px;border-bottom:1px solid var(--line)}
 .buying-heading h2 {font-size:clamp(51px,5.2vw,75px);font-weight:500;margin:18px 0}
-.buying-heading p {font-size:13px;color:#84857d;max-width:340px;line-height:1.75}
+.buying-heading p {font-size:13px;color:#666761;max-width:340px;line-height:1.75}
 .steps-list {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .steps-list>div {border-top:1px solid #c5c5bc;padding-top:20px}
-.steps-list>div>span {font:400 28px/1.2 'Instrument Serif',Georgia,serif;color:#98998f}
+.steps-list>div>span {font:400 28px/1.2 'Instrument Serif',Georgia,serif;color:#8a8b82}
 .steps-list h3 {font:600 16px/1.35 var(--body);letter-spacing:-.035em;margin:29px 0 11px}
-.steps-list p {font-size:12px;line-height:1.8;color:#777971}
+.steps-list p {font-size:12px;line-height:1.8;color:#666761}
 .closing-modern {padding-block:105px}
 .closing-modern h2 {font-size:clamp(58px,6.7vw,98px);font-weight:500}
 .site-footer {background:#242521}
@@ -147,21 +147,21 @@ a,button { -webkit-tap-highlight-color:transparent }
 .site-footer h3 {font-weight:600}
 /* Product details */
 .inner-main {padding-top:35px}
-.breadcrumbs {font-size:10px;letter-spacing:.05em;color:#96968d}
+.breadcrumbs {font-size:10px;letter-spacing:.05em;color:#676761}
 .product-detail {gap:clamp(38px,6vw,100px)}
 .detail-hero-image {background:#efeee8}
 .detail-hero-image img {filter:saturate(.9)}
 .detail-info h1 {font-size:clamp(45px,4.5vw,70px);font-weight:500;line-height:1.1}
 .detail-price {font-size:25px}
-.detail-description {font-size:13px;color:#85847e;line-height:1.8}
-.detail-extra span {font-size:12px;color:#84857d}
-.photo-note {font-size:10px;letter-spacing:.1em;color:#97978e}
+.detail-description {font-size:13px;color:#686762;line-height:1.8}
+.detail-extra span {font-size:12px;color:#666761}
+.photo-note {font-size:10px;letter-spacing:.1em;color:#676761}
 /* Cart: a single, strongly distinguished action */
 .cart-main {min-height:75vh}
 .page-title {padding-top:18px}
 .page-title h1 {font-size:clamp(53px,6vw,86px);font-weight:500}
 .page-title h1 i {font-family:'Instrument Serif',Georgia,serif;color:#595e55;font-weight:400}
-.page-title p {font-size:13px;color:#8a8a83}
+.page-title p {font-size:13px;color:#676762}
 .cart-layout {grid-template-columns:minmax(0,1.45fr) minmax(330px,.83fr);gap:clamp(35px,5vw,80px);margin-top:40px}
 .cart-summary {background:#eeeee8;padding:30px;position:sticky;top:102px}
 .cart-summary .summary-kicker {font-size:9px;letter-spacing:.17em;color:#7d8173;font-weight:700;display:block;margin-bottom:8px}

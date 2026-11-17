@@ -25,6 +25,14 @@ const assetVersion=(()=>{
  for(const dir of ['css','js'])for(const name of fs.readdirSync(path.join(__dirname,'public',dir)).sort())hash.update(name).update(fs.readFileSync(path.join(__dirname,'public',dir,name)));
  return hash.digest('hex').slice(0,10);
 })();
+// Fotos del catálogo (/img/pNNN.jpg): si existe su versión WebP en /img/w/ (generada con
+// scripts/webpPhotos.sh), las vistas añaden srcset para que el navegador baje la más liviana.
+const webpPhotos=new Set((()=>{try{return require('node:fs').readdirSync(path.join(__dirname,'public','img','w'))}catch{return []}})());
+function photoSrcset(src,sizes='(max-width:680px) 50vw, (max-width:900px) 33vw, 320px'){
+ const m=/^\/img\/(p\d{3})\.jpg$/.exec(String(src||''));
+ if(!m||!webpPhotos.has(m[1]+'.webp')||!webpPhotos.has(m[1]+'-360.webp'))return '';
+ return ` srcset="/img/w/${m[1]}-360.webp 360w, /img/w/${m[1]}.webp 540w" sizes="${sizes}"`;
+}
 // Número de WhatsApp de la tienda (variable WHATSAPP_NUMBER). Acepta "+57 300 123 4567",
 // "300-123-4567" o "573001234567": se quitan los símbolos y a un celular colombiano de
 // 10 dígitos se le antepone el 57. Si no queda un número válido, la tienda ofrece copiar el pedido.
@@ -44,6 +52,7 @@ app.use((req,res,next)=>{
  res.locals.assistantEnabled=assistant.enabled();
  // Datos para la vista previa al compartir un enlace (WhatsApp, Facebook...). Las páginas pueden cambiarlos.
  res.locals.assetVersion=assetVersion;
+ res.locals.photoSrcset=photoSrcset;
  res.locals.baseUrl=`${req.protocol}://${req.get('host')}`;
  res.locals.pageUrl=res.locals.baseUrl+req.originalUrl.split('?')[0];
  res.locals.metaDescription=DESCRIPTION;

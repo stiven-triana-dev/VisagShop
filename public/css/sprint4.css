@@ -46,7 +46,7 @@ input[aria-invalid="true"]:focus,select[aria-invalid="true"]:focus,textarea[aria
 .pagination-pages a:hover{border-color:var(--ink)}
 .pagination-pages [aria-current="page"]{background:var(--ink);border-color:var(--ink);color:#fff}
 .pagination-step{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ink)}
-.pagination-step[aria-hidden="true"]{color:#b9b8b0}
+.pagination-step[aria-hidden="true"]{color:#686763}
 a.pagination-step:hover{text-decoration:underline;text-underline-offset:3px}
 @media(max-width:680px){.pagination{gap:4px}.pagination-step{padding:0 6px}}
 
