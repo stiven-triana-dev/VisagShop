@@ -1,13 +1,5 @@
--- =====================================================================
--- VisagShop · Sprint 6 · Script de datos (generado por scripts/generateDataSql.js)
--- Ejecutar conectado a la base "visagshop" DESPUÉS de structure.sql:
---   psql -U postgres -d visagshop -f database/data.sql
--- Usuarios de demostración ficticios; contraseña: VisagDemo-2026
--- No ejecutar sobre la base de producción.
--- =====================================================================
 BEGIN;
 
--- Categorías
 INSERT INTO categories (id, name) VALUES
   (1, 'Pantalones'),
   (2, 'Pantalonetas'),
@@ -16,7 +8,6 @@ INSERT INTO categories (id, name) VALUES
   (5, 'Gorras'),
   (6, 'Zapatos');
 
--- Tallas
 INSERT INTO sizes (id, name) VALUES
   (1, '24-4'),
   (2, '26-6'),
@@ -38,7 +29,6 @@ INSERT INTO sizes (id, name) VALUES
   (18, '7 1/8'),
   (19, '7');
 
--- Colores
 INSERT INTO colors (id, name) VALUES
   (1, 'Amarillo'),
   (2, 'Azul'),
@@ -54,7 +44,6 @@ INSERT INTO colors (id, name) VALUES
   (12, 'Turquesa'),
   (13, 'Verde');
 
--- Productos (108)
 INSERT INTO products (id, name, description, price, image, category_id) VALUES
   ('p001', 'Gorra curva · Negra 01', 'Gorra de visera curva, negra, con cierre ajustable atrás. Un básico urbano que combina con todo.', 45000, '/img/p001.jpg', 5),
   ('p002', 'Gorra curva · Negra y roja 01', 'Gorra de visera curva, negra y roja, con cierre ajustable atrás. Un básico urbano que combina con todo.', 45000, '/img/p002.jpg', 5),
@@ -165,7 +154,6 @@ INSERT INTO products (id, name, description, price, image, category_id) VALUES
   ('p107', 'Nike · Café y blanco', 'Tenis Nike en café y blanco. Combínalos con jeans, bermudas o sudaderas.', 230000, '/img/p107.jpg', 6),
   ('p108', 'Nike · Gris y negro', 'Tenis Nike en gris y negro. Combínalos con jeans, bermudas o sudaderas.', 230000, '/img/p108.jpg', 6);
 
--- Tallas de cada producto
 INSERT INTO product_sizes (product_id, size_id, position) VALUES
   ('p042', 1, 0),
   ('p042', 2, 1),
@@ -300,7 +288,6 @@ INSERT INTO product_sizes (product_id, size_id, position) VALUES
   ('p040', 19, 0),
   ('p041', 19, 0);
 
--- Colores de cada producto
 INSERT INTO product_colors (product_id, color_id, position) VALUES
   ('p042', 9, 0),
   ('p098', 9, 0),
@@ -452,12 +439,10 @@ INSERT INTO product_colors (product_id, color_id, position) VALUES
   ('p041', 3, 0),
   ('p041', 2, 1);
 
--- Usuarios de demostración
 INSERT INTO users (id, first_name, last_name, email, phone, password_hash, role) VALUES
   ('2b0c6a0e-6d1f-4c1a-9a7e-0d6f0a1b2c01', 'Andrea', 'Rojas', 'andrea.demo@example.test', '+57 300 000 0001', 'scrypt$b2937ca19b5079746165d1db73cd3f32$5a2c6001d4af90288042a382f658ab02b02097609c59567c29d980781ca3f287b8ab759af52742dd096caa8131e3cade72f652a08b943926f875a26f72884309', 'customer'),
   ('2b0c6a0e-6d1f-4c1a-9a7e-0d6f0a1b2c02', 'Mateo', 'López', 'mateo.demo@example.test', '', 'scrypt$b2937ca19b5079746165d1db73cd3f32$5a2c6001d4af90288042a382f658ab02b02097609c59567c29d980781ca3f287b8ab759af52742dd096caa8131e3cade72f652a08b943926f875a26f72884309', 'customer');
 
--- Contadores: los próximos registros continúan después de los datos cargados
 SELECT setval('categories_id_seq', 6, true);
 SELECT setval('sizes_id_seq', 19, true);
 SELECT setval('colors_id_seq', 13, true);

@@ -1,6 +1,5 @@
 (() => {
   'use strict';
-  // Cambia el estado de un pedido desde su detalle en el panel.
   const form = document.getElementById('order-status-form');
   if (!form) return;
   const feedback = document.getElementById('order-feedback');

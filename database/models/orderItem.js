@@ -1,6 +1,4 @@
 'use strict';
-// Prenda dentro de un pedido. Conserva nombre, foto y precio del momento de la compra;
-// product_id queda en NULL si el producto se elimina del catálogo después.
 module.exports = (sequelize, DataTypes) => {
   const OrderItem = sequelize.define('OrderItem', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},

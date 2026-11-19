@@ -1,5 +1,4 @@
 'use strict';
-// Descargas del panel: pedidos en CSV (se abre en Excel) y una copia de los datos en JSON.
 const orders = require('../models/activeOrders');
 const products = require('../models/activeProducts');
 const users = require('../models/activeUsers');
@@ -7,10 +6,9 @@ const users = require('../models/activeUsers');
 const today = () => new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Bogota'}).format(new Date()); // AAAA-MM-DD
 const localDate = iso => new Intl.DateTimeFormat('es-CO', {dateStyle: 'short', timeStyle: 'short', timeZone: 'America/Bogota'}).format(new Date(iso));
 
-// Celda CSV segura: comillas escapadas y sin fórmulas (un valor que empieza con
-// = + - @ podría ejecutarse en Excel, así que se antepone un apóstrofo).
 function cell(value) {
   let text = value === null || value === undefined ? '' : String(value);
+  // Excel ejecuta las celdas que empiezan con = + - @, por eso se les antepone un apóstrofo.
   if (/^[=+\-@\t\r]/.test(text)) text = `'${text}`;
   return /[";\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
@@ -26,7 +24,6 @@ async function ordersCsv(req, res) {
     o.items.map(i => `${i.quantity} x ${i.name}${i.size ? ` (${i.size})` : ''}`).join(' | '),
     o.itemCount, o.subtotal, o.hasUnpriced ? 'Sí' : 'No', o.adminNote
   ]);
-  // Punto y coma y BOM: así Excel en español separa bien las columnas y muestra las tildes.
   const csv = '﻿' + [header, ...rows].map(r => r.map(cell).join(';')).join('\r\n') + '\r\n';
   res.set('Cache-Control', 'no-store');
   res.attachment(`visagshop-pedidos${status ? '-' + status : ''}-${today()}.csv`);

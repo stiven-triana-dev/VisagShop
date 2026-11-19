@@ -1,6 +1,4 @@
 'use strict';
-// Pedidos guardados: validación, precios del servidor, panel y "Mis pedidos".
-// Usa el almacenamiento JSON en una carpeta temporal: no toca data/ ni ninguna base.
 const {test, before, after} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');

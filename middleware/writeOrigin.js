@@ -1,5 +1,4 @@
 'use strict';
-// Protege las acciones del panel y de las cuentas de solicitudes cross-site.
 module.exports=function writeOrigin(req,res,next){
   const origin=req.get('Origin');
   const referer=req.get('Referer');

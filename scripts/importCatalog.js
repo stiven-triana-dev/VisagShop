@@ -1,13 +1,4 @@
 'use strict';
-// Completa precios y tallas del catálogo a partir de data/completar-catalogo.csv.
-//
-//   npm run catalog:import            -> solo muestra los cambios (no escribe nada)
-//   npm run catalog:import -- --aplicar -> guarda en data/products.json y, si existe
-//                                         DATABASE_URL, también en la base de datos
-// Con DATABASE_URL los cambios se comparan con lo que hay en la base (lo que ve la tienda).
-//
-// Columnas: id;categoria;nombre;precio;tallas;foto. Solo se usan id, precio y tallas.
-// Una celda vacía deja el dato actual sin cambios. Las tallas se separan con comas.
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -18,7 +9,6 @@ const defaultCsv = path.join(root, 'data', 'completar-catalogo.csv');
 function parsePrice(raw, id) {
   const text = String(raw || '').trim();
   if (!text) return undefined;
-  // Acepta 130000, 130.000, $130.000 o 130 000 (pesos colombianos, sin centavos).
   const clean = text.replace(/[$\s.]/g, '');
   if (!/^\d+$/.test(clean)) throw new Error(`${id}: precio "${text}" no es un número entero en pesos.`);
   const value = Number(clean);
@@ -37,7 +27,6 @@ function unquote(cell) {
   return t.length >= 2 && t.startsWith('"') && t.endsWith('"') ? t.slice(1, -1).replace(/""/g, '"') : t;
 }
 
-// Devuelve [{id, precio?, tallas?}] solo con los campos que traen valor.
 function parseCsv(text) {
   const lines = text.replace(/^﻿/, '').split(/\r?\n/).filter(l => l.trim());
   if (!lines.length) return [];
@@ -61,7 +50,6 @@ function parseCsv(text) {
   return changes;
 }
 
-// Aplica los cambios sobre la lista y devuelve solo los que modifican algo.
 function applyChanges(products, changes) {
   const byId = new Map(products.map(p => [p.id, p]));
   const applied = [];
@@ -79,8 +67,6 @@ function applyChanges(products, changes) {
   return applied;
 }
 
-// Actualiza la base de datos (Sequelize). Si las tablas aún no existen, las crea
-// y copia los datos anteriores igual que al arrancar la tienda.
 async function updateNeon(applied) {
   const setup = require('../database/setup');
   const products = require('../database/repositories/products');
@@ -92,8 +78,6 @@ async function updateNeon(applied) {
   return missing;
 }
 
-// Con DATABASE_URL los cambios se calculan contra la base (lo que ve la tienda);
-// sin ella, contra data/products.json.
 async function currentCatalog(apply) {
   if (!process.env.DATABASE_URL) return JSON.parse(fs.readFileSync(seedFile, 'utf8'));
   if (!/^postgres(ql)?:\/\/[^\s@]+@[^\s/]+\/\S+$/.test(process.env.DATABASE_URL.trim())) {
@@ -139,7 +123,6 @@ async function main() {
     console.log('Vista previa: no se guardó nada. Ejecuta con --aplicar para guardar.');
     return;
   }
-  // Base de datos primero: si falla, el JSON queda igual y se puede repetir el comando.
   if (process.env.DATABASE_URL) {
     try {
       if (applied.length) {
@@ -149,7 +132,6 @@ async function main() {
     } finally {
       await require('../database/models').close();
     }
-    // Mantener también la semilla JSON al día.
     const seed = JSON.parse(fs.readFileSync(seedFile, 'utf8'));
     const seedIds = new Set(seed.map(p => p.id));
     if (applyChanges(seed, changes.filter(c => seedIds.has(c.id))).length) {

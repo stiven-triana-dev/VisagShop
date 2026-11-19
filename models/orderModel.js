@@ -1,6 +1,4 @@
 'use strict';
-// Pedidos: lógica común y almacenamiento en JSON para desarrollo local
-// (sin DATABASE_URL). database/repositories/orders.js tiene la misma interfaz.
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
@@ -15,10 +13,9 @@ const PAGE_SIZE = 20;
 const code = number => `VS-${number}`;
 const text = (value, max) => (typeof value === 'string' ? value.trim().slice(0, max) : '');
 
-// Arma el pedido a partir del formulario y del catálogo. Los precios siempre salen
-// del catálogo del servidor, nunca de lo que envía el navegador.
 async function buildOrder(input, findProduct) {
   const items = [];
+  // El precio sale del catálogo del servidor, nunca de lo que manda el navegador.
   for (const [position, line] of (input.items || []).entries()) {
     const product = await findProduct(line.id);
     if (!product) throw new Error(`El producto ${line.id} ya no está disponible. Actualiza tu carrito.`);
@@ -47,7 +44,6 @@ async function buildOrder(input, findProduct) {
   };
 }
 
-// Completa los campos calculados que usan las vistas.
 function decorate(order) {
   if (!order) return null;
   return {
@@ -60,7 +56,6 @@ function decorate(order) {
   };
 }
 
-// ----- Almacenamiento JSON (desarrollo local) -----
 const dataDir = path.resolve(process.env.VISAG_DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH || path.join(__dirname, '..', 'data'));
 const file = path.join(dataDir, 'orders.json');
 function read() {

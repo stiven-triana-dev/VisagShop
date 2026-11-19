@@ -1,5 +1,4 @@
 'use strict';
-// Chat con VisagAssist: valida la pregunta y la reenvía con la identidad firmada.
 const assistant=require('../services/visagAssist');
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 

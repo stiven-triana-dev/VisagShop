@@ -1,13 +1,10 @@
 'use strict';
-// Pedido solicitado desde el carrito. Guarda una copia de los datos de entrega
-// y de las prendas, para que el pedido no cambie si luego se edita el catálogo.
 const STATUSES = ['nuevo', 'confirmado', 'enviado', 'entregado', 'cancelado'];
 const PAYMENTS = ['contraentrega', 'nequi', 'tarjeta'];
 
 module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
     id: {type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4},
-    // Número público del pedido (VS-1001, VS-1002...), sale de order_number_seq.
     number: {type: DataTypes.INTEGER, allowNull: false, unique: true},
     userId: {type: DataTypes.UUID, allowNull: true},
     status: {type: DataTypes.STRING(20), allowNull: false, defaultValue: 'nuevo', validate: {isIn: [STATUSES]}},

@@ -10,7 +10,6 @@
   const isNew=form.dataset.mode==='new';
   const money=number=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(number);
 
-  // Sprint 7: mismas reglas que valida el servidor (validations/productValidations.js).
   const validator=attach(form,{
     nombre:[r.required('El nombre del producto es obligatorio.'),r.minLength(5,'El nombre debe tener al menos 5 caracteres.'),r.maxLength(120,'El nombre puede tener máximo 120 caracteres.')],
     descripcion:[r.minLength(20,'La descripción debe tener al menos 20 caracteres.'),r.maxLength(1000,'La descripción puede tener máximo 1000 caracteres.')],

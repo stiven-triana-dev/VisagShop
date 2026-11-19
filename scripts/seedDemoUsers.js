@@ -1,6 +1,4 @@
 'use strict';
-// Genera datos académicos ficticios, NO cuentas reales. Las contraseñas se
-// muestran una sola vez en consola y se almacenan solamente como hashes.
 if(process.env.NODE_ENV==='production'){
  console.error('No está permitido crear usuarios de demostración en producción.');process.exit(1);
 }

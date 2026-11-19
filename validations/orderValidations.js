@@ -1,6 +1,4 @@
 'use strict';
-// Validación del pedido que llega desde el carrito (express-validator).
-// Los nombres de campo son los del formulario de views/products/cart.ejs.
 const {body} = require('express-validator');
 const products = require('../models/activeProducts');
 const orders = require('../models/orderModel');
@@ -26,7 +24,6 @@ const create = [
         if (line.talla !== undefined && (typeof line.talla !== 'string' || line.talla.length > 50)) throw new Error('Hay una talla inválida en tu carrito.');
         const product = await products.find(line.id);
         if (!product) throw new Error('Una de las prendas ya no está disponible. Actualiza tu carrito.');
-        // Si la prenda tiene tallas publicadas, la elegida debe ser una de ellas.
         if (line.talla && product.tallas?.length && !product.tallas.includes(line.talla)) throw new Error(`La talla ${line.talla} no está disponible para ${product.nombre}.`);
       }
       return true;

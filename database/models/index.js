@@ -1,8 +1,4 @@
 'use strict';
-// Punto de entrada de Sequelize: crea la conexión, carga los modelos y
-// declara sus relaciones (associate). Equivale al models/index.js que genera
-// sequelize-cli, pero con la lista de modelos explícita y conexión perezosa:
-// solo se conecta cuando existe DATABASE_URL y algún módulo usa un modelo.
 const {Sequelize} = require('sequelize');
 
 const envName = ['production', 'test'].includes(process.env.NODE_ENV) ? process.env.NODE_ENV : 'development';
@@ -42,7 +38,6 @@ function connect() {
   return db;
 }
 
-// Cierra la conexión (scripts y pruebas). La siguiente consulta vuelve a conectar.
 async function close() {
   if (!db.sequelize) return;
   const sequelize = db.sequelize;

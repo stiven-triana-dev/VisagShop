@@ -1,7 +1,4 @@
 'use strict';
-// Burbuja de chat de VisagAssist. Habla solo con el servidor de VisagShop (/api/asistente),
-// que firma quién pregunta y reenvía la pregunta al asistente. Las respuestas se pintan con
-// nodos de texto (nunca innerHTML): aunque el modelo devolviera HTML, no se ejecuta.
 (()=>{
  const meta=document.querySelector('meta[name="visag-assistant"]');
  if(!meta)return;
@@ -30,7 +27,6 @@
   return node;
  };
 
- // Enlaces: solo http(s). Los de la tienda publicada se abren en este mismo sitio.
  function safeLink(raw,label){
   let url;
   try{url=new URL(raw,location.origin);}catch{return document.createTextNode(label);}
@@ -41,7 +37,6 @@
   if(!own){link.target='_blank';link.rel='noopener noreferrer';}
   return link;
  }
- // Formato mínimo: **negrita**, `código`, [texto](url), direcciones sueltas y listas.
  const pattern=/\[([^\]\n]{1,120})\]\((https?:\/\/[^\s)]+|\/[^\s)]*)\)|(https?:\/\/[^\s<>()]+[^\s<>().,;:!?])|\*\*([^*\n]{1,200})\*\*|`([^`\n]{1,80})`/g;
  function inline(text){
   const out=[];let last=0;

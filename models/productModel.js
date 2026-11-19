@@ -17,7 +17,6 @@ function all() {
   return rows;
 }
 function find(id) {return all().find(p => p.id === id) || null;}
-// Misma búsqueda que la versión con base de datos: texto en nombre, descripción o categoría.
 function search({q='', categoria=''}={}) {
   const text = String(q).trim().slice(0,80).toLowerCase();
   return all().filter(p => (!categories.includes(categoria) || p.categoria === categoria) &&
@@ -55,8 +54,6 @@ function validate(input, previous) {
     imagen:previous ? previous.imagen : '/img/p001.jpg'
   };
 }
-// Guarda una imagen (data URL) en la carpeta de subidas y devuelve su ruta pública.
-// También la usa userModel para la foto de perfil.
 function uploadedPhoto(data) {
   if (!data) return null;
   const image=decodeImage(data);
@@ -78,7 +75,6 @@ function create(input) {
   product.id=`p${String(nextNumber).padStart(3,'0')}`;
   product.imagen=uploadedPhoto(input.imageData);
   rows.unshift(product);atomicWrite(rows);
-  // Mantener el contador separado permite evitar reutilizar el ID de una prenda eliminada.
   fs.writeFileSync(sequenceFile,JSON.stringify({lastNumber:nextNumber})+'\n',{encoding:'utf8',mode:0o600});
   return product;
 }
@@ -97,7 +93,6 @@ function remove(id) {
   if (index===-1) return null;
   const [removed]=rows.splice(index,1);
   atomicWrite(rows);
-  // Eliminar solamente imágenes que fueron subidas por el administrador.
   // Jamás se eliminan las fotos originales del catálogo.
   if (/^\/img\/uploads\/[a-f0-9-]{36}\.(?:jpg|png|webp)$/.test(removed.imagen||'')) {
     const target=path.join(uploadDirectory,path.basename(removed.imagen));

@@ -1,6 +1,4 @@
 'use strict';
-// Usuarios con Sequelize: crear (registro, con foto de perfil opcional),
-// ver el detalle (perfil), editar el perfil y cambiar la contraseña.
 const crypto = require('node:crypto');
 const {UniqueConstraintError} = require('sequelize');
 const db = require('../models');

@@ -1,6 +1,4 @@
 'use strict';
-// Sesiones de clientes con Sequelize. El navegador recibe un token aleatorio
-// opaco en una cookie httpOnly; en la tabla sessions solo se guarda su SHA-256.
 const crypto = require('node:crypto');
 const {Op} = require('sequelize');
 const db = require('../models');
@@ -43,7 +41,6 @@ async function login(req, res, user, remember = false) {
   const {sequelize, Session} = db.models;
   await sequelize.transaction(async transaction => {
     if (req.sessionTokenHash) await Session.destroy({where: {tokenHash: req.sessionTokenHash}, transaction});
-    // Limpieza de sesiones vencidas para que la tabla no crezca sin límite.
     await Session.destroy({where: {expiresAt: {[Op.lte]: new Date()}}, transaction});
     await Session.create({
       tokenHash: hash(token), userId: user.id, remember: Boolean(remember),

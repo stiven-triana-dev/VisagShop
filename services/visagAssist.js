@@ -1,8 +1,4 @@
 'use strict';
-// Conexión con VisagAssist, el asistente con IA (servicio aparte en Python).
-// El navegador nunca habla directo con VisagAssist: le pregunta a VisagShop, y este servidor,
-// que sabe quién inició sesión, firma un "pase" corto (JWT HS256) con VISAGASSIST_SECRETO.
-// Así un cliente solo puede consultar SUS pedidos y nadie puede hacerse pasar por administrador.
 const crypto=require('node:crypto');
 
 const ISSUER='visagshop';
@@ -19,14 +15,10 @@ function settings(){
 const enabled=()=>settings().enabled;
 const base64url=value=>Buffer.from(typeof value==='string'?value:JSON.stringify(value)).toString('base64url');
 
-// Huella de la conexión del visitante (no se envía la IP): VisagAssist la usa para
-// los límites de preguntas por hora de los invitados.
 function fingerprint(ip,secret){
  return crypto.createHmac('sha256',secret).update(`origen:${ip||'desconocido'}`).digest('hex').slice(0,32);
 }
 
-// Quién pregunta: administrador (ya pasó por el usuario y la clave del panel), cliente con
-// sesión iniciada o invitado.
 function identityFor(req,{admin=false}={}){
  if(admin)return {rol:'administrador'};
  const customer=req.customer;
@@ -34,6 +26,7 @@ function identityFor(req,{admin=false}={}){
  return {rol:'invitado'};
 }
 
+// El navegador nunca habla directo con VisagAssist: aquí se firma quién pregunta.
 function signPass(identity,secret,{ip,now=Date.now()}={}){
  const iat=Math.floor(now/1000);
  const payload={iss:ISSUER,aud:AUDIENCE,iat,exp:iat+PASS_SECONDS,...identity,origen:fingerprint(ip,secret)};
@@ -43,7 +36,6 @@ function signPass(identity,secret,{ip,now=Date.now()}={}){
  return `${unsigned}.${signature}`;
 }
 
-// Errores con un mensaje que se puede mostrar al cliente tal cual.
 class AssistantError extends Error{
  constructor(status,message,retryAfter){super(message);this.status=status;this.retryAfter=retryAfter;}
 }
@@ -74,11 +66,9 @@ async function ask(req,{mensaje,conversacion_id},{admin=false,fetchImpl}={}){
  const {secret}=settings();
  const pass=signPass(identityFor(req,{admin}),secret,{ip:req.ip});
  const data=await call('/api/v1/chat',{method:'POST',body:{mensaje,conversacion_id:conversacion_id||null},pass,fetchImpl});
- // Al navegador solo le llega lo necesario (no tokens ni costos).
  return {conversacion_id:data.conversacion_id,respuesta:data.respuesta};
 }
 
-// Despierta al asistente (en Render gratis se duerme): la burbuja lo llama al abrirse.
 async function wake({fetchImpl}={}){
  await call('/api/v1/estado',{fetchImpl});
  return {ok:true};

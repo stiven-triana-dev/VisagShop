@@ -1,5 +1,4 @@
 'use strict';
-// Pedidos desde el carrito: POST /api/orders
 const express = require('express');
 const controller = require('../controllers/orderController');
 const sameOrigin = require('../middleware/writeOrigin');

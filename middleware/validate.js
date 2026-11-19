@@ -1,7 +1,4 @@
 'use strict';
-// Ejecuta una lista de validaciones de express-validator y, si hay errores,
-// responde 400 con el primer mensaje (error) y uno por campo (errors), que el
-// navegador muestra debajo de cada campo del formulario.
 const {validationResult} = require('express-validator');
 
 module.exports = function validate(rules) {

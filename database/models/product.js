@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('Product', {
-    // Referencia pública (p001, p002...): aparece en URLs y en carritos guardados.
     id: {type: DataTypes.STRING(10), primaryKey: true, validate: {is: /^p\d{3,}$/}},
     name: {type: DataTypes.STRING(120), allowNull: false, validate: {len: [3, 120]}},
     description: {type: DataTypes.STRING(1000), allowNull: false, defaultValue: ''},

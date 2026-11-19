@@ -1,5 +1,4 @@
 'use strict';
-// Fotografía subida desde el panel; se sirve en /img/uploads/<id>.<ext>.
 module.exports = (sequelize, DataTypes) => {
   const Upload = sequelize.define('Upload', {
     id: {type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4},

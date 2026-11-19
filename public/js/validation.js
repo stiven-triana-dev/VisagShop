@@ -1,6 +1,3 @@
-// Sprint 7 · Validaciones del front-end (JavaScript propio, sin librerías).
-// Mismas reglas que el servidor (validations/rules.js). Muestra un mensaje debajo
-// de cada campo, marca el campo con aria-invalid y lleva el foco al primer error.
 (() => {
   'use strict';
   const IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
@@ -79,7 +76,6 @@
       input.addEventListener('blur', () => { touched.add(name); check(name); });
       input.addEventListener(input.type === 'file' || input.tagName === 'SELECT' ? 'change' : 'input', () => {
         if (touched.has(name) || input.getAttribute('aria-invalid')) check(name);
-        // Revalida la confirmación si cambia la contraseña original.
         for (const other of Object.keys(fieldRules)) if (other !== name && touched.has(other) && form.elements[other]?.dataset.matches === name) check(other);
       });
     }
@@ -94,7 +90,6 @@
         if (firstInvalid) firstInvalid.focus();
         return !firstInvalid;
       },
-      // Errores que devuelve el servidor (express-validator): {campo: mensaje}
       showServerErrors(errors) {
         let first = null;
         for (const [name, message] of Object.entries(errors || {})) {

@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
     // Formato "scrypt$<sal>$<hash>": la contraseña nunca se guarda en texto plano.
     passwordHash: {type: DataTypes.STRING(200), allowNull: false},
     role: {type: DataTypes.STRING(20), allowNull: false, defaultValue: 'customer', validate: {isIn: [['customer']]}},
-    // Foto de perfil opcional (Sprint 7): ruta pública y fila de uploads que la guarda.
     avatar: {type: DataTypes.STRING(200), allowNull: true},
     uploadId: {type: DataTypes.UUID, allowNull: true}
   }, {tableName: 'users'});

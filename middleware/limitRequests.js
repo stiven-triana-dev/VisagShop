@@ -1,6 +1,4 @@
 'use strict';
-// Barrera anti fuerza bruta por IP. Suficiente como capa básica para la demo
-// monoinstancia; para tráfico real elevado usar límite distribuido / WAF.
 const buckets = new Map();
 let requests = 0;
 module.exports = function limitRequests({windowMs = 15*60*1000, max = 12, namespace = 'auth'} = {}) {

@@ -1,6 +1,4 @@
 'use strict';
-// Sprint 7 · Validaciones del back-end (express-validator) probadas por HTTP.
-// Usa el almacenamiento JSON en una carpeta temporal: no toca data/ ni ninguna base.
 const {test, before, after} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -99,7 +97,6 @@ test('productos: nombre, descripción, categoría, precio e imagen', async () =>
   r = await post('/products', {nombre: 'Gorra de prueba', descripcion: '', categoria: 'Gorras', precio: '45000', imageData: gif}, {headers});
   assert.equal(r.status, 201, JSON.stringify(r.body));
 
-  // Al editar, la foto es opcional y la descripción vacía está permitida.
   r = await post(`/products/${r.body.id}`, {nombre: 'Gorra de prueba editada', descripcion: 'Gorra ajustable con logo bordado al frente.', categoria: 'Gorras', precio: ''}, {method: 'PUT', headers});
   assert.equal(r.status, 200, JSON.stringify(r.body));
 });

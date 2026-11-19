@@ -1,5 +1,3 @@
-# Corre las pruebas en cada cambio: las normales (sin base de datos) y las de
-# PostgreSQL real (scripts SQL, CRUD con Sequelize y migración de datos).
 name: Pruebas
 
 on:

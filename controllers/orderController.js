@@ -1,7 +1,6 @@
 'use strict';
 const orders = require('../models/activeOrders');
 
-// POST /api/orders — guarda el pedido del carrito y devuelve su número.
 async function create(req, res) {
   try {
     const order = await orders.create(req.body, req.customer?.id || null);
@@ -15,7 +14,6 @@ async function create(req, res) {
   }
 }
 
-// ----- Panel de administración -----
 const pageData = extra => ({pageTitle: 'Pedidos | VisagShop', isAdmin: true, statuses: orders.STATUSES, statusLabels: orders.STATUS_LABELS, ...extra});
 const money = value => new Intl.NumberFormat('es-CO', {style: 'currency', currency: 'COP', maximumFractionDigits: 0}).format(value);
 const date = iso => new Intl.DateTimeFormat('es-CO', {dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/Bogota'}).format(new Date(iso));

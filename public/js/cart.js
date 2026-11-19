@@ -141,7 +141,6 @@
     try {await navigator.clipboard.writeText(messageEl.value);notify('Pedido copiado. Pégalo en el chat de VisagShop.');}
     catch {messageEl.focus();messageEl.select();notify('Selecciona y copia el texto para pegarlo en WhatsApp.');}
   });
-  // Guarda el pedido en la tienda (POST /api/orders). Los precios los calcula el servidor.
   const errors=window.VisagValidate?.attach(form,{});
   async function saveOrder() {
     const body={};
@@ -187,7 +186,6 @@
         if(!errors?.showServerErrors(error.fields))notify(error.message);
         return;
       }
-      // Si la tienda no responde, el pedido igual puede enviarse por WhatsApp.
       notify('No pudimos registrar el pedido en la tienda, pero puedes enviarlo por WhatsApp.');
     }
     confirmBtn.disabled=false;confirmBtn.innerHTML=label;

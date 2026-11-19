@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# Genera las versiones WebP de las fotos del catálogo (public/img/pNNN.jpg) en public/img/w/:
-#   pNNN.webp      tamaño original (≈540 px), para la portada y pantallas grandes
-#   pNNN-360.webp  360 px de ancho, para las tarjetas del catálogo
-# Requiere ImageMagick con soporte WebP. Solo crea las que faltan (usa --force para rehacerlas todas).
 set -euo pipefail
 cd "$(dirname "$0")/../public/img"
 mkdir -p w

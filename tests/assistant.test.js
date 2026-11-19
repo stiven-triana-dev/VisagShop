@@ -1,6 +1,4 @@
 'use strict';
-// Asistente con IA: VisagShop firma quién pregunta y reenvía la pregunta a VisagAssist.
-// Se usa un VisagAssist falso (servidor local) que revisa el pase recibido.
 const {test, before, after, beforeEach} = require('node:test');
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
@@ -18,7 +16,6 @@ process.env.VISAGASSIST_SECRETO = SECRET;
 process.env.ADMIN_USERNAME = 'admin-pruebas';
 process.env.ADMIN_PASSWORD = 'clave-admin-de-pruebas';
 
-// Decodifica y verifica un JWT HS256 como lo hace VisagAssist.
 function verify(token) {
   const [header, payload, signature] = token.split('.');
   const expected = crypto.createHmac('sha256', SECRET).update(`${header}.${payload}`).digest('base64url');

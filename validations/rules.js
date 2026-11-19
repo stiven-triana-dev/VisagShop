@@ -1,6 +1,4 @@
 'use strict';
-// Reglas compartidas por las validaciones (express-validator) y los modelos.
-// public/js/validation.js aplica las mismas reglas en el navegador.
 const NAME_MIN = 2;
 const NAME_MAX = 75;
 const EMAIL_MAX = 180;
@@ -12,7 +10,6 @@ const DESCRIPTION_MIN = 20;
 const DESCRIPTION_MAX = 1000;
 const PHONE = /^[+0-9 ()-]{7,25}$/;
 
-// Devuelve el primer problema de la contraseña o null si cumple todo.
 function passwordProblem(password) {
   if (typeof password !== 'string' || password === '') return 'La contraseña es obligatoria.';
   if (password.length < PASSWORD_MIN) return `La contraseña debe tener al menos ${PASSWORD_MIN} caracteres.`;

@@ -19,15 +19,12 @@ router.get('/products/:id/edit',wrap(controller.editForm));
 router.post('/api/products',sameOrigin,validate(rules.create),wrap(controller.create));
 router.put('/api/products/:id',sameOrigin,validate(rules.update),wrap(controller.update));
 router.delete('/api/products/:id',sameOrigin,wrap(controller.remove));
-// Pedidos
 router.get('/orders',wrap(orders.list));
-// Descargas: pedidos en Excel (CSV) y respaldo de datos (JSON)
 const exportsCtl=require('../controllers/exportController');
 router.get('/orders/export.csv',wrap(exportsCtl.ordersCsv));
 router.get('/backup.json',wrap(exportsCtl.backupJson));
 router.get('/orders/:number(\\d+)',wrap(orders.detail));
 router.put('/api/orders/:number(\\d+)',sameOrigin,validate(orderRules.status),wrap(orders.updateStatus));
-// Asistente con IA: aquí responde con las herramientas de administrador (pedidos pendientes, ventas...)
 const assistant=require('../controllers/assistantController');
 router.get('/api/asistente/estado',wrap(assistant.wake));
 router.post('/api/asistente/chat',sameOrigin,wrap(assistant.chat({admin:true})));

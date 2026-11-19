@@ -1,6 +1,4 @@
 'use strict';
-// Rutas del asistente para la tienda (invitados y clientes). Las del administrador
-// están en routes/admin.js, detrás del usuario y la clave del panel.
 const express=require('express');
 const controller=require('../controllers/assistantController');
 const sameOrigin=require('../middleware/writeOrigin');

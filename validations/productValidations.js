@@ -1,5 +1,4 @@
 'use strict';
-// Sprint 7 · Validaciones del back-end para crear y editar productos (express-validator).
 const {body} = require('express-validator');
 const products = require('../models/activeProducts');
 const {decodeImage} = require('./image');
@@ -16,7 +15,6 @@ const common = [
   body('descripcion').customSanitizer(text).optional({values: 'falsy'})
     .isLength({min: R.DESCRIPTION_MIN}).withMessage(`La descripción debe tener al menos ${R.DESCRIPTION_MIN} caracteres.`).bail()
     .isLength({max: R.DESCRIPTION_MAX}).withMessage(`La descripción puede tener máximo ${R.DESCRIPTION_MAX} caracteres.`),
-  // Tabla secundaria: la categoría debe existir en la base de datos.
   body('categoria').customSanitizer(text)
     .notEmpty().withMessage('Selecciona una categoría.').bail()
     .custom(async value => {

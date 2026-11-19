@@ -1,6 +1,4 @@
 'use strict';
-// Descargas del panel (Excel y respaldo) y archivos para buscadores (robots y sitemap).
-// Usa el almacenamiento JSON en una carpeta temporal: no toca data/ ni ninguna base.
 const {test, before, after} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');

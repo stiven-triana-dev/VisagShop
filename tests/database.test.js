@@ -1,8 +1,4 @@
 'use strict';
-// Pruebas contra un PostgreSQL real. Se ejecutan solo si existe TEST_DATABASE_URL:
-//   TEST_DATABASE_URL=postgresql://usuario:clave@localhost:5432/postgres npm run test:db
-// Con esa conexión se crean bases temporales (visag_test_*) que se borran al final;
-// la base indicada en la URL no se modifica. Nunca uses la URL de producción.
 const {test, before, after} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -34,7 +30,6 @@ async function runSql(url, sql) {
   await client.connect();
   try { await client.query(sql); } finally { await client.end(); }
 }
-// Cambia la conexión de Sequelize a otra base de prueba.
 async function useDatabase(url) {
   await require('../database/models').close();
   process.env.DATABASE_URL = url;
@@ -100,7 +95,6 @@ test('CRUD de productos y usuarios con Sequelize', {skip}, async () => {
   assert.equal(await users.authenticate('ana@example.test', 'Clave-segura-1'), null);
   assert.equal((await users.authenticate('ana@example.test', 'Clave-segura-2')).firstName, 'Ana M.');
 
-  // Pedidos
   const orders = require('../database/repositories/orders');
   const form = {nombre: 'Ana', apellidos: 'Prueba', celular: '3001234567', departamento: 'Santander', ciudad: 'Lebrija', direccion: 'Calle 1 #2-3', 'medio-pago': 'contraentrega'};
   const order = await orders.create({...form, items: [{id: 'p042', talla: '28-8', cant: 2}, {id: again.id, talla: '', cant: 1}]}, user.id);
@@ -113,13 +107,11 @@ test('CRUD de productos y usuarios con Sequelize', {skip}, async () => {
   assert.deepEqual([listed.all, listed.counts.nuevo, listed.orders[0].code], [2, 2, 'VS-1002']);
   assert.equal((await orders.updateStatus(1001, 'enviado', 'Guía 123')).statusLabel, 'Enviado');
   assert.equal((await orders.list({status: 'enviado'})).total, 1);
-  // Si se borra el producto del catálogo, el pedido conserva su nombre y precio.
   await products.remove(again.id);
   const kept = await orders.find(1001);
   assert.equal(kept.items[1].productId, null);
   assert.equal(kept.items[1].name, 'Otra gorra');
   assert.equal(kept.items[0].lineTotal, 260000);
-  // Exportaciones del panel
   assert.deepEqual((await orders.exportAll()).map(o => o.code), ['VS-1002', 'VS-1001']);
   const exported = await users.exportAll();
   assert.equal(exported.length, 1);
@@ -162,7 +154,6 @@ test('migra los datos del esquema anterior (tablas visag_*) sin perder nada', {s
   const all = await products.all();
   assert.deepEqual(all.map(p => p.id).sort(), ['p001', 'p002', 'p042', 'p200']);
 
-  // Carga única de precios, tallas y colores del catálogo en lo que faltaba.
   const seed = id => catalog.find(p => p.id === id);
   const p002 = await products.find('p002');
   assert.deepEqual([p002.precio, p002.tallas, p002.colores], [seed('p002').precio, seed('p002').tallas, seed('p002').colores]);

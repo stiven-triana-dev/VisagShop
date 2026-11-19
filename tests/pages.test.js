@@ -1,6 +1,4 @@
 'use strict';
-// Paginación del listado, caché de archivos y vista previa al compartir enlaces.
-// Usa el almacenamiento JSON en una carpeta temporal: no toca data/ ni ninguna base.
 const {test, before, after} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -64,8 +62,6 @@ test('la ficha de producto trae vista previa con su foto y precio', async () => 
   assert.match(html, /<link rel="canonical" href="[^"]+\/products\/p042">/);
 });
 
-// Fotos WebP: cada foto del catálogo debe tener sus dos versiones (scripts/webpPhotos.sh),
-// porque el catálogo en el navegador las pide sin comprobar que existan.
 test('cada foto del catálogo tiene su versión WebP y las tarjetas la ofrecen', async () => {
   const img = path.join(__dirname, '..', 'public', 'img');
   const faltan = fs.readdirSync(img).filter(f => /^p\d{3}\.jpg$/.test(f))

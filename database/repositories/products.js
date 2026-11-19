@@ -1,7 +1,4 @@
 'use strict';
-// CRUD de productos con Sequelize. Devuelve objetos con las mismas claves que
-// usan las vistas y el navegador (id, nombre, categoria, precio, tallas...),
-// así el resto de la aplicación no depende de cómo se guardan los datos.
 const crypto = require('node:crypto');
 const {Op} = require('sequelize');
 const db = require('../models');
@@ -10,7 +7,6 @@ const {decodeImage} = require('../../validations/image');
 
 const categories = local.categories;
 
-// Nombres de la tabla secundaria categories (para validar que el valor exista en la base).
 async function listCategories() {
   const rows = await db.models.Category.findAll({attributes: ['name'], order: [['id', 'ASC']]});
   return rows.map(r => r.name);
@@ -53,7 +49,6 @@ async function find(id) {
   return toPlain(await db.models.Product.findByPk(id, {include: include()}));
 }
 
-// Búsqueda por texto en nombre, descripción o categoría, con filtro opcional de categoría.
 async function search({q = '', categoria = ''} = {}) {
   const {Product, Category} = db.models;
   const text = String(q).trim().slice(0, 80);
@@ -74,7 +69,6 @@ async function search({q = '', categoria = ''} = {}) {
   return rows.map(toPlain);
 }
 
-// Busca o crea las filas de una tabla secundaria (tallas o colores) y devuelve sus ids en orden.
 async function namesToIds(Model, names, transaction) {
   const ids = [];
   for (const name of names) {
@@ -158,7 +152,6 @@ async function remove(id) {
   return previous;
 }
 
-// Inserta un producto ya existente (semilla JSON o migración) conservando su referencia.
 async function importProduct(plain, {createdAt, uploadId = null} = {}, transaction) {
   const {Product, Category} = db.models;
   const [category] = await Category.findOrCreate({where: {name: plain.categoria}, defaults: {name: plain.categoria}, transaction});
@@ -171,7 +164,6 @@ async function importProduct(plain, {createdAt, uploadId = null} = {}, transacti
   await setRelations(product, {tallas: plain.tallas || [], colores: plain.colores || []}, transaction);
 }
 
-// Cambia solo el precio y/o las tallas (lo usa scripts/importCatalog.js).
 async function patch(id, {precio, tallas}) {
   const {sequelize, Product} = db.models;
   return sequelize.transaction(async transaction => {

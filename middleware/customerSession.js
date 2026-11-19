@@ -1,6 +1,4 @@
 'use strict';
-// Sprint 5: sesiones persistentes basadas en tokens aleatorios opacos.
-// El navegador solo recibe el token; en el servidor se almacena su SHA-256.
 const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
@@ -45,7 +43,6 @@ function login(req,res,user,remember=false){
  const token=crypto.randomBytes(32).toString('hex');
  const ttl=remember?rememberedSeconds:sessionSeconds;
  const rows=read().filter(s=>s.expiresAt>Date.now());
- // Si el cliente ya tenía sesión, invalidar el token anterior.
  if(req.sessionTokenHash){const index=rows.findIndex(s=>s.tokenHash===req.sessionTokenHash);if(index!==-1)rows.splice(index,1);}
  rows.push({tokenHash:hash(token),userId:user.id,remember:Boolean(remember),createdAt:Date.now(),expiresAt:Date.now()+ttl*1000});
  write(rows);

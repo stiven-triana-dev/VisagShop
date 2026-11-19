@@ -1,10 +1,4 @@
 'use strict';
-// Preparación de la base de datos al arrancar la aplicación:
-//  1. Crea las tablas que falten a partir de los modelos (sync sin "alter":
-//     nunca modifica ni borra tablas existentes).
-//  2. Si la base estaba vacía, copia los datos del esquema anterior (Sprint 5:
-//     tablas visag_*) o, si no existe, carga el catálogo de data/products.json.
-//     Las tablas visag_* no se borran: quedan como respaldo.
 const fs = require('node:fs');
 const path = require('node:path');
 const db = require('./models');
@@ -76,7 +70,6 @@ async function syncSequence(transaction) {
   await q(`SELECT setval('product_number_seq', ${value}, true)`);
 }
 
-// Ajustes de datos que deben ejecutarse una sola vez; quedan registrados en app_meta.
 async function runOnce(key, transaction, task) {
   const {sequelize} = db.models;
   const [done] = await sequelize.query('SELECT 1 FROM app_meta WHERE key = :key', {replacements: {key}, type: 'SELECT', transaction});
@@ -85,10 +78,6 @@ async function runOnce(key, transaction, task) {
   await sequelize.query('INSERT INTO app_meta (key, value) VALUES (:key, :value)', {replacements: {key, value: JSON.stringify(result ?? {})}, transaction});
 }
 
-// Noviembre 2026: el catálogo completó precios, tallas y colores. Se copian a los
-// productos que en la base todavía no los tienen. No pisa datos ya cargados y,
-// al correr una sola vez, tampoco vuelve a llenar un precio que el administrador
-// deje vacío después.
 async function fillCatalogGaps(transaction) {
   const {Product, Size, Color} = db.models;
   const seed = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'products.json'), 'utf8'));
@@ -116,8 +105,6 @@ async function fillCatalogGaps(transaction) {
   return {prices, sizes, colors};
 }
 
-// Noviembre 2026: descripciones del catálogo. Solo llena las que están vacías y una
-// sola vez, así no pisa lo que el administrador haya escrito.
 async function fillDescriptions(transaction) {
   const {Product} = db.models;
   const seed = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'products.json'), 'utf8'));
@@ -135,7 +122,6 @@ async function initialize() {
   const {sequelize, Product, User, Category} = db.connect();
   await sequelize.authenticate();
   await sequelize.sync();
-  // Sprint 7: foto de perfil. sync() no agrega columnas a tablas que ya existen.
   await sequelize.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar VARCHAR(200) NULL');
   await sequelize.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS upload_id UUID NULL REFERENCES uploads(id) ON UPDATE CASCADE ON DELETE SET NULL');
   await sequelize.query('CREATE SEQUENCE IF NOT EXISTS product_number_seq START WITH 1');

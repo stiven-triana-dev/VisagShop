@@ -1,5 +1,4 @@
 'use strict';
-// Pedidos con Sequelize. Misma interfaz que models/orderModel.js.
 const db = require('../models');
 const products = require('./products');
 const common = require('../../models/orderModel');

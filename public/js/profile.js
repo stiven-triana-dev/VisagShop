@@ -23,7 +23,6 @@
   finally{button.disabled=false;}
  }
 
- // Sprint 7: mismas reglas que valida el servidor.
  const personal=document.querySelector('#profile-form');
  if(personal){
   const validator=attach(personal,{

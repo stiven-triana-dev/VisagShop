@@ -14,8 +14,6 @@ test('Datos privados: products.json y users.json viven fuera de public',()=>{
  assert.equal(fs.existsSync(path.join(root,'public/data/products.json')),false);
  assert.equal(fs.existsSync(path.join(root,'public/data/users.json')),false);
  assert.equal(JSON.parse(file('data/products.json')).length,108);
- // users.json se crea en tiempo de ejecución local y está excluido por .gitignore.
- // El ZIP público no debe incluir cuentas reales ni datos de clientes.
  const usersFile=path.join(root,'data/users.json');
  if(fs.existsSync(usersFile)){
   const u=JSON.parse(fs.readFileSync(usersFile,'utf8'));

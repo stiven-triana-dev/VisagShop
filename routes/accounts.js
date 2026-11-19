@@ -11,7 +11,6 @@ const router=express.Router();
 const wrap=require('../middleware/asyncHandler');
 const loginLimit=limitRequests({max:12,windowMs:15*60*1000,namespace:'login'});
 const registerLimit=limitRequests({max:5,windowMs:60*60*1000,namespace:'register'});
-// Sprint 7: cada formulario pasa por express-validator antes de llegar al controlador.
 router.post('/register',registerLimit,onlyGuest,sameOrigin,validate(rules.register),wrap(controller.register));
 router.post('/login',loginLimit,onlyGuest,sameOrigin,validate(rules.login),wrap(controller.login));
 router.post('/logout',onlyCustomer,sameOrigin,wrap(controller.logout));

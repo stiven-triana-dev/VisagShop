@@ -18,24 +18,17 @@ const cloud=Boolean(process.env.DATABASE_URL);
 const production=process.env.NODE_ENV==='production';
 if(production&&!cloud)throw Error('No es seguro iniciar VisagShop en hosting gratuito sin DATABASE_URL de Neon.');
 if(!cloud)store.setup();
-// Versión de CSS/JS: huella del contenido de esos archivos. Va en sus URLs (?v=...),
-// así el navegador puede guardarlos en caché y aun así recibe los cambios de cada despliegue.
 const assetVersion=(()=>{
  const fs=require('node:fs'),crypto=require('node:crypto'),hash=crypto.createHash('sha1');
  for(const dir of ['css','js'])for(const name of fs.readdirSync(path.join(__dirname,'public',dir)).sort())hash.update(name).update(fs.readFileSync(path.join(__dirname,'public',dir,name)));
  return hash.digest('hex').slice(0,10);
 })();
-// Fotos del catálogo (/img/pNNN.jpg): si existe su versión WebP en /img/w/ (generada con
-// scripts/webpPhotos.sh), las vistas añaden srcset para que el navegador baje la más liviana.
 const webpPhotos=new Set((()=>{try{return require('node:fs').readdirSync(path.join(__dirname,'public','img','w'))}catch{return []}})());
 function photoSrcset(src,sizes='(max-width:680px) 50vw, (max-width:900px) 33vw, 320px'){
  const m=/^\/img\/(p\d{3})\.jpg$/.exec(String(src||''));
  if(!m||!webpPhotos.has(m[1]+'.webp')||!webpPhotos.has(m[1]+'-360.webp'))return '';
  return ` srcset="/img/w/${m[1]}-360.webp 360w, /img/w/${m[1]}.webp 540w" sizes="${sizes}"`;
 }
-// Número de WhatsApp de la tienda (variable WHATSAPP_NUMBER). Acepta "+57 300 123 4567",
-// "300-123-4567" o "573001234567": se quitan los símbolos y a un celular colombiano de
-// 10 dígitos se le antepone el 57. Si no queda un número válido, la tienda ofrece copiar el pedido.
 function whatsappNumber(value){
  let digits=String(value||'').replace(/\D/g,'');
  if(/^3\d{9}$/.test(digits))digits='57'+digits;
@@ -50,7 +43,6 @@ app.use((req,res,next)=>{
  res.locals.isHome=false;res.locals.isCheckout=false;res.locals.isAdmin=false;res.locals.pageScript='';res.locals.pageTitle='VisagShop';
  res.locals.whatsappNumber=whatsappNumber(process.env.WHATSAPP_NUMBER);
  res.locals.assistantEnabled=assistant.enabled();
- // Datos para la vista previa al compartir un enlace (WhatsApp, Facebook...). Las páginas pueden cambiarlos.
  res.locals.assetVersion=assetVersion;
  res.locals.photoSrcset=photoSrcset;
  res.locals.baseUrl=`${req.protocol}://${req.get('host')}`;
@@ -77,8 +69,6 @@ app.get('/health',wrap(async(req,res)=>{
  }
  res.set('Cache-Control','no-store').json({status:'ok'});
 }));
-// Archivos públicos antes de identificar usuarios: evita consultas a Neon por cada
-// CSS, JS y fotografía, importante para cuotas gratuitas.
 if(cloud){
  app.get('/img/uploads/:filename',wrap(async(req,res)=>{
   const match=/^([a-f0-9-]{36})\.(?:jpg|png|webp|gif)$/.exec(req.params.filename);
@@ -89,13 +79,10 @@ if(cloud){
   res.type(file.mime).send(file.image_bytes);
  }));
 }else app.use('/img/uploads',express.static(store.uploadDir,{index:false,dotfiles:'deny',maxAge:'30d',immutable:true}));
-// Caché del navegador: CSS/JS pedidos con ?v=versión no cambian nunca (1 año);
-// las fotos del catálogo, 7 días; el resto, 1 hora.
 app.use(express.static(path.join(__dirname,'public'),{index:false,dotfiles:'deny',setHeaders(res,file){
  const req=res.req,versioned=/\.(css|js)$/.test(file)&&req.query.v===assetVersion;
  res.set('Cache-Control',versioned?'public, max-age=31536000, immutable':/\.(jpe?g|png|webp|gif|svg)$/i.test(file)?'public, max-age=604800':'public, max-age=3600');
 }}));
-// Para buscadores: qué pueden recorrer y la lista de páginas públicas (todas las prendas).
 app.get('/robots.txt',(req,res)=>{
  res.type('text/plain').set('Cache-Control','public, max-age=86400').send(['User-agent: *','Disallow: /admin','Disallow: /api/','Disallow: /profile','Disallow: /productCart','',`Sitemap: ${res.locals.baseUrl}/sitemap.xml`,''].join('\n'));
 });

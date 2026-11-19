@@ -8,7 +8,6 @@
  if(nextField && next && next.startsWith('/') && !next.startsWith('//') && !next.includes('\\'))nextField.value=next;
  const mode=form.dataset.mode;
 
- // Sprint 7: reglas del navegador (las mismas que valida el servidor).
  const fieldRules={
   register:{
    firstName:[r.required('El nombre es obligatorio.'),r.minLength(2,'El nombre debe tener al menos 2 caracteres.')],
@@ -28,7 +27,6 @@
  }[mode];
  const validator=attach(form,fieldRules);
 
- // Vista previa de la foto de perfil.
  const avatarInput=form.elements.avatar,avatarPreview=document.getElementById('avatar-preview');
  avatarInput?.addEventListener('change',()=>{
   const file=avatarInput.files[0];

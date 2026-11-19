@@ -1,5 +1,4 @@
 'use strict';
-// Sprint 7 · Validaciones del back-end para registro, login y perfil (express-validator).
 const {body} = require('express-validator');
 const users = require('../models/activeUsers');
 const {decodeImage} = require('./image');

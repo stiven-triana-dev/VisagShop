@@ -11,7 +11,6 @@ const rules=require('../validations/productValidations');
 const router=express.Router();
 const wrap=require('../middleware/asyncHandler');
 const money=value=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(value);
-// Vista previa del enlace de un producto: su foto, precio y tallas.
 function productMeta(p){
   const parts=[Number.isFinite(p.precio)?money(p.precio):'Precio por consultar'];
   if(p.tallas?.length)parts.push(`Tallas: ${p.tallas.join(', ')}`);
@@ -19,8 +18,6 @@ function productMeta(p){
   return {metaDescription:`${parts.join(' · ')}. ${p.descripcion||`${p.categoria} de ropa urbana en VisagShop. Pide por WhatsApp.`}`.slice(0,300),ogImage:p.imagen,ogType:'product'};
 }
 
-// Rutas REST y método HTTP indicados en Sprint 4.
-// Listado, buscador y paginación: /products?q=jean&categoria=Pantalones&page=2
 const PAGE_SIZE=24;
 router.get('/',wrap(async (req,res)=>{
   const q=typeof req.query.q==='string'?req.query.q.trim().slice(0,80):'';
@@ -28,7 +25,6 @@ router.get('/',wrap(async (req,res)=>{
   const list=q||categoria?await products.search({q,categoria}):await products.all();
   const pages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));
   const page=Math.min(pages,Math.max(1,Number.parseInt(req.query.page,10)||1));
-  // Enlace a otra página conservando la búsqueda y la categoría.
   const pageLink=n=>{
     const query=new URLSearchParams({...(q?{q}:{}),...(categoria?{categoria}:{}),...(n>1?{page:String(n)}:{})}).toString();
     return query?`/products?${query}`:'/products';

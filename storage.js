@@ -1,6 +1,4 @@
 'use strict';
-// Solo el bootstrap de producción usa este módulo. Los modelos pueden probarse
-// aisladamente con sus propios directorios JSON temporales.
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
@@ -17,8 +15,6 @@ function setup() {
   fs.mkdirSync(dataDir, {recursive: true, mode: 0o700});
   fs.mkdirSync(uploadDir, {recursive: true, mode: 0o700});
   if (!persistent) {
-    // Al clonar desde GitHub estos archivos están ignorados para no publicar cuentas.
-    // Se crean vacíos solo si todavía no existen; nunca se sobrescriben datos locales.
     for (const name of ['users.json','sessions.json']) {
       const target=path.join(dataDir,name);
       if (!fs.existsSync(target)) fs.writeFileSync(target,'[]\n',{flag:'wx',mode:0o600});
@@ -32,11 +28,9 @@ function setup() {
     throw new Error(`Volumen incompleto: faltan ${files.filter(n=>!current.includes(n)).join(', ')}. No se reinicializarán datos de clientes. Restaura una copia.`);
   }
   if (!initialized && current.length) {
-    // Evitar sembrar usuarios en un volumen ajeno o parcialmente inicializado.
     throw new Error('Hay datos previos sin manifiesto en el volumen. Revisa o restaura los archivos antes de iniciar.');
   }
   if (!initialized) {
-    // Solo primera puesta en marcha: no copiar cuentas ficticias del proyecto.
     const sourceProducts = path.join(sourceDir, 'products.json');
     const products = JSON.parse(fs.readFileSync(sourceProducts,'utf8'));
     if (!Array.isArray(products) || products.length === 0) throw new Error('Catálogo inicial inválido.');

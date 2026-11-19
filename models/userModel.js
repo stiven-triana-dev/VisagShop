@@ -1,6 +1,4 @@
 'use strict';
-// Usuarios en archivos JSON (desarrollo local sin DATABASE_URL).
-// Misma interfaz que database/repositories/users.js.
 const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
