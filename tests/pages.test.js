@@ -1,7 +1,5 @@
 'use strict';
-// Paginación del listado, caché de archivos y vista previa al compartir enlaces.
-// Usa el almacenamiento JSON en una carpeta temporal: no toca data/ ni ninguna base.
-const {test, before, after} = require('node:test');
+const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -14,16 +12,18 @@ process.env.VISAG_DATA_DIR = tmp;
 
 let server, base;
 before(async () => {
-  const {app} = require('../app');
-  await new Promise(resolve => { server = app.listen(0, '127.0.0.1', resolve); });
+  const { app } = require('../app');
+  await new Promise((resolve) => {
+    server = app.listen(0, '127.0.0.1', resolve);
+  });
   base = `http://127.0.0.1:${server.address().port}`;
 });
 after(async () => {
-  await new Promise(resolve => server.close(resolve));
-  fs.rmSync(tmp, {recursive: true, force: true});
+  await new Promise((resolve) => server.close(resolve));
+  fs.rmSync(tmp, { recursive: true, force: true });
 });
 
-const cards = html => (html.match(/class="product-card"/g) || []).length;
+const cards = (html) => (html.match(/class="product-card"/g) || []).length;
 
 test('el listado muestra 24 productos por página y enlaces que conservan la búsqueda', async () => {
   const first = await (await fetch(`${base}/products`)).text();
@@ -52,7 +52,11 @@ test('CSS y JS con versión se guardan en caché; las fotos, 7 días', async () 
   const css = /href="(\/css\/style\.css\?v=[a-f0-9]{10})"/.exec(home)?.[1];
   assert.ok(css, 'los estilos llevan versión');
   assert.match((await fetch(base + css)).headers.get('cache-control'), /max-age=31536000, immutable/);
-  assert.match((await fetch(base + '/css/style.css')).headers.get('cache-control'), /max-age=3600/, 'sin versión, caché corta');
+  assert.match(
+    (await fetch(base + '/css/style.css')).headers.get('cache-control'),
+    /max-age=3600/,
+    'sin versión, caché corta',
+  );
   assert.match((await fetch(base + '/img/p042.jpg')).headers.get('cache-control'), /max-age=604800/);
 });
 
@@ -64,13 +68,13 @@ test('la ficha de producto trae vista previa con su foto y precio', async () => 
   assert.match(html, /<link rel="canonical" href="[^"]+\/products\/p042">/);
 });
 
-// Fotos WebP: cada foto del catálogo debe tener sus dos versiones (scripts/webpPhotos.sh),
-// porque el catálogo en el navegador las pide sin comprobar que existan.
 test('cada foto del catálogo tiene su versión WebP y las tarjetas la ofrecen', async () => {
   const img = path.join(__dirname, '..', 'public', 'img');
-  const faltan = fs.readdirSync(img).filter(f => /^p\d{3}\.jpg$/.test(f))
-    .flatMap(f => [f.replace('.jpg', '.webp'), f.replace('.jpg', '-360.webp')])
-    .filter(f => !fs.existsSync(path.join(img, 'w', f)));
+  const faltan = fs
+    .readdirSync(img)
+    .filter((f) => /^p\d{3}\.jpg$/.test(f))
+    .flatMap((f) => [f.replace('.jpg', '.webp'), f.replace('.jpg', '-360.webp')])
+    .filter((f) => !fs.existsSync(path.join(img, 'w', f)));
   assert.deepEqual(faltan, [], 'Ejecuta scripts/webpPhotos.sh');
   const html = await (await fetch(`${base}/products`)).text();
   assert.match(html, /srcset="\/img\/w\/p\d{3}-360\.webp 360w, \/img\/w\/p\d{3}\.webp 540w"/);

@@ -1,5 +1,3 @@
-/* VISAGSHOP / ATELIER — refinamiento minimalista y comercial 2026.
-   Sobreescrituras sobre las hojas previas; mantiene las vistas y funcionalidad. */
 :root {
   --ink:#1e1e1b; --paper:#f8f7f3; --white:#fff; --muted:#676762;
   --line:#e5e4de; --lime:#d5ed59; --blue:#d5ed59; --blue-deep:#575f38;
@@ -32,7 +30,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .btn-lime:hover {background:#e0dfd0}
 .btn-outline-dark {background:transparent;color:#222;border-color:#b8b7af}
 .btn-outline-dark:hover {background:#20211e;color:#fff;border-color:#20211e}
-/* Home editorial intro */
 .atelier-hero {background:#f4f3ee;overflow:hidden}
 .atelier-hero-grid {display:grid;grid-template-columns:1fr 1fr;min-height:646px}
 .atelier-copy {padding:31px clamp(32px,5vw,82px) 22px 0;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
@@ -63,7 +60,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .atelier-ticker .shell {display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:63px}
 .atelier-ticker span {font-size:10px;letter-spacing:.1em;color:#5f625a;font-weight:600;white-space:nowrap}
 .atelier-ticker i {height:4px;width:4px;border-radius:50%;background:#b2b1a8}
-/* Category composition */
 .quick-benefits {min-height:104px;background:transparent}
 .quick-benefits>div {padding:17px 20px}
 .quick-benefits strong {font-size:10px;font-weight:600}
@@ -91,7 +87,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .statement-copy h2 {font-size:clamp(49px,4.8vw,73px);font-weight:500;margin:24px 0}
 .statement-copy p {font-size:13px;color:#666762}
 .statement-stamp {color:#999a8e}
-/* Catalog */
 .catalog-modern {background:#fff}
 .catalog-heading {margin-bottom:39px}
 .catalog-intro {margin:12px 0 0}
@@ -123,7 +118,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .product-sizes {margin:7px 0 0;color:#676763;font-size:10px}
 .load-more {padding-top:45px}
 .empty-state {padding:70px 20px}
-/* Wholesale and easy checkout teaching */
 .wholesale-modern {background:#e9e8e1}
 .wholesale-modern-layout {min-height:520px;gap:80px;padding-block:65px}
 .wholesale-left h2 {font-size:clamp(58px,6vw,89px);font-weight:500}
@@ -145,7 +139,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .site-footer {background:#242521}
 .site-footer .brand .brand-period {color:#c4c6b5}
 .site-footer h3 {font-weight:600}
-/* Product details */
 .inner-main {padding-top:35px}
 .breadcrumbs {font-size:10px;letter-spacing:.05em;color:#676761}
 .product-detail {gap:clamp(38px,6vw,100px)}
@@ -156,7 +149,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .detail-description {font-size:13px;color:#686762;line-height:1.8}
 .detail-extra span {font-size:12px;color:#666761}
 .photo-note {font-size:10px;letter-spacing:.1em;color:#676761}
-/* Cart: a single, strongly distinguished action */
 .cart-main {min-height:75vh}
 .page-title {padding-top:18px}
 .page-title h1 {font-size:clamp(53px,6vw,86px);font-weight:500}
@@ -176,7 +168,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .whatsapp-checkout:hover {background:#3c4938}
 .whatsapp-checkout .whatsapp-icon {color:#ceeab3;flex:none}
 .summary-helper {color:#85867e;font-size:11px;line-height:1.75;margin-top:15px}
-/* Auth and other views */
 .auth-main {background:#f4f3ed}
 .auth-poster {background:#272924}
 .auth-poster h2 {font-weight:500}
@@ -185,7 +176,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 .auth-panel h1 {font-weight:500}
 .demo-notice {background:#efefe8;border-left-color:#89917c}
 .not-found h1 span {color:#babdb0}
-/* Adaptive layout */
 @media(max-width:1120px){
  .shell {width:calc(100% - 64px)}
  .atelier-copy {padding-right:29px}
@@ -311,7 +301,6 @@ a,button { -webkit-tap-highlight-color:transparent }
 }
 @media(prefers-reduced-motion:reduce){.atelier-portrait img,.atelier-inset img{transition:none}}
 
-/* Checkout / métodos de pago: jerarquía minimalista, grandes superficies táctiles */
 .checkout-overline{font-size:10px;letter-spacing:.12em;color:#75796f;font-weight:700;padding-bottom:12px;border-bottom:1px solid #d4d6cc;margin:21px 0 15px}
 .checkout-overline:first-child{margin-top:0}
 .payment-fieldset{border:0;margin:0;padding:0;min-width:0}

@@ -30,6 +30,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Estilo y calidad del código (Prettier y ESLint)
+        run: npm run format:check && npm run lint
       - name: Pruebas sin base de datos
         run: npm test
       - name: Pruebas con PostgreSQL

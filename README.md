@@ -62,7 +62,7 @@ El catálogo inicial incluye **108 referencias y 108 fotografías**, todas con p
 - **Datos:** PostgreSQL con el ORM **Sequelize** (modelos y relaciones en `database/`); archivos JSON como alternativa local.
 - **Autenticación:** contraseñas derivadas con `scrypt` y sesiones revocables almacenadas en el servidor.
 - **Despliegue:** GitHub como repositorio, Render como servidor y Neon para PostgreSQL.
-- **Calidad:** pruebas automatizadas con `node:test`.
+- **Calidad:** pruebas automatizadas con `node:test`, formato con **Prettier** y reglas con **ESLint**, revisados en GitHub Actions en cada cambio.
 
 ## Arquitectura
 
@@ -140,6 +140,8 @@ npm test            # Pruebas automatizadas
 npm run test:db     # Pruebas contra PostgreSQL (requiere TEST_DATABASE_URL)
 npm run db:data-sql # Regenera database/data.sql desde data/products.json
 npm run check       # Validación sintáctica del servidor
+npm run lint        # Reglas de calidad con ESLint
+npm run format      # Da formato al código con Prettier (format:check solo revisa)
 ```
 
 > **No ejecutes `npm install` desde una carpeta superior sin `package.json`.** En Windows, usa Visual Studio Code → **Archivo → Abrir carpeta** y selecciona la carpeta del proyecto.
@@ -183,6 +185,22 @@ Ejecuta `npm test` desde la raíz: revisa las rutas del CRUD, la protección de 
 `npm run test:db` prueba contra un PostgreSQL real: que `structure.sql` y `data.sql` funcionen, el CRUD de productos y usuarios con Sequelize y la migración de los datos del esquema anterior. Necesita `TEST_DATABASE_URL` apuntando a un servidor de pruebas: crea bases temporales `visag_test_*` y las borra al terminar. **Nunca uses la URL de producción.**
 
 Para conocer las restricciones actuales y las verificaciones recomendadas antes de mostrar la tienda a un reclutador o usarla con clientes, consulta [**Pruebas y limitaciones**](docs/PRUEBAS_Y_LIMITACIONES.md).
+
+## Lo que aprendí con este proyecto
+
+VisagShop empezó guardando todo en archivos JSON porque era lo más rápido para tener la tienda funcionando. Eso me sirvió para entender rutas, controladores y vistas con Express y EJS sin pelear todavía con una base de datos. El problema llegó al publicarla: los archivos se pierden cuando Render reinicia el servidor, así que pasé a PostgreSQL en Neon.
+
+Mi primer intento con PostgreSQL fue guardar cada producto como un bloque JSON en una sola columna (`payload`). Funcionaba, pero no podía buscar ni relacionar nada bien. Lo rehice con Sequelize y tablas relacionadas (productos, categorías, tallas, colores, pedidos), primero con el diagrama entidad-relación y `structure.sql`. Lo difícil fue no perder lo que ya estaba en producción: escribí una migración que lee las tablas viejas y pasa los datos a las nuevas dentro de una transacción, y dejé las tablas anteriores como respaldo.
+
+Otro fallo fue depender de pasos manuales con la contraseña de la base. Intenté correr el importador de precios desde PowerShell con `DATABASE_URL` y me equivoqué al pegar la conexión más de una vez. La solución fue mover esos arreglos al arranque de la aplicación: `database/setup.js` crea lo que falta y aplica cada corrección de datos una sola vez, registrándola en una tabla. Así se aplican solos al desplegar y nadie tiene que manejar la contraseña a mano.
+
+En seguridad aprendí a no guardar contraseñas, sino un hash con `scrypt` y sal aleatoria, y a guardar en el servidor solo la huella SHA-256 del token de sesión, para que una copia de la base no sirva para entrar. También aprendí que validar en el navegador no basta: las mismas reglas están en el servidor con express-validator, porque el navegador se puede saltar.
+
+Con el plan gratis aparecieron problemas que no veía en local. Cada foto, CSS o archivo JS consultaba la sesión en Neon y gastaba la cuota, así que moví los archivos públicos antes de esa consulta. El asistente con IA (VisagAssist) se duerme en Render y tarda en despertar, entonces la burbuja lo despierta en cuanto el cliente la abre y el servidor espera hasta 100 segundos antes de mostrar un error amable.
+
+Hubo errores pequeños que también enseñan. El número de WhatsApp de la tienda no abría el chat si se escribía con espacios o sin el 57; ahora se normaliza. Algunos productos quedaron sin precio y había textos de sprints anteriores visibles para el cliente, como «SPRINT 5 / TU CUENTA», que tuve que limpiar. Una auditoría con Lighthouse mostró textos de 7 a 9 px en el celular y contraste insuficiente, y los corregí.
+
+Las pruebas con `node:test` y GitHub Actions me salvaron varias veces: corren en cada cambio, incluso contra un PostgreSQL real, y así detecté fallos de la migración antes de publicar. Al final agregué Prettier y ESLint porque mi código era muy compacto y difícil de leer para otra persona; al formatearlo se rompió una prueba que comparaba el texto exacto del código, y la cambié para que ignore los espacios.
 
 ## Posibles mejoras futuras
 

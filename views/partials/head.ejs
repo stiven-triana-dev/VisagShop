@@ -8,7 +8,6 @@
   <meta name="description" content="<%= metaDescription %>">
   <title><%= pageTitle || 'VisagShop' %></title>
   <link rel="canonical" href="<%= pageUrl %>">
-  <%# Vista previa al compartir el enlace (WhatsApp, Facebook, Instagram, X) %>
   <meta property="og:site_name" content="VisagShop">
   <meta property="og:locale" content="es_CO">
   <meta property="og:type" content="<%= ogType %>">
@@ -33,7 +32,6 @@
   <script src="/js/validation.js?v=<%= assetVersion %>" defer></script>
   <% if (pageScript) { %><script src="/js/<%= pageScript %>?v=<%= assetVersion %>" defer></script><% } %>
   <% if (assistantEnabled) { %>
-  <%# Asistente con IA (VisagAssist): en el panel responde como administrador %>
   <meta name="visag-assistant" content="<%= isAdmin ? '/admin/api/asistente' : '/api/asistente' %>">
   <link rel="stylesheet" href="/css/assistant.css?v=<%= assetVersion %>">
   <script src="/js/assistant.js?v=<%= assetVersion %>" defer></script>
