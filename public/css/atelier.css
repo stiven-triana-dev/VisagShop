@@ -16,7 +16,10 @@ a,button { -webkit-tap-highlight-color:transparent }
 .site-header {background:rgba(248,247,243,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .header-inner,.site-header .header-inner {height:77px}
 .brand {font-size:27px;font-weight:700;letter-spacing:-.085em}
-.brand .brand-period {color:#9c9c91;font-size:9px}
+.brand .brand-mark {width:48px;height:48px;box-shadow:0 0 0 1px #d7d9dd}
+.brand .brand-wordmark {display:inline-block;font:700 26px/.85 'Space Grotesk',Arial,sans-serif;letter-spacing:-.06em;color:#111315}
+.brand .brand-wordmark>span {color:#168ee7}
+.brand .brand-wordmark>small {display:block;margin-top:7px;font:700 8px/1.5 'DM Sans',Arial,sans-serif;letter-spacing:.31em;color:#62676d}
 .nav-main {gap:34px}
 .nav-main a,.account-link {font-size:12px;letter-spacing:0;color:#4c4c47;font-weight:500}
 .nav-main a:hover,.account-link:hover {color:#12120f}
@@ -137,7 +140,10 @@ a,button { -webkit-tap-highlight-color:transparent }
 .closing-modern {padding-block:105px}
 .closing-modern h2 {font-size:clamp(58px,6.7vw,98px);font-weight:500}
 .site-footer {background:#242521}
-.site-footer .brand .brand-period {color:#c4c6b5}
+.site-footer .brand .brand-wordmark {color:#f4f5eb}
+.site-footer .brand .brand-wordmark>span {color:#4db1f5;font-size:inherit;letter-spacing:inherit;display:inline;margin:0}
+.site-footer .brand .brand-wordmark>small {color:#b6b9b0}
+.site-footer .brand .brand-mark {box-shadow:0 0 0 1px rgba(255,255,255,.14)}
 .site-footer h3 {font-weight:600}
 .inner-main {padding-top:35px}
 .breadcrumbs {font-size:10px;letter-spacing:.05em;color:#676761}
@@ -214,7 +220,9 @@ a,button { -webkit-tap-highlight-color:transparent }
  .promo-mobile-text {display:block}
  .promo .promo-divider,.promo .promo-divider+text {display:none}
  .header-inner,.site-header .header-inner {height:62px}
- .brand {font-size:24px}
+ .brand .brand-mark {width:40px;height:40px}
+ .brand .brand-wordmark {font-size:20px}
+ .brand .brand-wordmark>small {letter-spacing:.2em;margin-top:5px}
  .header-actions {gap:10px}
  .menu-toggle span {background:#242520}
  .nav-main {top:62px;background:#f8f7f3;box-shadow:0 16px 20px #0002;border-top:1px solid var(--line)}

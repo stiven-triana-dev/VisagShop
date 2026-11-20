@@ -202,6 +202,8 @@ Hubo errores pequeños que también enseñan. El número de WhatsApp de la tiend
 
 Las pruebas con `node:test` y GitHub Actions me salvaron varias veces: corren en cada cambio, incluso contra un PostgreSQL real, y así detecté fallos de la migración antes de publicar. Al final agregué Prettier y ESLint porque mi código era muy compacto y difícil de leer para otra persona; al formatearlo se rompió una prueba que comparaba el texto exacto del código, y la cambié para que ignore los espacios.
 
+Al hacer VisagStock (el inventario de la tienda) noté que el nombre de VisagShop no se veía igual en todas las páginas. En la página de pago salía «VISAG» en negro, «SHOP» en azul y debajo «ROPA URBANA / COLOMBIA», pero en el resto de la tienda salía todo en negro. Pasaba porque fui agregando hojas de estilo nuevas (`modern.css` y `atelier.css`) encima de la original, y una de ellas volvía negro el «SHOP». Lo unifiqué con el diseño de la página de pago en el encabezado y en el pie de página. Aprendí a medir los estilos en la página publicada y no solo leer los archivos, porque con varias hojas de estilo lo que manda es la última regla que se aplica.
+
 ## Posibles mejoras futuras
 
 - Pasarela de pagos real gestionada por un proveedor especializado.
